@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>User onboarding and monetization dashboard | [Your Name]</title>
+  <meta name="description" content="Case study: SQL analysis in Google BigQuery and a Looker Studio dashboard for WYZR Friends, with scaled volumes and simulated revenue.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;650;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="wrap">
+    <header class="site-header">
+      <a class="site-title" href="index.html"><mark class="ph">[Your Name]</mark></a>
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="case-studies.html" aria-current="page">Case studies</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="resume.pdf">Résumé (PDF)</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main">
+      <header class="cs-head">
+        <p class="crumb"><a href="case-studies.html">All case studies</a></p>
+        <h1>User onboarding and monetization dashboard</h1>
+        <p class="dek">SQL analysis in Google BigQuery and a Looker Studio dashboard for WYZR Friends, a live product built by my company.</p>
+      </header>
+
+      <dl class="summary" aria-label="Summary">
+        <div><dt>Role</dt><dd>Analysis, SQL and dashboard build</dd></div>
+        <div><dt>Client type</dt><dd>Internal product team</dd></div>
+        <div><dt>Tools</dt><dd>Google BigQuery (SQL), Looker Studio</dd></div>
+        <div><dt>Outcome</dt><dd>Partial answer; limited by the absence of real monetization data</dd></div>
+      </dl>
+
+      <article class="cs-body">
+
+        <h2 id="context">Context</h2>
+        <p>The project manager of WYZR Friends asked for an analysis of user onboarding and monetization. WYZR Friends is a live product built by my company, so the work used real user data, with the team’s permission.</p>
+        <p><mark class="ph">[Add the exact question the project manager asked, in one sentence.]</mark></p>
+
+        <h2 id="role">My role</h2>
+        <p>I wrote the SQL queries in Google BigQuery and built the dashboard in Looker Studio. I framed the business questions the queries answer, defined the metrics, made the data-governance decisions described below, and validated the outputs.</p>
+
+        <h2 id="approach">Approach</h2>
+
+        <div class="step">
+          <h3>Rebuilding the age field</h3>
+          <p>The stored age field was about 40% empty, and its bands overlapped. I recalculated age from date of birth instead. <mark class="ph">[VERIFY]</mark></p>
+        </div>
+        <aside class="note" aria-label="Decision note">
+          <span class="note-kind">Decision</span>
+          <p>Recalculating from date of birth gives one consistent definition of age, rather than patching a field with gaps and overlapping bands.</p>
+        </aside>
+
+        <div class="step">
+          <h3>Setting a minimum segment size</h3>
+          <p>Segments with fewer than 50 users were excluded. Rates from groups that small were too unstable to compare. <mark class="ph">[VERIFY]</mark></p>
+        </div>
+        <aside class="note" aria-label="Trade-off note">
+          <span class="note-kind">Trade-off</span>
+          <p>Some small groups drop out of the view. The rates that remain can be compared with each other.</p>
+        </aside>
+
+        <div class="step">
+          <h3>Modelling revenue as scenarios <span class="sim">Simulated</span></h3>
+          <p>Monetization data was not available to me, so the revenue component is a simulation. A Looker Studio parameter switches the estimate between conservative, base and optimistic scenarios. <mark class="ph">[VERIFY]</mark></p>
+        </div>
+        <aside class="note" aria-label="Decision note">
+          <span class="note-kind">Decision</span>
+          <p>Three labelled scenarios show a range and keep the assumption visible. A single simulated number would read as a forecast.</p>
+        </aside>
+
+        <figure class="ph-block" role="img" aria-label="Screenshot placeholder">
+          [Screenshot placeholder: sanitized dashboard view with scaled volumes. Label every revenue figure in the image as simulated.]
+        </figure>
+
+        <div class="ph-block">
+          [Optional: a short SQL snippet cut down from your own age or segment-size query, captioned “Simplified example, not production code.” Delete this block if you leave it out.]
+        </div>
+
+        <h2 id="governance">Data governance and constraints</h2>
+        <ul>
+          <li><strong>Permission.</strong> All permissions were obtained from the team before the data was used.</li>
+          <li><strong>Personal data.</strong> Email and phone-number fields were deliberately excluded.</li>
+          <li><strong>Volumes.</strong> All user counts are scaled with multipliers. No real counts appear on this page.</li>
+          <li><strong>Revenue.</strong> The revenue component is a simulation <span class="sim">Simulated</span>, because monetization data was not available to me.</li>
+          <li><strong>Access.</strong> The live dashboard is not linked or embedded. It contains production queries and carries risk to the client.</li>
+        </ul>
+
+        <h2 id="outcome">Outcome</h2>
+        <p>The analysis answered part of the business question but produced limited actionable results. The main reason was the absence of real monetization data: the onboarding analysis rests on real, scaled user data, while the revenue side can only show simulated scenarios.</p>
+
+        <h2 id="learned">What I learned</h2>
+        <p>Most of the work happened before the first query was written: deciding which fields could be trusted, which could be used at all, and which segments were large enough to report. An analysis is only as strong as the data it is allowed to see.</p>
+        <p><mark class="ph">[Suggested, confirm or rewrite:]</mark> Next time, I would agree data access, including monetization data, with the project team before fixing the scope of the questions.</p>
+
+        <h2 id="method">Tools and method</h2>
+        <div class="method">
+          <p>Google BigQuery (SQL) and Looker Studio.</p>
+          <p>SQL drafted and debugged with AI assistance; business questions, metric definitions, data-governance decisions and output validation are my own.</p>
+        </div>
+
+        <p class="cs-nav"><a href="case-studies.html">All case studies</a></p>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <p class="data-note">Figures are scaled or simulated to protect client data. Live systems and dashboards are not linked.</p>
+      <p><mark class="ph">[Your Name]</mark>. <a href="mailto:[email]"><mark class="ph">[Email]</mark></a> and <a href="[LinkedIn URL]"><mark class="ph">[LinkedIn]</mark></a></p>
+    </footer>
+  </div>
+</body>
+</html>
