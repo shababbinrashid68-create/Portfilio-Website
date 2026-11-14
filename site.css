@@ -298,6 +298,61 @@ mark.ph {
   border-bottom: 1px solid var(--rule);
 }
 
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 2.25rem;
+  list-style: none;
+  padding: 0;
+  font-family: var(--sans);
+}
+
+.pillar-card {
+  padding: 1.1rem 1.2rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  border-radius: 6px;
+  box-shadow: var(--shadow-sm);
+}
+
+.pillar-num {
+  display: inline-block;
+  font-size: var(--step--2);
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 0.05em 0.45em;
+  border-radius: 3px;
+  margin-bottom: 0.4rem;
+}
+
+.pillar-card h2,
+.pillar-card h3 {
+  font-size: var(--step-0);
+  font-weight: 700;
+  margin: 0 0 0.35rem;
+  padding: 0;
+  border: 0;
+}
+
+.pillar-card h2::before {
+  display: none;
+}
+
+.pillar-card p {
+  margin: 0;
+  font-size: var(--step--1);
+  color: var(--muted);
+  line-height: 1.5;
+}
+@media (max-width: 54rem) {
+  .pillars {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 .hero-name {
   font-size: var(--step-1);
   font-weight: 650;
