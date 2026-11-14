@@ -472,6 +472,13 @@ mark.ph {
   line-height: 1.45;
 }
 
+.entry-link {
+  margin: 1rem 0 0;
+  font-family: var(--sans);
+  font-size: var(--step--1);
+  font-weight: 650;
+}
+
 /* ---------- Case study page ---------- */
 
 .cs-head {
