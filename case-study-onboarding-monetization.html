@@ -3,8 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>User onboarding and monetization dashboard | [Your Name]</title>
-  <meta name="description" content="Case study: SQL analysis in Google BigQuery and a Looker Studio dashboard for WYZR Friends, with scaled volumes and simulated revenue.">
+  <title>User onboarding and monetization dashboard | Shabab Bin Rashid</title>
+  <meta name="description" content="Case study: SQL analysis in Google BigQuery and a Looker Studio dashboard for WYZR Friends, with scaled user volumes and simulated revenue scenarios.">
+  <meta property="og:title" content="User onboarding and monetization dashboard | Shabab Bin Rashid">
+  <meta property="og:description" content="Case study: SQL analysis in Google BigQuery and a Looker Studio dashboard for WYZR Friends, with scaled user volumes and simulated revenue scenarios.">
+  <meta property="og:type" content="article">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;650;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
@@ -15,7 +18,7 @@
 
   <div class="wrap">
     <header class="site-header">
-      <a class="site-title" href="index.html"><mark class="ph">[Your Name]</mark></a>
+      <a class="site-title" href="index.html">Shabab Bin Rashid</a>
       <nav class="site-nav" aria-label="Main">
         <ul>
           <li><a href="index.html">Home</a></li>
@@ -30,77 +33,172 @@
       <header class="cs-head">
         <p class="crumb"><a href="case-studies.html">All case studies</a></p>
         <h1>User onboarding and monetization dashboard</h1>
-        <p class="dek">SQL analysis in Google BigQuery and a Looker Studio dashboard for WYZR Friends, a live product built by my company.</p>
+        <p class="dek">SQL analysis in Google BigQuery and a Looker Studio dashboard for WYZR Friends, a live product built by Kainotomia Pte Ltd.</p>
       </header>
 
       <dl class="summary" aria-label="Summary">
         <div><dt>Role</dt><dd>Analysis, SQL and dashboard build</dd></div>
         <div><dt>Client type</dt><dd>Internal product team</dd></div>
         <div><dt>Tools</dt><dd>Google BigQuery (SQL), Looker Studio</dd></div>
-        <div><dt>Outcome</dt><dd>Partial answer; limited by the absence of real monetization data</dd></div>
+        <div><dt>Outcome</dt><dd>Answered part of the business question; limited by the absence of real monetization data</dd></div>
       </dl>
 
       <article class="cs-body">
 
         <h2 id="context">Context</h2>
-        <p>The project manager of WYZR Friends asked for an analysis of user onboarding and monetization. WYZR Friends is a live product built by my company, so the work used real user data, with the team’s permission.</p>
-        <p><mark class="ph">[Add the exact question the project manager asked, in one sentence.]</mark></p>
+        <p>The project manager of WYZR Friends asked for an analysis of user onboarding and monetization. WYZR Friends is a live product built by my company, Kainotomia Pte Ltd, so the work used real user data, with the team’s permission.</p>
+        <p><mark class="ph">[PLACEHOLDER: the question the project manager asked, in one sentence]</mark></p>
 
         <h2 id="role">My role</h2>
-        <p>I wrote the SQL queries in Google BigQuery and built the dashboard in Looker Studio. I framed the business questions the queries answer, defined the metrics, made the data-governance decisions described below, and validated the outputs.</p>
+        <p>I wrote the SQL queries behind the onboarding and monetization dashboard in Google BigQuery and built the dashboard in Looker Studio. I framed the business questions, defined the metrics, made the data-governance decisions described below, and validated the outputs.</p>
+
+        <figure class="artefact full-bleed" aria-labelledby="cs1-flow-title">
+          <div class="artefact-head">
+            <h3 class="artefact-title" id="cs1-flow-title">Workflow: from raw product tables to scenario view</h3>
+            <span class="badge-illus">Illustrative</span>
+          </div>
+          <div class="artefact-body">
+            <ol class="flow-list">
+              <li class="flow-node">
+                <span class="flow-stage">Stage 1</span>
+                <strong>Raw product tables</strong>
+                <p>User registration and onboarding tables accessed with team permission.</p>
+              </li>
+              <li class="flow-node">
+                <span class="flow-stage">Stage 2</span>
+                <strong>Data-quality and governance rules</strong>
+                <ul>
+                  <li>Email and phone fields excluded</li>
+                  <li>Age recalculated from date of birth <mark class="ph">[VERIFY]</mark></li>
+                  <li>Segments under 50 users excluded <mark class="ph">[VERIFY]</mark></li>
+                </ul>
+              </li>
+              <li class="flow-node">
+                <span class="flow-stage">Stage 3</span>
+                <strong>Google BigQuery (SQL)</strong>
+                <p>CTEs, CASE logic, date functions, and GROUP BY / HAVING aggregations with scaled user counts <span class="scaled">Scaled</span>.</p>
+              </li>
+              <li class="flow-node">
+                <span class="flow-stage">Stage 4</span>
+                <strong>Looker Studio dashboard</strong>
+                <p>Onboarding views paired with a scenario parameter for revenue estimates <span class="sim">Simulated</span>.</p>
+              </li>
+            </ol>
+          </div>
+          <figcaption class="artefact-foot">Illustrative process diagram showing how raw user tables moved through governance and quality rules into Looker Studio.</figcaption>
+        </figure>
 
         <h2 id="approach">Approach</h2>
 
         <div class="step">
-          <h3>Rebuilding the age field</h3>
+          <h3><span class="step-num">Step 1</span> Rebuilding the age field</h3>
           <p>The stored age field was about 40% empty, and its bands overlapped. I recalculated age from date of birth instead. <mark class="ph">[VERIFY]</mark></p>
         </div>
-        <aside class="note" aria-label="Decision note">
+        <aside class="note" aria-label="Decision note: age field">
           <span class="note-kind">Decision</span>
-          <p>Recalculating from date of birth gives one consistent definition of age, rather than patching a field with gaps and overlapping bands.</p>
+          <p>Recalculating from date of birth gives one consistent definition of age, rather than patching a field with gaps and overlapping bands. <mark class="ph">[VERIFY]</mark></p>
         </aside>
 
         <div class="step">
-          <h3>Setting a minimum segment size</h3>
+          <h3><span class="step-num">Step 2</span> Setting a minimum segment size</h3>
           <p>Segments with fewer than 50 users were excluded. Rates from groups that small were too unstable to compare. <mark class="ph">[VERIFY]</mark></p>
         </div>
-        <aside class="note" aria-label="Trade-off note">
+        <aside class="note" aria-label="Trade-off note: segment threshold">
           <span class="note-kind">Trade-off</span>
-          <p>Some small groups drop out of the view. The rates that remain can be compared with each other.</p>
+          <p>Some small groups drop out of the view. The rates that remain can be compared with each other. <mark class="ph">[VERIFY]</mark></p>
         </aside>
 
         <div class="step">
-          <h3>Modelling revenue as scenarios <span class="sim">Simulated</span></h3>
-          <p>Monetization data was not available to me, so the revenue component is a simulation. A Looker Studio parameter switches the estimate between conservative, base and optimistic scenarios. <mark class="ph">[VERIFY]</mark></p>
+          <h3><span class="step-num">Step 3</span> Modelling revenue as scenarios <span class="sim">Simulated</span></h3>
+          <p>I had no permission to use monetization data, so the revenue component is a simulation <span class="sim">Simulated</span>. I built a Looker Studio parameter that switches revenue estimates between conservative, base and optimistic scenarios. <mark class="ph">[VERIFY]</mark></p>
         </div>
-        <aside class="note" aria-label="Decision note">
+        <aside class="note" aria-label="Decision note: revenue scenarios">
           <span class="note-kind">Decision</span>
-          <p>Three labelled scenarios show a range and keep the assumption visible. A single simulated number would read as a forecast.</p>
+          <p>Three labelled scenarios show a range and keep the assumption visible. A single simulated number would read as a forecast. <mark class="ph">[VERIFY]</mark></p>
         </aside>
 
+        <figure class="artefact" aria-labelledby="cs1-scenario-title">
+          <div class="artefact-head">
+            <h3 class="artefact-title" id="cs1-scenario-title">Looker Studio scenario parameter control</h3>
+            <div>
+              <span class="badge-illus">Illustrative</span>
+              <span class="sim">Simulated</span>
+            </div>
+          </div>
+          <div class="artefact-body scenario-panel">
+            <div>
+              <div class="scenario-bar" role="group" aria-label="Illustrative Looker Studio parameter options">
+                <div class="scenario-option">Conservative</div>
+                <div class="scenario-option is-active">Base</div>
+                <div class="scenario-option">Optimistic</div>
+              </div>
+            </div>
+            <div class="scenario-schema">
+              <div class="scenario-card">
+                <strong>Conservative <span class="sim">Simulated</span></strong>
+                <p>Lower-bound assumption applied in Looker Studio to scaled onboarding cohorts <span class="scaled">Scaled</span>. No figures shown.</p>
+              </div>
+              <div class="scenario-card is-base">
+                <strong>Base <span class="sim">Simulated</span></strong>
+                <p>Mid-case assumption selected via the dashboard parameter <span class="scaled">Scaled</span>. No figures shown.</p>
+              </div>
+              <div class="scenario-card">
+                <strong>Optimistic <span class="sim">Simulated</span></strong>
+                <p>Upper-bound assumption applied to the same onboarding cohorts <span class="scaled">Scaled</span>. No figures shown.</p>
+              </div>
+            </div>
+          </div>
+          <figcaption class="artefact-foot">Illustrative control showing the three Looker Studio scenario labels (<mark class="ph">[VERIFY]</mark>). Revenue is simulated (<span class="sim">Simulated</span>) and no figures are shown.</figcaption>
+        </figure>
+
         <figure class="ph-block" role="img" aria-label="Screenshot placeholder">
-          [Screenshot placeholder: sanitized dashboard view with scaled volumes. Label every revenue figure in the image as simulated.]
+          [PLACEHOLDER: sanitized dashboard screenshot with scaled user volumes (<span class="scaled">Scaled</span>) and every revenue figure labelled <span class="sim">Simulated</span>.]
         </figure>
 
         <div class="ph-block">
-          [Optional: a short SQL snippet cut down from your own age or segment-size query, captioned “Simplified example, not production code.” Delete this block if you leave it out.]
+          [PLACEHOLDER: optional short SQL snippet cut down from my own query, captioned “Simplified example, not production code.” Remove this block if omitted.]
         </div>
 
         <h2 id="governance">Data governance and constraints</h2>
-        <ul>
-          <li><strong>Permission.</strong> All permissions were obtained from the team before the data was used.</li>
-          <li><strong>Personal data.</strong> Email and phone-number fields were deliberately excluded.</li>
-          <li><strong>Volumes.</strong> All user counts are scaled with multipliers. No real counts appear on this page.</li>
-          <li><strong>Revenue.</strong> The revenue component is a simulation <span class="sim">Simulated</span>, because monetization data was not available to me.</li>
-          <li><strong>Access.</strong> The live dashboard is not linked or embedded. It contains production queries and carries risk to the client.</li>
-        </ul>
+        <p>Working with real product records required setting boundaries on what entered the queries and what could be shown outside the team.</p>
+
+        <section class="artefact" aria-labelledby="cs1-gov-title">
+          <div class="artefact-head">
+            <h3 class="artefact-title" id="cs1-gov-title">Data-governance summary</h3>
+            <span class="badge-illus">Governance rules</span>
+          </div>
+          <div class="artefact-body">
+            <dl class="gov-grid">
+              <div class="gov-item">
+                <dt>Permissions</dt>
+                <dd>All permissions were obtained from the WYZR Friends team before the data was used.</dd>
+              </div>
+              <div class="gov-item">
+                <dt>Personal data <span>Excluded</span></dt>
+                <dd>Email and phone-number fields were deliberately excluded so personal identifiers never entered the reporting layer.</dd>
+              </div>
+              <div class="gov-item">
+                <dt>User volumes <span class="scaled">Scaled</span></dt>
+                <dd>All user volumes are scaled with multipliers. No real user figures appear anywhere.</dd>
+              </div>
+              <div class="gov-item">
+                <dt>Revenue component <span class="sim">Simulated</span></dt>
+                <dd>I had no permission to use monetization data, so all revenue estimates are simulated (<span class="sim">Simulated</span>) across conservative, base and optimistic scenarios.</dd>
+              </div>
+              <div class="gov-item">
+                <dt>Live dashboard access <span>Not linked</span></dt>
+                <dd>The live Looker Studio dashboard is never linked or embedded. It contains production queries and carries risk to the client.</dd>
+              </div>
+            </dl>
+          </div>
+        </section>
 
         <h2 id="outcome">Outcome</h2>
-        <p>The analysis answered part of the business question but produced limited actionable results. The main reason was the absence of real monetization data: the onboarding analysis rests on real, scaled user data, while the revenue side can only show simulated scenarios.</p>
+        <p>The analysis answered part of the business question but produced limited actionable results, largely because real monetization data was not available. The onboarding breakdown rests on real, scaled user data <span class="scaled">Scaled</span>, while the revenue component shows simulated scenarios <span class="sim">Simulated</span>.</p>
 
         <h2 id="learned">What I learned</h2>
-        <p>Most of the work happened before the first query was written: deciding which fields could be trusted, which could be used at all, and which segments were large enough to report. An analysis is only as strong as the data it is allowed to see.</p>
-        <p><mark class="ph">[Suggested, confirm or rewrite:]</mark> Next time, I would agree data access, including monetization data, with the project team before fixing the scope of the questions.</p>
+        <p>Most of the work happens before the query is written, and an analysis is only as strong as the data it is allowed to see.</p>
+        <p>What I would do differently: agree data access, including monetization data, with the project team before fixing the scope of the questions. <mark class="ph">[VERIFY]</mark></p>
 
         <h2 id="method">Tools and method</h2>
         <div class="method">
@@ -114,7 +212,7 @@
 
     <footer class="site-footer">
       <p class="data-note">Figures are scaled or simulated to protect client data. Live systems and dashboards are not linked.</p>
-      <p><mark class="ph">[Your Name]</mark>. <a href="mailto:[email]"><mark class="ph">[Email]</mark></a> and <a href="[LinkedIn URL]"><mark class="ph">[LinkedIn]</mark></a></p>
+      <p>Shabab Bin Rashid. <a href="mailto:[email]"><mark class="ph">[PLACEHOLDER: email]</mark></a> and <a href="[LinkedIn URL]"><mark class="ph">[PLACEHOLDER: LinkedIn]</mark></a></p>
     </footer>
   </div>
 </body>
