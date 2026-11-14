@@ -991,6 +991,18 @@ mark.ph {
   color: var(--accent);
 }
 
+.ba-col h4 {
+  font-size: var(--step-0);
+  margin-bottom: 0.35rem;
+}
+
+.ba-col p {
+  margin: 0;
+  font-size: var(--step--1);
+  color: var(--muted);
+  line-height: 1.5;
+}
+
 /* User story specification card (CS4) */
 .spec-grid {
   display: grid;

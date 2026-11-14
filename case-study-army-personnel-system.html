@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Personnel and equipment management system, Bangladesh Army | Shabab Bin Rashid</title>
+  <meta name="description" content="Case study: requirements engineering across five meetings with a Bangladesh Army unit for a personnel and equipment management system now in use.">
+  <meta property="og:title" content="Personnel and equipment management system, Bangladesh Army | Shabab Bin Rashid">
+  <meta property="og:description" content="Case study: requirements engineering across five meetings with a Bangladesh Army unit for a personnel and equipment management system now in use.">
+  <meta property="og:type" content="article">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;650;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="wrap">
+    <header class="site-header">
+      <a class="site-title" href="index.html">Shabab Bin Rashid</a>
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="case-studies.html" aria-current="page">Case studies</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="resume.pdf">Résumé (PDF)</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main">
+      <header class="cs-head">
+        <p class="crumb"><a href="case-studies.html">All case studies</a> <span>Case Study 3</span></p>
+        <h1>Personnel and equipment management system, Bangladesh Army</h1>
+        <p class="dek">Requirements gathered across five meetings with a Bangladesh Army unit for a system now in use, where questioning a fixed rule led to a configurable design.</p>
+      </header>
+
+      <dl class="summary" aria-label="Summary">
+        <div><dt>Role</dt><dd>Business Analyst</dd></div>
+        <div><dt>Client type</dt><dd>Defence (government): Bangladesh Army</dd></div>
+        <div><dt>Tools</dt><dd>Stakeholder meetings, requirements specification <mark class="ph">[VERIFY: any specific documents or tools used]</mark></dd></div>
+        <div><dt>Outcome</dt><dd>Delivered and in use by the unit; a fixed 50% heir share replaced with a configurable field</dd></div>
+      </dl>
+
+      <article class="cs-body">
+
+        <h2 id="context">Context</h2>
+        <p>A unit of the Bangladesh Army needed a system to manage personnel records and equipment. The system was built by my company, Kainotomia Pte Ltd, and is now delivered and in use by the unit.</p>
+
+        <h2 id="role">My role</h2>
+        <p>I worked as the Business Analyst on the project. I gathered requirements across five meetings with the unit, questioned rules where fixed assumptions did not hold up against real cases, and made sure the development team built what the client asked for.</p>
+
+        <figure class="artefact full-bleed" aria-labelledby="cs3-flow-title">
+          <div class="artefact-head">
+            <h3 class="artefact-title" id="cs3-flow-title">Requirement-change workflow: nominated-heir field</h3>
+            <span class="badge-illus">Illustrative</span>
+          </div>
+          <div class="artefact-body">
+            <ol class="flow-list flow-5">
+              <li class="flow-node">
+                <span class="flow-stage">Stage 1</span>
+                <strong>Requirement received</strong>
+                <p>Unit requested that a wife always receive exactly 50% in the nominated-heir field.</p>
+              </li>
+              <li class="flow-node">
+                <span class="flow-stage">Stage 2</span>
+                <strong>Questioned against real cases</strong>
+                <p>Tested the fixed 50% rule against real-world family and nomination cases.</p>
+              </li>
+              <li class="flow-node">
+                <span class="flow-stage">Stage 3</span>
+                <strong>Raised with the unit</strong>
+                <p>Brought the edge-case limitation back to the unit during requirement meetings.</p>
+              </li>
+              <li class="flow-node">
+                <span class="flow-stage">Stage 4</span>
+                <strong>Agreed change</strong>
+                <p>The unit agreed to drop the fixed 50% requirement from the specification.</p>
+              </li>
+              <li class="flow-node">
+                <span class="flow-stage">Stage 5</span>
+                <strong>Configurable field built</strong>
+                <p>Had the development team build the share field open and configurable.</p>
+              </li>
+            </ol>
+          </div>
+          <figcaption class="artefact-foot">Illustrative process diagram showing how a hard-coded requirement was questioned, revised with the client, and built as a configurable field.</figcaption>
+        </figure>
+
+        <h2 id="approach">Approach</h2>
+
+        <div class="step">
+          <h3><span class="step-num">Step 1</span> Gathering requirements across five meetings</h3>
+          <p>I held five meetings with the unit to gather requirements for the personnel and equipment modules and to confirm how the development team should build each workflow.</p>
+        </div>
+        <aside class="note" aria-label="Decision note: five meetings">
+          <span class="note-kind">Decision</span>
+          <p>Reviewing requirements across five meetings gave the unit space to check how proposed rules would work in practice before they were locked into code. <mark class="ph">[VERIFY]</mark></p>
+        </aside>
+
+        <div class="step">
+          <h3><span class="step-num">Step 2</span> Questioning the fixed 50% nominated-heir share</h3>
+          <p>The unit initially required that a wife always receive exactly 50% in the nominated-heir field. Rather than transcribing that rule directly into the specification, I questioned it against real-world cases and raised it with the unit.</p>
+        </div>
+        <aside class="note" aria-label="Decision note: questioning the fixed rule">
+          <span class="note-kind">Decision</span>
+          <p>Hard-coding a fixed 50% share would block valid nominations whenever a service member’s family circumstances required a different split. <mark class="ph">[VERIFY]</mark></p>
+        </aside>
+
+        <div class="step">
+          <h3><span class="step-num">Step 3</span> Building the share field open and configurable</h3>
+          <p>After I raised the issue, the unit agreed to remove the fixed share. I had the development team build the nominated-heir field open and configurable, and made sure the delivered system matched what the unit agreed to.</p>
+        </div>
+        <aside class="note" aria-label="Trade-off note: configurable share">
+          <span class="note-kind">Trade-off</span>
+          <p>Leaving the share open requires entering the allocation for each record rather than relying on a fixed preset, but it handles every nomination case without a code change. <mark class="ph">[VERIFY]</mark></p>
+        </aside>
+
+        <figure class="artefact" aria-labelledby="cs3-ba-title">
+          <div class="artefact-head">
+            <h3 class="artefact-title" id="cs3-ba-title">Nominated-heir field specification</h3>
+            <span class="badge-illus">Simplified illustration</span>
+          </div>
+          <div class="artefact-body before-after">
+            <div class="ba-col">
+              <span class="ba-label">Before (initial requirement)</span>
+              <h4>Spouse share fixed at 50%</h4>
+              <p>The nominated-heir field hard-codes a fixed 50% share for a wife on every record.</p>
+            </div>
+            <div class="ba-col is-after">
+              <span class="ba-label">After (agreed specification)</span>
+              <h4>Share left open and configurable</h4>
+              <p>Fixed 50% constraint removed after review with the unit; the nominated-heir field accepts configurable shares.</p>
+            </div>
+          </div>
+          <figcaption class="artefact-foot">Simplified illustration of the requirement change agreed with the unit. No system screens or real personnel records are shown.</figcaption>
+        </figure>
+
+        <h2 id="governance">Data governance and constraints</h2>
+        <p>Because this system was built for a defence client, strict disclosure rules apply to this write-up.</p>
+
+        <section class="artefact" aria-labelledby="cs3-gov-title">
+          <div class="artefact-head">
+            <h3 class="artefact-title" id="cs3-gov-title">Disclosure and security boundaries</h3>
+            <span class="badge-illus">Governance rules</span>
+          </div>
+          <div class="artefact-body">
+            <dl class="gov-grid">
+              <div class="gov-item">
+                <dt>Client and unit anonymity</dt>
+                <dd>Bangladesh Army is named with approval. Specific unit names and locations are never disclosed.</dd>
+              </div>
+              <div class="gov-item">
+                <dt>No screenshots or system name</dt>
+                <dd>No screenshots of the application are shown, and the internal system name is not disclosed beyond its generic description.</dd>
+              </div>
+              <div class="gov-item">
+                <dt>No personnel or equipment data</dt>
+                <dd>No personnel records, hierarchy details or equipment inventory data appear anywhere on this site.</dd>
+              </div>
+            </dl>
+          </div>
+        </section>
+
+        <h2 id="outcome">Outcome</h2>
+        <p>The personnel and equipment management system was delivered and is in use by the unit. Replacing the fixed 50% heir share with a configurable field ensured the system could record real nomination cases without requiring workarounds or later code changes.</p>
+
+        <h2 id="learned">What I learned</h2>
+        <p><mark class="ph">[PLACEHOLDER: what I learned from this project / what I would do differently]</mark></p>
+
+        <h2 id="method">Tools and method</h2>
+        <div class="method">
+          <p>Stakeholder meetings and requirements specification <mark class="ph">[VERIFY: any specific documents or tools used]</mark>.</p>
+          <p><mark class="ph">[VERIFY: confirm whether any AI assistance was used on this project, or state that none was used]</mark></p>
+        </div>
+
+        <nav class="cs-nav" aria-label="Case study navigation">
+          <a href="case-study-ai-output-audit.html">Previous: AI output audit for an OSINT platform</a>
+          <a href="case-studies.html">All case studies</a>
+        </nav>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <p class="data-note">Figures are scaled or simulated to protect client data. Live systems and dashboards are not linked.</p>
+      <p>Shabab Bin Rashid. <a href="mailto:[email]"><mark class="ph">[PLACEHOLDER: email]</mark></a> and <a href="[LinkedIn URL]"><mark class="ph">[PLACEHOLDER: LinkedIn]</mark></a></p>
+    </footer>
+  </div>
+</body>
+</html>
