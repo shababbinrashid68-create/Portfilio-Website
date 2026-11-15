@@ -1065,6 +1065,205 @@ mark.ph {
   line-height: 1.5;
 }
 
+.artefact.is-secondary {
+  margin: 0.75rem 0 1.75rem;
+  box-shadow: var(--shadow-sm);
+}
+.artefact.is-secondary .artefact-head {
+  padding: 0.65rem 1rem;
+}
+.artefact.is-secondary .artefact-body {
+  padding: 0.9rem 1rem;
+}
+.artefact.is-secondary .ba-col {
+  padding: 0.85rem 0.95rem;
+}
+.artefact.is-secondary .ba-col h4 {
+  font-size: var(--step--1);
+}
+.artefact.is-secondary .ba-col p {
+  font-size: var(--step--2);
+}
+
+/* Role map diagram & structured 5-responsibility grid (CS3) */
+.role-map {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.role-endpoint {
+  padding: 1.1rem;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--rule-strong);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.85rem;
+}
+
+.role-endpoint h4 {
+  font-size: var(--step-0);
+  margin: 0.25rem 0 0.35rem;
+}
+
+.role-endpoint p {
+  margin: 0;
+  font-size: var(--step--2);
+  color: var(--muted);
+  line-height: 1.48;
+}
+
+.role-subbox {
+  padding: 0.75rem 0.85rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+}
+
+.role-subbox strong {
+  display: block;
+  font-size: var(--step--1);
+  color: var(--ink);
+  margin-bottom: 0.2rem;
+}
+
+.role-bridge {
+  padding: 1.15rem;
+  background: var(--surface-tint);
+  border: 2px solid var(--accent);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.role-bridge-head {
+  margin-bottom: 0.2rem;
+}
+
+.role-bridge-head h4 {
+  font-size: var(--step-0);
+  color: var(--ink);
+  margin: 0.2rem 0 0.15rem;
+}
+
+.role-bridge-head p {
+  margin: 0;
+  font-size: var(--step--2);
+  color: var(--muted);
+}
+
+.role-stream {
+  padding: 0.6rem 0.8rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  font-size: var(--step--2);
+  line-height: 1.42;
+}
+
+.role-stream-dir {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.15rem;
+}
+
+.role-stream-arrow {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 0.05em 0.45em;
+  border-radius: 3px;
+}
+
+.role-stream p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.role-resp-grid {
+  list-style: none;
+  margin: 1.25rem 0 2rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.role-resp-card {
+  padding: 1.1rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px;
+  box-shadow: var(--shadow-sm);
+}
+
+.role-resp-card h3 {
+  font-size: var(--step-0);
+  margin-bottom: 0.45rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 0.6rem;
+}
+
+.role-resp-card p {
+  margin: 0;
+  font-size: var(--step--1);
+  line-height: 1.55;
+}
+
+/* Requirement-as-rule empty slot template (CS3) */
+.rule-slots {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.rule-slot {
+  padding: 0.95rem 1.05rem;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  border-radius: 5px;
+}
+
+.rule-slot strong {
+  display: block;
+  font-size: var(--step--1);
+  color: var(--ink);
+  margin-bottom: 0.25rem;
+}
+
+.rule-slot p {
+  margin: 0 0 0.65rem;
+  font-size: var(--step--2);
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.rule-slot-empty {
+  padding: 0.55rem 0.7rem;
+  background: var(--surface);
+  border: 1px dashed var(--rule-strong);
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-align: center;
+}
+
 /* User story specification card (CS4) */
 .spec-grid {
   display: grid;
@@ -1239,6 +1438,9 @@ tbody th { font-weight: 650; color: var(--ink); }
   .audit-checks-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+  .role-map {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 @media (max-width: 42rem) {
@@ -1264,7 +1466,9 @@ tbody th { font-weight: 650; color: var(--ink); }
   .audit-checks-grid,
   .scenario-schema,
   .gov-grid,
-  .before-after {
+  .before-after,
+  .role-resp-grid,
+  .rule-slots {
     grid-template-columns: minmax(0, 1fr);
   }
   .scenario-bar {

@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Personnel and equipment management system, Bangladesh Army | Shabab Bin Rashid</title>
-  <meta name="description" content="Case study: requirements engineering across five meetings with a Bangladesh Army unit for a personnel and equipment management system now in use.">
+  <meta name="description" content="Case study: Business Analyst on a personnel and equipment management system now in use by a Bangladesh Army unit, covering client communication, requirements, feedback, UI collaboration and delivery checks.">
   <meta property="og:title" content="Personnel and equipment management system, Bangladesh Army | Shabab Bin Rashid">
-  <meta property="og:description" content="Case study: requirements engineering across five meetings with a Bangladesh Army unit for a personnel and equipment management system now in use.">
+  <meta property="og:description" content="Case study: Business Analyst on a personnel and equipment management system now in use by a Bangladesh Army unit, covering client communication, requirements, feedback, UI collaboration and delivery checks.">
   <meta property="og:type" content="article">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,146 +33,293 @@
       <header class="cs-head">
         <p class="crumb"><a href="case-studies.html">All case studies</a> <span>Case Study 3</span></p>
         <h1>Personnel and equipment management system, Bangladesh Army</h1>
-        <p class="dek">Requirements gathered across five meetings with a Bangladesh Army unit for a system now in use, where questioning a fixed rule led to a configurable design.</p>
+        <p class="dek">Business analyst on a system now in use by an Army unit. I handled client communication, requirements and feedback, and worked with the UI designers and developers through to delivery.</p>
       </header>
 
       <dl class="summary" aria-label="Summary">
-        <div><dt>Role</dt><dd>Business Analyst</dd></div>
-        <div><dt>Client type</dt><dd>Defence (government): Bangladesh Army</dd></div>
-        <div><dt>Tools</dt><dd>Stakeholder meetings, requirements specification <mark class="ph">[VERIFY: any specific documents or tools used]</mark></dd></div>
-        <div><dt>Outcome</dt><dd>Delivered and in use by the unit; a fixed 50% heir share replaced with a configurable field</dd></div>
+        <div><dt>Role</dt><dd>Business Analyst: client communication, requirements, feedback, UI collaboration, delivery checks</dd></div>
+        <div><dt>Client type</dt><dd>Defence (government)</dd></div>
+        <div><dt>Tools</dt><dd>Requirements meetings, requirements outline <mark class="ph">[PLACEHOLDER: other tools or documents]</mark></dd></div>
+        <div><dt>Outcome</dt><dd>Delivered and in use by the unit</dd></div>
       </dl>
 
       <article class="cs-body">
 
         <h2 id="context">Context</h2>
-        <p>A unit of the Bangladesh Army needed a system to manage personnel records and equipment. The system was built by my company, Kainotomia Pte Ltd, and is now delivered and in use by the unit.</p>
+        <p>An Army unit needed a system to manage personnel and equipment records. <mark class="ph">[VERIFY: records were previously kept on paper]</mark></p>
+        <p>The unit’s staff (<mark class="ph">[VERIFY: users were commanders, clerks and quartermaster staff]</mark>) described their processes precisely, but in military administrative terms the developers could not build from directly. My job at Kainotomia Pte Ltd was to work between the unit and our development and design teams.</p>
 
         <h2 id="role">My role</h2>
-        <p>I worked as the Business Analyst on the project. I gathered requirements across five meetings with the unit, questioned rules where fixed assumptions did not hold up against real cases, and made sure the development team built what the client asked for.</p>
+        <p>I worked as the Business Analyst across the project, sitting between the Army unit and our internal delivery teams across five core responsibilities:</p>
 
-        <figure class="artefact full-bleed" aria-labelledby="cs3-flow-title">
+        <figure class="artefact full-bleed" aria-labelledby="cs3-rolemap-title">
           <div class="artefact-head">
-            <h3 class="artefact-title" id="cs3-flow-title">Requirement-change workflow: nominated-heir field</h3>
-            <span class="badge-illus">Illustrative</span>
+            <h3 class="artefact-title" id="cs3-rolemap-title">Role map: sitting between the Army unit and the delivery teams</h3>
+            <span class="badge-illus">Simplified illustration</span>
           </div>
           <div class="artefact-body">
-            <ol class="flow-list flow-5">
-              <li class="flow-node">
-                <span class="flow-stage">Stage 1</span>
-                <strong>Requirement received</strong>
-                <p>Unit requested that a wife always receive exactly 50% in the nominated-heir field.</p>
-              </li>
-              <li class="flow-node">
-                <span class="flow-stage">Stage 2</span>
-                <strong>Questioned against real cases</strong>
-                <p>Tested the fixed 50% rule against real-world family and nomination cases.</p>
-              </li>
-              <li class="flow-node">
-                <span class="flow-stage">Stage 3</span>
-                <strong>Raised with the unit</strong>
-                <p>Brought the edge-case limitation back to the unit during requirement meetings.</p>
-              </li>
-              <li class="flow-node">
-                <span class="flow-stage">Stage 4</span>
-                <strong>Agreed change</strong>
-                <p>The unit agreed to drop the fixed 50% requirement from the specification.</p>
-              </li>
-              <li class="flow-node">
-                <span class="flow-stage">Stage 5</span>
-                <strong>Configurable field built</strong>
-                <p>Had the development team build the share field open and configurable.</p>
-              </li>
-            </ol>
+            <div class="role-map">
+              <div class="role-endpoint">
+                <div>
+                  <span class="flow-stage">Client side</span>
+                  <h4>Bangladesh Army unit</h4>
+                  <p>Operational stakeholders defining unit workflows and reviewing rules.</p>
+                </div>
+                <div class="role-subbox">
+                  <strong>Unit users</strong>
+                  <p>Commanders, clerks and quartermaster staff <mark class="ph">[VERIFY]</mark></p>
+                </div>
+              </div>
+
+              <div class="role-bridge">
+                <div class="role-bridge-head">
+                  <span class="flow-stage">Bridge role</span>
+                  <h4>Business Analyst (my role)</h4>
+                  <p>What passed through me between the unit and the delivery teams:</p>
+                </div>
+                <div class="role-stream">
+                  <div class="role-stream-dir">
+                    <span>1. Requirements</span>
+                    <span class="role-stream-arrow">Unit → BA → Dev</span>
+                  </div>
+                  <p>Gathered across five meetings with the unit and translated into system rules.</p>
+                </div>
+                <div class="role-stream">
+                  <div class="role-stream-dir">
+                    <span>2. Feedback</span>
+                    <span class="role-stream-arrow">Unit ↔ BA → Dev</span>
+                  </div>
+                  <p>Gathered unit review feedback and confirmed revised rules before build.</p>
+                </div>
+                <div class="role-stream">
+                  <div class="role-stream-dir">
+                    <span>3. Design input</span>
+                    <span class="role-stream-arrow">BA ↔ UI designers</span>
+                  </div>
+                  <p>Worked closely with UI designers on the visual outlook of the system.</p>
+                </div>
+                <div class="role-stream">
+                  <div class="role-stream-dir">
+                    <span>4. Delivery checks</span>
+                    <span class="role-stream-arrow">Dev → BA → Unit</span>
+                  </div>
+                  <p>Checked delivered features against what the unit had agreed.</p>
+                </div>
+              </div>
+
+              <div class="role-endpoint">
+                <div>
+                  <span class="flow-stage">Delivery side</span>
+                  <h4>Kainotomia Pte Ltd teams</h4>
+                  <p>Internal engineering and interface teams building the system.</p>
+                </div>
+                <div class="role-subbox">
+                  <strong>Development team</strong>
+                  <p>Built the personnel and equipment modules from agreed system rules.</p>
+                </div>
+                <div class="role-subbox">
+                  <strong>UI designers</strong>
+                  <p>Designed the visual outlook and interface structure.</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <figcaption class="artefact-foot">Illustrative process diagram showing how a hard-coded requirement was questioned, revised with the client, and built as a configurable field.</figcaption>
+          <figcaption class="artefact-foot">Simplified illustration of the Business Analyst role across client communication, requirements, feedback, UI collaboration and delivery checks.</figcaption>
         </figure>
+
+        <ol class="role-resp-grid full-bleed" aria-label="Five Business Analyst responsibilities">
+          <li class="role-resp-card">
+            <h3><span class="step-num">1</span> Client communication</h3>
+            <p>I was responsible for communication with the unit throughout the project.</p>
+          </li>
+          <li class="role-resp-card">
+            <h3><span class="step-num">2</span> Requirements gathering</h3>
+            <p>Across five meetings with the unit, I gathered the requirements for both the personnel and equipment modules. <mark class="ph">[VERIFY: wrote each as an exact rule (trigger, frequency, approver)]</mark></p>
+          </li>
+          <li class="role-resp-card">
+            <h3><span class="step-num">3</span> Feedback gathering</h3>
+            <p>I gathered the unit’s feedback and fed it back into the requirements. <mark class="ph">[VERIFY: one review session produced nineteen change requests; each revised rule was confirmed with users before development]</mark></p>
+          </li>
+          <li class="role-resp-card">
+            <h3><span class="step-num">4</span> UI collaboration</h3>
+            <p>I worked closely with the UI designers on the visual outlook of the system. <mark class="ph">[PLACEHOLDER: what the UI collaboration involved]</mark> <mark class="ph">[PLACEHOLDER: whether I represented the unit's feedback in design reviews]</mark></p>
+          </li>
+          <li class="role-resp-card">
+            <h3><span class="step-num">5</span> Delivery assurance</h3>
+            <p>I made sure the development team built what the client asked for. <mark class="ph">[VERIFY: checked delivered features against what the unit had agreed]</mark></p>
+          </li>
+        </ol>
 
         <h2 id="approach">Approach</h2>
 
-        <div class="step">
-          <h3><span class="step-num">Step 1</span> Gathering requirements across five meetings</h3>
-          <p>I held five meetings with the unit to gather requirements for the personnel and equipment modules and to confirm how the development team should build each workflow.</p>
-        </div>
-        <aside class="note" aria-label="Decision note: five meetings">
-          <span class="note-kind">Decision</span>
-          <p>Reviewing requirements across five meetings gave the unit space to check how proposed rules would work in practice before they were locked into code. <mark class="ph">[VERIFY]</mark></p>
-        </aside>
-
-        <div class="step">
-          <h3><span class="step-num">Step 2</span> Questioning the fixed 50% nominated-heir share</h3>
-          <p>The unit initially required that a wife always receive exactly 50% in the nominated-heir field. Rather than transcribing that rule directly into the specification, I questioned it against real-world cases and raised it with the unit.</p>
-        </div>
-        <aside class="note" aria-label="Decision note: questioning the fixed rule">
-          <span class="note-kind">Decision</span>
-          <p>Hard-coding a fixed 50% share would block valid nominations whenever a service member’s family circumstances required a different split. <mark class="ph">[VERIFY]</mark></p>
-        </aside>
-
-        <div class="step">
-          <h3><span class="step-num">Step 3</span> Building the share field open and configurable</h3>
-          <p>After I raised the issue, the unit agreed to remove the fixed share. I had the development team build the nominated-heir field open and configurable, and made sure the delivered system matched what the unit agreed to.</p>
-        </div>
-        <aside class="note" aria-label="Trade-off note: configurable share">
-          <span class="note-kind">Trade-off</span>
-          <p>Leaving the share open requires entering the allocation for each record rather than relying on a fixed preset, but it handles every nomination case without a code change. <mark class="ph">[VERIFY]</mark></p>
-        </aside>
-
-        <figure class="artefact" aria-labelledby="cs3-ba-title">
+        <figure class="artefact full-bleed" aria-labelledby="cs3-lifecycle-title">
           <div class="artefact-head">
-            <h3 class="artefact-title" id="cs3-ba-title">Nominated-heir field specification</h3>
+            <h3 class="artefact-title" id="cs3-lifecycle-title">Requirements lifecycle</h3>
+            <span class="badge-illus">Simplified illustration</span>
+          </div>
+          <div class="artefact-body">
+            <ol class="flow-list">
+              <li class="flow-node">
+                <span class="flow-stage">Stage 1</span>
+                <strong>Meetings</strong>
+                <p>Five requirement and review meetings held with the unit.</p>
+              </li>
+              <li class="flow-node">
+                <span class="flow-stage">Stage 2</span>
+                <strong>Requirements</strong>
+                <p>Personnel and equipment processes structured into system rules.</p>
+              </li>
+              <li class="flow-node">
+                <span class="flow-stage">Stage 3</span>
+                <strong>Unit review and feedback</strong>
+                <p>Unit reviewed draft requirements and raised change requests.</p>
+              </li>
+              <li class="flow-node">
+                <span class="flow-stage">Stage 4</span>
+                <strong>Confirmation</strong>
+                <p>Revised rules confirmed with users before going to build.</p>
+              </li>
+              <li class="flow-node">
+                <span class="flow-stage">Stage 5</span>
+                <strong>Design and build</strong>
+                <p>Worked with UI designers and developers as modules were built.</p>
+              </li>
+              <li class="flow-node">
+                <span class="flow-stage">Stage 6</span>
+                <strong>Check against agreed requirements</strong>
+                <p>Checked delivered features against what the unit had agreed.</p>
+              </li>
+              <li class="flow-node">
+                <span class="flow-stage">Stage 7</span>
+                <strong>Delivery</strong>
+                <p>System delivered and placed in use by the unit.</p>
+              </li>
+            </ol>
+          </div>
+          <figcaption class="artefact-foot">Simplified illustration of the seven stages from initial unit meetings through to delivery.</figcaption>
+        </figure>
+
+        <figure class="artefact full-bleed" aria-labelledby="cs3-rulecard-title">
+          <div class="artefact-head">
+            <h3 class="artefact-title" id="cs3-rulecard-title">Requirement-as-rule structure <mark class="ph">[VERIFY]</mark></h3>
+            <span class="badge-illus">Simplified illustration</span>
+          </div>
+          <div class="artefact-body">
+            <div class="rule-slots">
+              <div class="rule-slot">
+                <span class="flow-stage">Slot 1</span>
+                <strong>Trigger</strong>
+                <p>What event, date or status change starts the rule.</p>
+                <div class="rule-slot-empty">[Empty template slot]</div>
+              </div>
+              <div class="rule-slot">
+                <span class="flow-stage">Slot 2</span>
+                <strong>Frequency</strong>
+                <p>How often the check, reminder or action runs.</p>
+                <div class="rule-slot-empty">[Empty template slot]</div>
+              </div>
+              <div class="rule-slot">
+                <span class="flow-stage">Slot 3</span>
+                <strong>Approver</strong>
+                <p>Which role authorizes or signs off on the record.</p>
+                <div class="rule-slot-empty">[Empty template slot]</div>
+              </div>
+            </div>
+          </div>
+          <figcaption class="artefact-foot">Simplified illustration of the three-part rule template (<mark class="ph">[VERIFY]</mark>). Slots are shown empty so no invented rule is displayed.</figcaption>
+        </figure>
+
+        <div class="step">
+          <h3><span class="step-num">Area 1</span> Personnel module</h3>
+          <p>I gathered the unit’s personnel management requirements and confirmed each revised rule with the users before it went to development. <mark class="ph">[VERIFY: personnel requirements included reminders before a mandatory training deadline lapses and before a temporary medical category falls due for review]</mark></p>
+        </div>
+        <aside class="note" aria-label="Decision note: feedback loop">
+          <span class="note-kind">Decision (feedback loop)</span>
+          <p>Confirming each revised rule with users before development meant changes were caught on paper, not after they were built. <mark class="ph">[VERIFY]</mark></p>
+        </aside>
+
+        <div class="step">
+          <h3><span class="step-num">Area 2</span> Equipment module</h3>
+          <p>I gathered the requirements for tracking equipment across the unit. <mark class="ph">[VERIFY: every item issued, handed over or written off leaves a record with supporting documents; a new quartermaster sees what the predecessor held]</mark></p>
+        </div>
+        <aside class="note" aria-label="Decision note: equipment records">
+          <span class="note-kind">Decision (equipment records)</span>
+          <p>A record for every movement means nothing disappears without explanation at handover. <mark class="ph">[VERIFY]</mark></p>
+        </aside>
+
+        <div class="step">
+          <h3><span class="step-num">Area 3</span> Nominated heir for the salary account (one example of questioning a requirement)</h3>
+          <p>In the nominated-heir field for the soldier’s salary account, the unit specified that a wife must always receive exactly 50%. I questioned this and raised it with the unit, which removed the fixed share immediately. The field was built open, so each soldier sets their own nominations. <mark class="ph">[VERIFY: reason — a fixed share does not fit every soldier, because family circumstances differ and inheritance shares under Bangladesh's personal laws vary with religion and family structure]</mark></p>
+        </div>
+        <aside class="note" aria-label="Decision note: heir field">
+          <span class="note-kind">Decision (heir field)</span>
+          <p>A fixed share would have recorded something false for soldiers whose family situation did not match it. <mark class="ph">[VERIFY]</mark></p>
+        </aside>
+
+        <figure class="artefact is-secondary" aria-labelledby="cs3-ba-title">
+          <div class="artefact-head">
+            <h3 class="artefact-title" id="cs3-ba-title">Nominated-heir field</h3>
             <span class="badge-illus">Simplified illustration</span>
           </div>
           <div class="artefact-body before-after">
             <div class="ba-col">
-              <span class="ba-label">Before (initial requirement)</span>
+              <span class="ba-label">Before</span>
               <h4>Spouse share fixed at 50%</h4>
-              <p>The nominated-heir field hard-codes a fixed 50% share for a wife on every record.</p>
+              <p>Initial requirement fixed a 50% share for a wife on every salary-account nomination record.</p>
             </div>
             <div class="ba-col is-after">
-              <span class="ba-label">After (agreed specification)</span>
-              <h4>Share left open and configurable</h4>
-              <p>Fixed 50% constraint removed after review with the unit; the nominated-heir field accepts configurable shares.</p>
+              <span class="ba-label">After</span>
+              <h4>Share left open; each soldier sets their own nominations</h4>
+              <p>Fixed share removed after review with the unit; the field was built open.</p>
             </div>
           </div>
-          <figcaption class="artefact-foot">Simplified illustration of the requirement change agreed with the unit. No system screens or real personnel records are shown.</figcaption>
         </figure>
 
-        <h2 id="governance">Data governance and constraints</h2>
-        <p>Because this system was built for a defence client, strict disclosure rules apply to this write-up.</p>
+        <div class="step">
+          <h3><span class="step-num">Area 4</span> Interface</h3>
+          <p>I worked closely with the UI designers on the visual outlook of the system. <mark class="ph">[PLACEHOLDER: one to two sentences on the UI work with designers]</mark></p>
+        </div>
+
+        <h2 id="governance">Constraints and confidentiality</h2>
+        <p>Because this system was built for a defence client, strict disclosure rules apply to this write-up:</p>
 
         <section class="artefact" aria-labelledby="cs3-gov-title">
           <div class="artefact-head">
-            <h3 class="artefact-title" id="cs3-gov-title">Disclosure and security boundaries</h3>
+            <h3 class="artefact-title" id="cs3-gov-title">Confidentiality boundaries</h3>
             <span class="badge-illus">Governance rules</span>
           </div>
           <div class="artefact-body">
             <dl class="gov-grid">
               <div class="gov-item">
-                <dt>Client and unit anonymity</dt>
-                <dd>Bangladesh Army is named with approval. Specific unit names and locations are never disclosed.</dd>
+                <dt>No screenshots of the system</dt>
+                <dd>No real screens, wireframes or mock interfaces resembling the application are shown.</dd>
               </div>
               <div class="gov-item">
-                <dt>No screenshots or system name</dt>
-                <dd>No screenshots of the application are shown, and the internal system name is not disclosed beyond its generic description.</dd>
+                <dt>No unit name, number or location</dt>
+                <dd>Bangladesh Army is named with approval, without identifying the specific unit or location.</dd>
               </div>
               <div class="gov-item">
-                <dt>No personnel or equipment data</dt>
-                <dd>No personnel records, hierarchy details or equipment inventory data appear anywhere on this site.</dd>
+                <dt>No personnel data</dt>
+                <dd>No real soldier records, salary-account nominations or equipment logs appear anywhere on this site.</dd>
+              </div>
+              <div class="gov-item">
+                <dt>No security classification markings</dt>
+                <dd>No internal military abbreviations or classification markings are used.</dd>
               </div>
             </dl>
           </div>
         </section>
 
         <h2 id="outcome">Outcome</h2>
-        <p>The personnel and equipment management system was delivered and is in use by the unit. Replacing the fixed 50% heir share with a configurable field ensured the system could record real nomination cases without requiring workarounds or later code changes.</p>
+        <p>The system has been delivered and is in use by the unit.</p>
 
         <h2 id="learned">What I learned</h2>
-        <p><mark class="ph">[PLACEHOLDER: what I learned from this project / what I would do differently]</mark></p>
+        <p>Good requirements protect the people a system records, not only the people who manage it.</p>
+        <p><mark class="ph">[PLACEHOLDER: what I would do differently]</mark></p>
 
         <h2 id="method">Tools and method</h2>
         <div class="method">
-          <p>Stakeholder meetings and requirements specification <mark class="ph">[VERIFY: any specific documents or tools used]</mark>.</p>
-          <p><mark class="ph">[VERIFY: confirm whether any AI assistance was used on this project, or state that none was used]</mark></p>
+          <p>Requirements meetings and the requirements outline. <mark class="ph">[PLACEHOLDER: tools or documents used]</mark></p>
         </div>
 
         <nav class="cs-nav" aria-label="Case study navigation">
