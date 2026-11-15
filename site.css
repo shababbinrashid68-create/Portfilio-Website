@@ -102,9 +102,9 @@ h1, h2, h3, h4 {
 h2 {
   font-size: var(--step-2);
   font-weight: 700;
-  margin-top: 3.5rem;
-  margin-bottom: 1.1rem;
-  padding-top: 1.35rem;
+  margin-top: 2.25rem;
+  margin-bottom: 0.85rem;
+  padding-top: 1.15rem;
   border-top: 1px solid var(--rule);
   display: flex;
   align-items: center;
@@ -159,7 +159,7 @@ code {
 }
 
 .wrap {
-  max-width: 75rem;
+  max-width: 68rem;
   margin-inline: auto;
   padding-inline: clamp(1.125rem, 5vw, 3.25rem);
 }
@@ -579,9 +579,9 @@ mark.ph {
 
 .summary {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.8fr) minmax(0, 1.25fr) minmax(0, 0.85fr);
   gap: 0;
-  margin: 0.5rem 0 3rem;
+  margin: 0.5rem 0 2rem;
   background: var(--surface);
   border: 1px solid var(--rule);
   border-top: 4px solid var(--accent);
@@ -591,7 +591,7 @@ mark.ph {
 }
 .summary > div {
   min-width: 0;
-  padding: 1.25rem 1.35rem;
+  padding: 1.15rem 1.25rem;
   border-right: 1px solid var(--rule);
 }
 .summary > div:last-child {
@@ -612,15 +612,16 @@ mark.ph {
   color: var(--ink);
 }
 
-/* Two-column reading layout: text on the left, decision notes in the margin.
-   A note placed directly after a block lands in the same grid row as that block. */
+/* Two-column reading layout for steps and decision notes;
+   all other sections span the full width so there are no empty side columns. */
 .cs-body {
   display: grid;
-  grid-template-columns: minmax(0, var(--measure)) minmax(15rem, 1fr);
-  column-gap: clamp(2rem, 4vw, 3.25rem);
-  align-items: start;
+  grid-template-columns: minmax(0, 1.55fr) minmax(16rem, 1fr);
+  column-gap: 1.5rem;
+  align-items: stretch;
 }
-.cs-body > * { grid-column: 1; }
+.cs-body > * { grid-column: 1 / -1; }
+.cs-body > .step { grid-column: 1; }
 .cs-body > .note { grid-column: 2; }
 .cs-body > .full-bleed { grid-column: 1 / -1; }
 
@@ -643,8 +644,8 @@ mark.ph {
 
 .step {
   position: relative;
-  margin: 0 0 1.5rem;
-  padding: 1.25rem 1.4rem;
+  margin: 0 0 1.1rem;
+  padding: 1.2rem 1.35rem;
   background: var(--surface);
   border: 1px solid var(--rule);
   border-left: 4px solid var(--accent);
@@ -678,7 +679,7 @@ mark.ph {
 
 .note {
   position: relative;
-  margin: 0 0 1.5rem;
+  margin: 0 0 1.1rem;
   padding: 1rem 1.15rem;
   background: var(--surface-tint);
   border: 1px solid var(--rule);
@@ -705,7 +706,7 @@ mark.ph {
 /* ---------- Visual Enrichment: Process Diagrams & Artefacts ---------- */
 
 .artefact {
-  margin: 1.85rem 0 2.5rem;
+  margin: 1.25rem 0 1.75rem;
   background: var(--surface);
   border: 1px solid var(--rule);
   border-radius: 6px;
@@ -761,6 +762,16 @@ mark.ph {
 
 .flow-list.flow-5 {
   grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.flow-list.flow-7 {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+.flow-list.flow-7 > .flow-node:nth-child(-n+4) {
+  grid-column: span 3;
+}
+.flow-list.flow-7 > .flow-node:nth-child(n+5) {
+  grid-column: span 4;
 }
 
 .flow-node {
@@ -1193,7 +1204,7 @@ mark.ph {
 
 .role-resp-grid {
   list-style: none;
-  margin: 1.25rem 0 2rem;
+  margin: 1.25rem 0 1.5rem;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1207,6 +1218,10 @@ mark.ph {
   border-left: 4px solid var(--accent);
   border-radius: 6px;
   box-shadow: var(--shadow-sm);
+}
+
+.role-resp-card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
 }
 
 .role-resp-card h3 {
@@ -1434,9 +1449,17 @@ tbody th { font-weight: 650; color: var(--ink); }
   }
   .flow-list,
   .flow-list.flow-5,
+  .flow-list.flow-7,
   .audit-top-row,
   .audit-checks-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .flow-list.flow-7 > .flow-node:nth-child(-n+4),
+  .flow-list.flow-7 > .flow-node:nth-child(n+5) {
+    grid-column: auto;
+  }
+  .flow-list.flow-7 > .flow-node:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
   }
   .role-map {
     grid-template-columns: minmax(0, 1fr);
@@ -1462,6 +1485,7 @@ tbody th { font-weight: 650; color: var(--ink); }
   .flow-list,
   .flow-list.flow-3,
   .flow-list.flow-5,
+  .flow-list.flow-7,
   .audit-top-row,
   .audit-checks-grid,
   .scenario-schema,
@@ -1470,6 +1494,10 @@ tbody th { font-weight: 650; color: var(--ink); }
   .role-resp-grid,
   .rule-slots {
     grid-template-columns: minmax(0, 1fr);
+  }
+  .flow-list.flow-7 > .flow-node:last-child:nth-child(odd),
+  .role-resp-card:last-child:nth-child(odd) {
+    grid-column: auto;
   }
   .scenario-bar {
     display: flex;
