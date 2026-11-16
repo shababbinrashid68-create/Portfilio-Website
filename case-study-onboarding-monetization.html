@@ -98,38 +98,38 @@
 
         <div class="step">
           <h3><span class="step-num">Step 1</span> Rebuilding the age field</h3>
-          <p>The stored age field was about 40% empty, and its bands overlapped. I recalculated age from date of birth instead, grouping users into five bands (30–39, 40–49, 50–64, 65–74 and 75+). <mark class="ph">[VERIFY]</mark></p>
+          <p>The stored age field was about 40% empty, and its bands overlapped <mark class="ph">[VERIFY]</mark>. In BigQuery, I recalculated <code>age_at_signup</code> from <code>dob</code> and <code>created_at</code> using <code>DATE_DIFF</code> (adjusted for whether the user’s birthday had passed that year) and bucketed users into six age ranges (<code>18–29</code>, <code>30–39</code>, <code>40–49</code>, <code>50–64</code>, <code>65–74</code> and <code>75+</code>), while normalizing <code>relationship_status</code> into <code>Individual</code> and <code>Couple</code>.</p>
         </div>
         <aside class="note" aria-label="Decision note: age field">
           <span class="note-kind">Decision</span>
-          <p>Recalculating from date of birth gives one consistent definition of age, rather than patching a field with gaps and overlapping bands. <mark class="ph">[VERIFY]</mark></p>
+          <p>Recalculating from date of birth gives one consistent definition of age at sign-up, rather than patching a field with gaps and overlapping bands. <mark class="ph">[VERIFY]</mark></p>
         </aside>
 
         <div class="step">
           <h3><span class="step-num">Step 2</span> Setting a minimum segment size</h3>
-          <p>Segments with fewer than 50 users were excluded because rates from groups that small were too unstable to compare. On the dashboard, this rule excluded states with fewer than 50 users, the Email &amp; Password sign-up method (n &lt; 50), and the 30–39 and 75+ Couple cohorts.</p>
+          <p>Segments with fewer than 50 users (<code>HAVING COUNT(id) &gt;= 50</code> and <code>WHERE s.n_users &gt;= p.min_segment_n</code>) were excluded as statistically unreliable. On the dashboard, this rule excluded states with 50 or fewer users, the Email &amp; Password sign-up method (n &lt; 50), the <code>18–29</code> age band, and the <code>30–39</code> and <code>75+</code> Couple cohorts.</p>
         </div>
         <aside class="note" aria-label="Trade-off note: segment threshold">
           <span class="note-kind">Trade-off</span>
-          <p>Some small groups drop out of the view. The rates that remain can be compared with each other. <mark class="ph">[VERIFY]</mark></p>
+          <p>Small cohorts drop out of the view, keeping unstable rates from small sample sizes out of the comparison.</p>
         </aside>
 
         <div class="step">
           <h3><span class="step-num">Step 3</span> Modelling revenue as scenarios <span class="sim">Simulated</span></h3>
-          <p>I had no permission to use monetization data, so the revenue component is a simulation <span class="sim">Simulated</span>. I modelled a hypothetical $9.99/month premium tier with subscriber propensity derived from profile completion, and built a Looker Studio parameter (<code>MRR Scenario</code>) that switches monthly recurring revenue estimates between conservative, base and optimistic scenarios.</p>
+          <p>I had no permission to use monetization data, so the revenue component is a deterministic expected-value simulation <span class="sim">Simulated</span> (with no <code>RAND()</code>). In a <code>params</code> CTE, I set a hypothetical $9.99/month premium tier and assigned conversion propensity from profile completion (<code>0.35</code> at 100% completion, <code>0.15</code> at 70–99%, and <code>0.00</code> below 70%), then computed conservative (<code>0.5×</code>), base (<code>1.0×</code>) and optimistic (<code>1.5×</code>) MRR columns controlled by a Looker Studio parameter (<code>MRR Scenario</code>).</p>
         </div>
         <aside class="note" aria-label="Decision note: revenue scenarios">
           <span class="note-kind">Decision</span>
-          <p>Three labelled scenarios show a range and keep the assumption visible. A single simulated number would read as a forecast. <mark class="ph">[VERIFY]</mark></p>
+          <p>Keeping all assumptions in a <code>params</code> CTE and exposing three labelled scenarios makes the simulation transparent rather than presenting a single number as a forecast. <mark class="ph">[VERIFY]</mark></p>
         </aside>
 
         <div class="step">
           <h3><span class="step-num">Step 4</span> Comparing profile completion by sign-up method and state</h3>
-          <p>Across 32,078 sign-ups <span class="scaled">Scaled</span>, 18,138 users <span class="scaled">Scaled</span> completed onboarding, an overall profile completion rate of 56.5%. By sign-up method (with Email &amp; Password excluded for n &lt; 50), Google led at 60.3% and Phone OTP reached 56.38%, while Apple ID trailed Google by 10.6 percentage points at 49.68%. Across US states with at least 50 users, Georgia led at 99.32% and all top-10 states exceeded 94%—a skew I noted on the dashboard because state is captured during profile setup rather than at initial sign-up.</p>
+          <p>Across 32,078 sign-ups <span class="scaled">Scaled</span>, 18,138 users <span class="scaled">Scaled</span> completed onboarding, an overall profile completion rate of 56.5%. By sign-up method (with Email &amp; Password excluded for n &lt; 50), Google led at 60.3% and Phone OTP reached 56.38%, while Apple ID trailed Google by 10.6 percentage points at 49.68%. Across US states with more than 50 users, Georgia led at 99.32% and all top-10 states exceeded 94%—a skew I noted on the dashboard because state is captured during profile setup rather than at initial sign-up, so the state ranking should be read as relative rather than absolute.</p>
         </div>
         <aside class="note" aria-label="Decision note: state capture bias">
           <span class="note-kind">Decision</span>
-          <p>Noting on the chart that state is captured at profile setup prevents readers from mistaking 94%+ state completion rates for top-of-funnel sign-up conversion. <mark class="ph">[VERIFY]</mark></p>
+          <p>Because state is captured during profile setup, state-level completion is biased upward; noting this on the dashboard ensures the state ranking is read as relative, not absolute.</p>
         </aside>
 
         <figure class="artefact full-bleed" aria-labelledby="cs1-scenario-title">
@@ -269,9 +269,97 @@
           <figcaption class="artefact-foot">Sanitized Looker Studio dashboard export. All user volumes and dollar amounts are scaled (<span class="scaled">Scaled</span>), all MRR figures are simulated (<span class="sim">Simulated</span>, assuming a hypothetical $9.99/mo tier), and completion percentages are actual unscaled rates.</figcaption>
         </figure>
 
-        <div class="ph-block">
-          [PLACEHOLDER: optional short SQL snippet cut down from my own query, captioned “Simplified example, not production code.” Remove this block if omitted.]
-        </div>
+        <figure class="artefact full-bleed" aria-labelledby="cs1-sql-title">
+          <div class="artefact-head">
+            <h3 class="artefact-title" id="cs1-sql-title">BigQuery SQL: age recalculation, segment threshold and scenario MRR</h3>
+            <div>
+              <span class="scaled">Scaled</span>
+              <span class="sim">Simulated</span>
+            </div>
+          </div>
+          <div class="artefact-body">
+<pre class="sql-block"><code>-- 1. Authentication completion (volumes scaled; rates unscaled; n &gt;= 50)
+SELECT
+  login_medium,
+  CAST(COUNT(id) * /* hidden_scalar */ AS INT64) AS total_users,
+  CAST(SUM(CAST(profile_completed AS INT64)) * /* hidden_scalar */ AS INT64) AS fully_onboarded_users,
+  ROUND((SUM(CAST(profile_completed AS INT64)) / COUNT(id)) * 100, 2) AS completion_rate_pct
+FROM `project.dataset.users`
+GROUP BY login_medium
+HAVING COUNT(id) &gt;= 50
+ORDER BY completion_rate_pct ASC;
+
+-- 2. Expected-value propensity &amp; scenario MRR model (deterministic, no RAND())
+WITH
+  params AS (
+    SELECT
+      9.99 AS price_usd,
+      /* hidden_scalar */ AS nda_scalar,
+      0.35 AS p_full,
+      0.15 AS p_high,
+      0.00 AS p_low,
+      50 AS min_segment_n
+  ),
+  base AS (
+    SELECT
+      u.id,
+      u.profile_percentage,
+      CASE
+        WHEN LOWER(TRIM(u.relationship_status)) IN ('single', 'individual') THEN 'Individual'
+        ELSE TRIM(u.relationship_status)
+      END AS relationship_status,
+      DATE_DIFF(COALESCE(DATE(u.created_at), CURRENT_DATE()), u.dob, YEAR)
+        - IF(
+          FORMAT_DATE('%m%d', COALESCE(DATE(u.created_at), CURRENT_DATE())) &lt; FORMAT_DATE('%m%d', u.dob),
+          1, 0
+        ) AS age_at_signup
+    FROM `project.dataset.users` AS u
+  ),
+  banded AS (
+    SELECT
+      b.id,
+      b.profile_percentage,
+      b.relationship_status,
+      CASE
+        WHEN b.age_at_signup BETWEEN 18 AND 29 THEN '18-29'
+        WHEN b.age_at_signup BETWEEN 30 AND 39 THEN '30-39'
+        WHEN b.age_at_signup BETWEEN 40 AND 49 THEN '40-49'
+        WHEN b.age_at_signup BETWEEN 50 AND 64 THEN '50-64'
+        WHEN b.age_at_signup BETWEEN 65 AND 74 THEN '65-74'
+        WHEN b.age_at_signup BETWEEN 75 AND 100 THEN '75+'
+      END AS age_range,
+      CASE
+        WHEN b.profile_percentage = 100 THEN p.p_full
+        WHEN b.profile_percentage &gt;= 70 THEN p.p_high
+        ELSE p.p_low
+      END AS p_convert
+    FROM base AS b
+    CROSS JOIN params AS p
+  ),
+  segments AS (
+    SELECT
+      age_range,
+      relationship_status,
+      COUNT(id) AS n_users,
+      SUM(p_convert) AS sum_p_convert
+    FROM banded
+    WHERE age_range IS NOT NULL AND relationship_status IS NOT NULL
+    GROUP BY age_range, relationship_status
+  )
+SELECT
+  s.age_range,
+  s.relationship_status,
+  CAST(ROUND(s.n_users * p.nda_scalar) AS INT64) AS total_users_in_segment,
+  CAST(ROUND(s.sum_p_convert * p.nda_scalar * p.price_usd * 0.5) AS INT64) AS mrr_conservative_usd,
+  CAST(ROUND(s.sum_p_convert * p.nda_scalar * p.price_usd) AS INT64) AS projected_mrr_usd,
+  CAST(ROUND(s.sum_p_convert * p.nda_scalar * p.price_usd * 1.5) AS INT64) AS mrr_optimistic_usd
+FROM segments AS s
+CROSS JOIN params AS p
+WHERE s.n_users &gt;= p.min_segment_n
+ORDER BY projected_mrr_usd DESC;</code></pre>
+          </div>
+          <figcaption class="artefact-foot">Simplified example, not production code. Dataset identifiers and NDA scaling multipliers (<code>/* hidden_scalar */</code>) are masked so raw volumes cannot be back-calculated.</figcaption>
+        </figure>
 
         <h2 id="governance">Data governance and constraints</h2>
         <p>Working with real product records required setting boundaries on what entered the queries and what could be shown outside the team.</p>
