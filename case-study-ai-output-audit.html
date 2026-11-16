@@ -37,10 +37,10 @@
       </header>
 
       <dl class="summary" aria-label="Summary">
-        <div><dt>Role</dt><dd>AI model evaluation and training-data feedback</dd></div>
+        <div><dt>Role</dt><dd>AI model evaluation, functional bug testing and product improvement input</dd></div>
         <div><dt>Client type</dt><dd>In-house product (Kainotomia Pte Ltd)</dd></div>
         <div><dt>Tools</dt><dd>Google Sheets, Gemini</dd></div>
-        <div><dt>Outcome</dt><dd>Structured findings tracker separating AI-output failures from software bugs; <mark class="ph">[PLACEHOLDER: one honest line on what the findings fed into]</mark></dd></div>
+        <div><dt>Outcome</dt><dd>Findings tracker used by the engineer to refine the AI engine’s RAG pipeline for customer readiness, alongside separate functional bug reporting and feature input</dd></div>
       </dl>
 
       <article class="cs-body">
@@ -50,7 +50,7 @@
         <p>My employer gave permission to describe this evaluation work, but not to show the platform or any real records.</p>
 
         <h2 id="role">My role</h2>
-        <p>My role is AI model evaluation and training-data feedback: testing the AI module, evaluating its responses, and flagging where its outputs fail. I built the findings tracker described below on my own with Gemini. I did not design, train or build the underlying AI model.</p>
+        <p>My role covered three areas across the platform: evaluating the AI module’s outputs and logging failures so the engineer could refine the AI engine’s RAG (retrieval-augmented generation) pipeline; testing the platform for functional software bugs and reporting them to the engineering team; and contributing my own input on how to improve the system’s functionality. I built the AI-inconsistency findings tracker described below on my own with Gemini. I did not design, train or build the underlying AI model itself.</p>
 
         <figure class="artefact full-bleed" aria-labelledby="cs2-flow-title">
           <div class="artefact-head">
@@ -104,9 +104,9 @@
               <div class="audit-box">
                 <span class="flow-stage">Stage 3: Triage &amp; routing</span>
                 <h4>Separated tracking logs</h4>
-                <p><strong>Route A (AI-output failure):</strong> logged in the Google Sheets AI-inconsistency findings tracker for training-data feedback.</p>
+                <p><strong>Route A (AI-output failure):</strong> logged in the Google Sheets findings tracker so the engineer could review cases and refine the AI engine’s RAG pipeline.</p>
                 <hr style="border: 0; border-top: 1px solid var(--rule); margin: 0.65rem 0;">
-                <p><strong>Route B (Functional defect):</strong> routed to a separate software bug tracker so UI or pipeline bugs never mix with model findings.</p>
+                <p><strong>Route B (Functional bugs &amp; product input):</strong> functional bugs tested and reported separately to the engineering team, alongside input on system functionality improvements.</p>
               </div>
             </div>
           </div>
@@ -134,12 +134,12 @@
         </aside>
 
         <div class="step">
-          <h3><span class="step-num">Step 3</span> Tracking AI inconsistencies separately from software bugs</h3>
-          <p>I built an AI-inconsistency findings tracker in Google Sheets on my own, with Gemini. Its columns capture the finding title, assessment, verdict, profile reference and evidence. Functional software bugs are tracked in a separate log so they are never mixed with AI-output findings.</p>
+          <h3><span class="step-num">Step 3</span> Tracking AI inconsistencies separately from functional bugs</h3>
+          <p>I built an AI-inconsistency findings tracker in Google Sheets on my own, with Gemini, so the engineer could review specific failure cases and refine the RAG of the AI engine for customer use. Its columns capture the finding title, assessment, verdict, profile reference and evidence. I also tested the platform for functional software bugs, reported them separately to the engineering team, and contributed input on how to improve system functionality.</p>
         </div>
         <aside class="note" aria-label="Trade-off note: separate trackers">
           <span class="note-kind">Trade-off</span>
-          <p>Maintaining two logs requires classifying every defect before logging it, but it keeps training-data feedback clean of routine software bugs. <mark class="ph">[VERIFY]</mark></p>
+          <p>Maintaining two logs requires classifying every defect before logging it, but it keeps RAG and training-data feedback clean of routine software bugs. <mark class="ph">[VERIFY]</mark></p>
         </aside>
 
         <figure class="artefact full-bleed" aria-labelledby="cs2-tracker-title">
@@ -225,7 +225,7 @@
         </section>
 
         <h2 id="outcome">Outcome</h2>
-        <p>The findings tracker gave the team a structured record of AI-output failures kept separate from functional software bugs. <mark class="ph">[PLACEHOLDER: one honest line on what the findings fed into, e.g. how the team used them]</mark></p>
+        <p>The findings tracker gave the engineer a structured log of AI-output failures to review and use when refining the RAG of the AI engine so that outputs would be accurate when customers used the system. Alongside the AI audit, I tested and reported functional software bugs to the engineering team in a separate log and contributed recommendations on how to improve the platform’s functionality.</p>
 
         <h2 id="learned">What I learned</h2>
         <p>I can identify where the model’s outputs fail. I cannot yet explain <em>why</em> the underlying statistical model produced them. Closing that gap is one reason I want formal training. <mark class="ph">[VERIFY]</mark></p>
