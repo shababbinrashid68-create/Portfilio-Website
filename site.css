@@ -3245,6 +3245,36 @@ html.motion .is-in > .reveal-line > span {
   transform: none;
 }
 
+/* Step 3: Hero entrance */
+.hero-portrait {
+  overflow: hidden;
+}
+html.motion .hero-portrait {
+  opacity: 0;
+  transform: scale(1.06);
+  transform-origin: 70% 100%;
+  transition:
+    opacity 1.2s ease .2s,
+    transform 1.8s var(--ease-out) .2s;
+}
+html.motion .hero.is-in .hero-portrait {
+  opacity: 1;
+  transform: scale(1);
+}
+html.motion .hero-name,
+html.motion .hero-sub,
+html.motion .hero-intro,
+html.motion .hero .link-row {
+  opacity: 0;
+  transition: opacity 1s ease .6s;
+}
+html.motion .hero.is-in .hero-name,
+html.motion .hero.is-in .hero-sub,
+html.motion .hero.is-in .hero-intro,
+html.motion .hero.is-in .link-row {
+  opacity: 1;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto !important;

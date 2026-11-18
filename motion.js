@@ -5,6 +5,18 @@ window.__motion = true;
   var docEl = document.documentElement;
   if (!docEl.classList.contains('motion')) return;
 
+  var heroStarted = false;
+  function startHeroEntrance() {
+    if (heroStarted) return;
+    heroStarted = true;
+    var hero = document.querySelector('.hero');
+    if (hero) {
+      requestAnimationFrame(function () {
+        hero.classList.add('is-in');
+      });
+    }
+  }
+
   function initLineReveals() {
     var csHead = document.querySelector('.cs-head');
     if (csHead) {
@@ -44,9 +56,14 @@ window.__motion = true;
     });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initLineReveals);
-  } else {
+  function init() {
     initLineReveals();
+    startHeroEntrance();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
   }
 })();
