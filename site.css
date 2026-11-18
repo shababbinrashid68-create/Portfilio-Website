@@ -3407,6 +3407,10 @@ html.motion .hero.is-in .link-row {
   font-weight: 500;
   color: var(--muted);
   white-space: nowrap;
+  transition: opacity .2s ease;
+}
+.hero-ch-label.is-hidden {
+  opacity: 0;
 }
 .hero-ch-follower {
   position: absolute;
@@ -3416,7 +3420,7 @@ html.motion .hero.is-in .link-row {
   transform: translate(0, 0) translate(-50%, -62%);
   transition:
     transform .5s var(--ease-out),
-    opacity .35s ease;
+    opacity .22s ease;
   will-change: transform, opacity;
 }
 .hero-ch-follower.is-hidden {

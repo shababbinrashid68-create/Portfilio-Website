@@ -166,18 +166,49 @@ window.__motion = true;
 
     var vLine = ch.querySelector('.hero-ch-v');
     var hLine = ch.querySelector('.hero-ch-h');
+    var hLabel = ch.querySelector('.hero-ch-label');
     var follower = ch.querySelector('.hero-ch-follower');
+    var textBlocks = hero.querySelectorAll('.hero-name, .hero-line, .hero-sub, .hero-intro, .link-row, a, button');
     var pendingRaf = null;
     var lastX = 0;
     var lastY = 0;
-    var overInteractive = false;
+    var hideFollower = false;
+    var hideLabel = false;
+
+    function checkTextProximity(clientX, clientY) {
+      var fw = follower.offsetWidth || 140;
+      var fh = follower.offsetHeight || 120;
+      var pad = 28;
+      var fLeft = clientX - fw * 0.5 - pad;
+      var fRight = clientX + fw * 0.5 + pad;
+      var fTop = clientY - fh * 0.62 - pad;
+      var fBottom = clientY + fh * 0.38 + pad;
+
+      var nearText = false;
+      var labelOverText = false;
+
+      for (var i = 0; i < textBlocks.length; i++) {
+        var r = textBlocks[i].getBoundingClientRect();
+        if (fRight >= r.left && fLeft <= r.right && fBottom >= r.top && fTop <= r.bottom) {
+          nearText = true;
+        }
+        if (clientY >= r.top - 12 && clientY <= r.bottom + 24) {
+          labelOverText = true;
+        }
+      }
+      hideFollower = nearText;
+      hideLabel = labelOverText;
+    }
 
     function updatePositions() {
       pendingRaf = null;
       vLine.style.transform = 'translateX(' + lastX + 'px)';
       hLine.style.transform = 'translateY(' + lastY + 'px)';
       follower.style.transform = 'translate(' + lastX + 'px, ' + lastY + 'px) translate(-50%, -62%)';
-      follower.classList.toggle('is-hidden', overInteractive);
+      follower.classList.toggle('is-hidden', hideFollower);
+      if (hLabel) {
+        hLabel.classList.toggle('is-hidden', hideLabel);
+      }
     }
 
     hero.addEventListener('pointerenter', function (e) {
@@ -187,7 +218,7 @@ window.__motion = true;
       var rect = hero.getBoundingClientRect();
       lastX = e.clientX - rect.left;
       lastY = e.clientY - rect.top;
-      overInteractive = !!(e.target && e.target.closest && e.target.closest('a, button'));
+      checkTextProximity(e.clientX, e.clientY);
       updatePositions();
       ch.classList.add('is-visible');
     });
@@ -202,7 +233,7 @@ window.__motion = true;
       var rect = hero.getBoundingClientRect();
       lastX = e.clientX - rect.left;
       lastY = e.clientY - rect.top;
-      overInteractive = !!(e.target && e.target.closest && e.target.closest('a, button'));
+      checkTextProximity(e.clientX, e.clientY);
       if (!ch.classList.contains('is-visible')) {
         ch.classList.add('is-visible');
       }
