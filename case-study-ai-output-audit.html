@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
-  <link rel="stylesheet" href="site.css?v=6">
+  <link rel="stylesheet" href="site.css?v=7">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -31,7 +31,7 @@
 
     <main id="main">
       <header class="cs-head">
-        <p class="crumb"><a href="case-studies.html">All case studies</a> <span>Case Study 2</span></p>
+        <p class="crumb"><span class="crumb-label">Case study 02 / 03</span> <a href="case-studies.html">← All case studies</a></p>
         <h1>AI output audit for an OSINT threat-intelligence platform</h1>
         <p class="dek">Evaluating an in-house AI module’s threat scores, red flags and narrative summaries, and separating model-output failures from functional software bugs.</p>
       </header>
@@ -45,205 +45,252 @@
 
       <article class="cs-body">
 
-        <h2 id="context">Context</h2>
-        <p>My company, Kainotomia Pte Ltd, develops an OSINT (open-source intelligence) threat-intelligence platform. The platform collects from publicly accessible sources: public channels, public groups and public stories. It includes a new, in-house-trained AI module that produces threat scores (0–100), red flags and narrative summaries.</p>
-        <p>My employer gave permission to describe this evaluation work, but not to show the platform or any real records.</p>
-
-        <h2 id="role">My role</h2>
-        <p>My role covered three areas across the platform: evaluating the AI module’s outputs and logging failures so the engineer could refine the AI engine’s RAG (retrieval-augmented generation) pipeline; testing the platform for functional software bugs and reporting them to the engineering team; and contributing my own input on how to improve the system’s functionality. I built the AI-inconsistency findings tracker described below on my own with Gemini. I did not design, train or build the underlying AI model itself.</p>
-
-        <figure class="artefact full-bleed" aria-labelledby="cs2-flow-title">
-          <div class="artefact-head">
-            <h3 class="artefact-title" id="cs2-flow-title">Audit workflow: from AI module output to separated issue logs</h3>
-            <span class="badge-illus">Illustrative</span>
+        <section class="cs-section" aria-labelledby="context">
+          <div class="cs-rail">
+            <h2 id="context"><span class="rail-num">01</span><span class="rail-title">Context</span></h2>
           </div>
-          <div class="artefact-body audit-pipeline">
-            <div class="audit-top-row">
-              <div class="audit-box">
-                <span class="flow-stage">Stage 1: Input</span>
-                <h4>In-house AI module output</h4>
-                <p>Generated from publicly accessible channels, groups and stories:</p>
-                <ul>
-                  <li>Threat score (0–100)</li>
-                  <li>Red flags</li>
-                  <li>Narrative summary and cross-case links</li>
-                </ul>
-              </div>
-
-              <div class="audit-box">
-                <span class="flow-stage">Stage 2: Six-point audit check</span>
-                <h4>Structured evaluation of model claims against raw public text</h4>
-                <div class="audit-checks-grid">
-                  <div class="audit-check-item">
-                    <strong>Score &amp; summary logic</strong>
-                    <span>Hallucinations and internal logic failures</span>
-                  </div>
-                  <div class="audit-check-item">
-                    <strong>Extraction &amp; NLP</strong>
-                    <span>Deterministic parsing and NLP failures</span>
-                  </div>
-                  <div class="audit-check-item">
-                    <strong>Quote intent</strong>
-                    <span>Personal intent vs. news, sarcasm or gaming talk</span>
-                  </div>
-                  <div class="audit-check-item">
-                    <strong>Evidence vs. flags</strong>
-                    <span>Evidence contradicting positive red flags</span>
-                  </div>
-                  <div class="audit-check-item">
-                    <strong>Demographics</strong>
-                    <span>Raw content vs. gazetteer heuristics</span>
-                  </div>
-                  <div class="audit-check-item">
-                    <strong>Cross-case links</strong>
-                    <span>Genuine link vs. shared channel, bot or self-match</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="audit-box">
-                <span class="flow-stage">Stage 3: Triage &amp; routing</span>
-                <h4>Separated tracking logs</h4>
-                <p><strong>Route A (AI-output failure):</strong> logged in the Google Sheets findings tracker so the engineer could review cases and refine the AI engine’s RAG pipeline.</p>
-                <hr style="border: 0; border-top: 1px solid var(--rule); margin: 0.65rem 0;">
-                <p><strong>Route B (Functional bugs &amp; product input):</strong> functional bugs tested and reported separately to the engineering team, alongside input on system functionality improvements.</p>
-              </div>
-            </div>
-          </div>
-          <figcaption class="artefact-foot">Illustrative process diagram showing how AI module outputs are audited across six failure categories and kept separate from functional software bugs.</figcaption>
-        </figure>
-
-        <h2 id="approach">Approach</h2>
-
-        <div class="step">
-          <h3><span class="step-num">Step 1</span> Auditing scores, flags and quote context</h3>
-          <p>I review the generated threat scores (0–100), red flags and narrative summaries against the raw public posts they cite. I check for hallucinations, logic failures, and deterministic extraction or NLP errors. In particular, I verify whether a cited quote reflects personal intent or is actually third-party news, sarcasm or gaming talk, and whether the evidence contradicts flags the system marked as positive.</p>
-        </div>
-        <aside class="note" aria-label="Decision note: quote context">
-          <span class="note-kind">Decision</span>
-          <p>Checking each cited quote in its full thread catches false positives where the model treated news reposts, sarcasm or gaming slang as literal personal intent. <mark class="ph">[VERIFY]</mark></p>
-        </aside>
-
-        <div class="step">
-          <h3><span class="step-num">Step 2</span> Checking demographic sources and cross-case links</h3>
-          <p>I verify whether demographic attributions (language, timezone and location) come from the raw content itself or from gazetteer heuristics. I also inspect cross-case links to confirm whether two profiles have a genuine connection, or were linked only because of shared public channels, moderation bots or self-matching.</p>
-        </div>
-        <aside class="note" aria-label="Decision note: source verification">
-          <span class="note-kind">Decision</span>
-          <p>Separating raw-content evidence from heuristic defaults prevents gazetteer guesses and shared-channel bots from looking like verified intelligence links. <mark class="ph">[VERIFY]</mark></p>
-        </aside>
-
-        <div class="step">
-          <h3><span class="step-num">Step 3</span> Tracking AI inconsistencies separately from functional bugs</h3>
-          <p>I built an AI-inconsistency findings tracker in Google Sheets on my own, with Gemini, so the engineer could review specific failure cases and refine the RAG of the AI engine for customer use. Its columns capture the finding title, assessment, verdict, profile reference and evidence. I also tested the platform for functional software bugs, reported them separately to the engineering team, and contributed input on how to improve system functionality.</p>
-        </div>
-        <aside class="note" aria-label="Trade-off note: separate trackers">
-          <span class="note-kind">Trade-off</span>
-          <p>Maintaining two logs requires classifying every defect before logging it, but it keeps RAG and training-data feedback clean of routine software bugs. <mark class="ph">[VERIFY]</mark></p>
-        </aside>
-
-        <figure class="artefact full-bleed" aria-labelledby="cs2-tracker-title">
-          <div class="artefact-head">
-            <h3 class="artefact-title" id="cs2-tracker-title">AI-inconsistency findings tracker (Google Sheets structure)</h3>
-            <span class="badge-illus">Illustrative template, fictional entries</span>
-          </div>
-          <div class="artefact-body sheet-wrap">
-            <table class="sheet-table">
-              <caption>Illustrative template, fictional entries. Column structure matches the Google Sheets tracker built with Gemini; all profile references and evidence below are invented examples.</caption>
-              <thead>
-                <tr>
-                  <th scope="col"><span class="sheet-col-letter">COL A</span>Finding title</th>
-                  <th scope="col"><span class="sheet-col-letter">COL B</span>Assessment</th>
-                  <th scope="col"><span class="sheet-col-letter">COL C</span>Verdict</th>
-                  <th scope="col"><span class="sheet-col-letter">COL D</span>Profile reference</th>
-                  <th scope="col"><span class="sheet-col-letter">COL E</span>Evidence</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">Gaming chat cited as literal threat intent</th>
-                  <td>Summary treats multiplayer game match commentary as a real-world statement of intent and raises the threat score.</td>
-                  <td><span class="verdict-pill">Context misread</span></td>
-                  <td><code>[Fictional-Ref-A]</code></td>
-                  <td>Quoted line in the public group thread refers to an in-game map objective, not a real location.</td>
-                </tr>
-                <tr>
-                  <th scope="row">Positive flag contradicted by cited quote</th>
-                  <td>System marks a positive red flag, but the quoted post is a third-party news headline shared with a critical reply.</td>
-                  <td><span class="verdict-pill">Flag contradiction</span></td>
-                  <td><code>[Fictional-Ref-B]</code></td>
-                  <td>Source post text explicitly disagrees with the forwarded news excerpt cited by the summary.</td>
-                </tr>
-                <tr>
-                  <th scope="row">Location attributed from gazetteer heuristic</th>
-                  <td>Narrative summary states location as a confirmed fact, but raw public stories contain no geographic markers.</td>
-                  <td><span class="verdict-pill">Heuristic artifact</span></td>
-                  <td><code>[Fictional-Ref-C]</code></td>
-                  <td>Location string matches a default gazetteer lookup on a common surname rather than raw post text.</td>
-                </tr>
-                <tr>
-                  <th scope="row">Cross-case link caused by shared moderation bot</th>
-                  <td>Two unrelated profiles are linked as associates because both interacted with the same automated welcome bot in a public channel.</td>
-                  <td><span class="verdict-pill">Bot / channel artifact</span></td>
-                  <td><code>[Fictional-Ref-D]</code></td>
-                  <td>Link graph edge points through an automated channel bot account rather than direct interaction.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <figcaption class="artefact-foot">Illustrative template, fictional entries. No real profiles, channel names, scores or system records are shown.</figcaption>
-        </figure>
-
-        <h2 id="governance">Data governance and constraints</h2>
-        <p>Because the platform handles threat-intelligence assessments, strict confidentiality boundaries apply to what can be described on this page.</p>
-
-        <section class="artefact" aria-labelledby="cs2-gov-title">
-          <div class="artefact-head">
-            <h3 class="artefact-title" id="cs2-gov-title">Confidentiality and scope boundaries</h3>
-            <span class="badge-illus">Governance rules</span>
-          </div>
-          <div class="artefact-body">
-            <dl class="gov-grid">
-              <div class="gov-item">
-                <dt>Employer permission</dt>
-                <dd>Kainotomia Pte Ltd granted permission to describe my evaluation method and tracker structure, but not to show the platform.</dd>
-              </div>
-              <div class="gov-item">
-                <dt>Platform and source anonymity</dt>
-                <dd>Neither the OSINT platform nor the specific social or messaging platforms it collects from are named.</dd>
-              </div>
-              <div class="gov-item">
-                <dt>No live records or identifiers</dt>
-                <dd>No internal URLs, IP addresses, hostnames, real names, real profiles, channel names or dossier contents appear anywhere on this site.</dd>
-              </div>
-              <div class="gov-item">
-                <dt>Fictional tracker entries</dt>
-                <dd>The findings tracker table is shown only as an illustrative template with fictional entries.</dd>
-              </div>
-            </dl>
+          <div class="cs-content">
+            <p>My company, Kainotomia Pte Ltd, develops an OSINT (open-source intelligence) threat-intelligence platform. The platform collects from publicly accessible sources: public channels, public groups and public stories. It includes a new, in-house-trained AI module that produces threat scores (0–100), red flags and narrative summaries.</p>
+            <p>My employer gave permission to describe this evaluation work, but not to show the platform or any real records.</p>
           </div>
         </section>
 
-        <h2 id="outcome">Outcome</h2>
-        <p>The findings tracker gave the engineer a structured log of AI-output failures to review and use when refining the RAG of the AI engine so that outputs would be accurate when customers used the system. Alongside the AI audit, I tested and reported functional software bugs to the engineering team in a separate log and contributed recommendations on how to improve the platform’s functionality.</p>
+        <section class="cs-section" aria-labelledby="role">
+          <div class="cs-rail">
+            <h2 id="role"><span class="rail-num">02</span><span class="rail-title">My role</span></h2>
+          </div>
+          <div class="cs-content">
+            <p>My role covered three areas across the platform: evaluating the AI module’s outputs and logging failures so the engineer could refine the AI engine’s RAG (retrieval-augmented generation) pipeline; testing the platform for functional software bugs and reporting them to the engineering team; and contributing my own input on how to improve the system’s functionality. I built the AI-inconsistency findings tracker described below on my own with Gemini. I did not design, train or build the underlying AI model itself.</p>
 
-        <h2 id="learned">What I learned</h2>
-        <p>I can identify where the model’s outputs fail. I cannot yet explain <em>why</em> the underlying statistical model produced them. Closing that gap is one reason I want formal training. <mark class="ph">[VERIFY]</mark></p>
+            <figure class="artefact" aria-labelledby="cs2-flow-title">
+              <div class="artefact-head">
+                <h3 class="artefact-title" id="cs2-flow-title">Audit workflow: from AI module output to separated issue logs</h3>
+                <span class="badge-illus">Illustrative</span>
+              </div>
+              <div class="artefact-body audit-pipeline">
+                <div class="audit-top-row">
+                  <div class="audit-box">
+                    <span class="flow-stage">Stage 1: Input</span>
+                    <h4>In-house AI module output</h4>
+                    <p>Generated from publicly accessible channels, groups and stories:</p>
+                    <ul>
+                      <li>Threat score (0–100)</li>
+                      <li>Red flags</li>
+                      <li>Narrative summary and cross-case links</li>
+                    </ul>
+                  </div>
 
-        <h2 id="method">Tools and method</h2>
-        <div class="method">
-          <p>Google Sheets and Gemini.</p>
-          <p>Findings tracker structure built on my own with Gemini; audit evaluations, failure classifications and evidence checks are my own. <mark class="ph">[VERIFY]</mark></p>
-        </div>
+                  <div class="audit-box">
+                    <span class="flow-stage">Stage 2: Six-point audit check</span>
+                    <h4>Structured evaluation of model claims against raw public text</h4>
+                    <div class="audit-checks-grid">
+                      <div class="audit-check-item">
+                        <strong>Score &amp; summary logic</strong>
+                        <span>Hallucinations and internal logic failures</span>
+                      </div>
+                      <div class="audit-check-item">
+                        <strong>Extraction &amp; NLP</strong>
+                        <span>Deterministic parsing and NLP failures</span>
+                      </div>
+                      <div class="audit-check-item">
+                        <strong>Quote intent</strong>
+                        <span>Personal intent vs. news, sarcasm or gaming talk</span>
+                      </div>
+                      <div class="audit-check-item">
+                        <strong>Evidence vs. flags</strong>
+                        <span>Evidence contradicting positive red flags</span>
+                      </div>
+                      <div class="audit-check-item">
+                        <strong>Demographics</strong>
+                        <span>Raw content vs. gazetteer heuristics</span>
+                      </div>
+                      <div class="audit-check-item">
+                        <strong>Cross-case links</strong>
+                        <span>Genuine link vs. shared channel, bot or self-match</span>
+                      </div>
+                    </div>
+                  </div>
 
-        <nav class="cs-nav" aria-label="Case study navigation">
-          <a href="case-study-onboarding-monetization.html">Previous: Onboarding and monetization dashboard</a>
-          <a href="case-studies.html">All case studies</a>
-          <a href="case-study-army-personnel-system.html">Next: Army personnel and equipment system</a>
-        </nav>
+                  <div class="audit-box">
+                    <span class="flow-stage">Stage 3: Triage &amp; routing</span>
+                    <h4>Separated tracking logs</h4>
+                    <p><strong>Route A (AI-output failure):</strong> logged in the Google Sheets findings tracker so the engineer could review cases and refine the AI engine’s RAG pipeline.</p>
+                    <hr style="border: 0; border-top: 1px solid var(--rule); margin: 0.65rem 0;">
+                    <p><strong>Route B (Functional bugs &amp; product input):</strong> functional bugs tested and reported separately to the engineering team, alongside input on system functionality improvements.</p>
+                  </div>
+                </div>
+              </div>
+              <figcaption class="artefact-foot">Illustrative process diagram showing how AI module outputs are audited across six failure categories and kept separate from functional software bugs.</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="cs-section" aria-labelledby="approach">
+          <div class="cs-rail">
+            <h2 id="approach"><span class="rail-num">03</span><span class="rail-title">Approach</span></h2>
+          </div>
+          <div class="cs-content">
+            <div class="step">
+              <span class="step-num">Step 1</span>
+              <h3>Auditing scores, flags and quote context</h3>
+              <p>I review the generated threat scores (0–100), red flags and narrative summaries against the raw public posts they cite. I check for hallucinations, logic failures, and deterministic extraction or NLP errors. In particular, I verify whether a cited quote reflects personal intent or is actually third-party news, sarcasm or gaming talk, and whether the evidence contradicts flags the system marked as positive.</p>
+              <aside class="note" aria-label="Decision note: quote context">
+                <span class="note-kind">Decision</span>
+                <p>Checking each cited quote in its full thread catches false positives where the model treated news reposts, sarcasm or gaming slang as literal personal intent. <mark class="ph">[VERIFY]</mark></p>
+              </aside>
+            </div>
+
+            <div class="step">
+              <span class="step-num">Step 2</span>
+              <h3>Checking demographic sources and cross-case links</h3>
+              <p>I verify whether demographic attributions (language, timezone and location) come from the raw content itself or from gazetteer heuristics. I also inspect cross-case links to confirm whether two profiles have a genuine connection, or were linked only because of shared public channels, moderation bots or self-matching.</p>
+              <aside class="note" aria-label="Decision note: source verification">
+                <span class="note-kind">Decision</span>
+                <p>Separating raw-content evidence from heuristic defaults prevents gazetteer guesses and shared-channel bots from looking like verified intelligence links. <mark class="ph">[VERIFY]</mark></p>
+              </aside>
+            </div>
+
+            <div class="step">
+              <span class="step-num">Step 3</span>
+              <h3>Tracking AI inconsistencies separately from functional bugs</h3>
+              <p>I built an AI-inconsistency findings tracker in Google Sheets on my own, with Gemini, so the engineer could review specific failure cases and refine the RAG of the AI engine for customer use. Its columns capture the finding title, assessment, verdict, profile reference and evidence. I also tested the platform for functional software bugs, reported them separately to the engineering team, and contributed input on how to improve system functionality.</p>
+              <aside class="note" aria-label="Trade-off note: separate trackers">
+                <span class="note-kind">Trade-off</span>
+                <p>Maintaining two logs requires classifying every defect before logging it, but it keeps RAG and training-data feedback clean of routine software bugs. <mark class="ph">[VERIFY]</mark></p>
+              </aside>
+            </div>
+
+            <figure class="artefact" aria-labelledby="cs2-tracker-title">
+              <div class="artefact-head">
+                <h3 class="artefact-title" id="cs2-tracker-title">AI-inconsistency findings tracker (Google Sheets structure)</h3>
+                <span class="badge-illus">Illustrative template, fictional entries</span>
+              </div>
+              <div class="artefact-body sheet-wrap">
+                <table class="sheet-table">
+                  <caption>Illustrative template, fictional entries. Column structure matches the Google Sheets tracker built with Gemini; all profile references and evidence below are invented examples.</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col"><span class="sheet-col-letter">COL A</span>Finding title</th>
+                      <th scope="col"><span class="sheet-col-letter">COL B</span>Assessment</th>
+                      <th scope="col"><span class="sheet-col-letter">COL C</span>Verdict</th>
+                      <th scope="col"><span class="sheet-col-letter">COL D</span>Profile reference</th>
+                      <th scope="col"><span class="sheet-col-letter">COL E</span>Evidence</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Gaming chat cited as literal threat intent</th>
+                      <td>Summary treats multiplayer game match commentary as a real-world statement of intent and raises the threat score.</td>
+                      <td><span class="verdict-pill">Context misread</span></td>
+                      <td><code>[Fictional-Ref-A]</code></td>
+                      <td>Quoted line in the public group thread refers to an in-game map objective, not a real location.</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Positive flag contradicted by cited quote</th>
+                      <td>System marks a positive red flag, but the quoted post is a third-party news headline shared with a critical reply.</td>
+                      <td><span class="verdict-pill">Flag contradiction</span></td>
+                      <td><code>[Fictional-Ref-B]</code></td>
+                      <td>Source post text explicitly disagrees with the forwarded news excerpt cited by the summary.</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Location attributed from gazetteer heuristic</th>
+                      <td>Narrative summary states location as a confirmed fact, but raw public stories contain no geographic markers.</td>
+                      <td><span class="verdict-pill">Heuristic artifact</span></td>
+                      <td><code>[Fictional-Ref-C]</code></td>
+                      <td>Location string matches a default gazetteer lookup on a common surname rather than raw post text.</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Cross-case link caused by shared moderation bot</th>
+                      <td>Two unrelated profiles are linked as associates because both interacted with the same automated welcome bot in a public channel.</td>
+                      <td><span class="verdict-pill">Bot / channel artifact</span></td>
+                      <td><code>[Fictional-Ref-D]</code></td>
+                      <td>Link graph edge points through an automated channel bot account rather than direct interaction.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <figcaption class="artefact-foot">Illustrative template, fictional entries. No real profiles, channel names, scores or system records are shown.</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="cs-section" aria-labelledby="governance">
+          <div class="cs-rail">
+            <h2 id="governance"><span class="rail-num">04</span><span class="rail-title">Data governance and constraints</span></h2>
+          </div>
+          <div class="cs-content">
+            <p>Because the platform handles threat-intelligence assessments, strict confidentiality boundaries apply to what can be described on this page.</p>
+
+            <section class="artefact" aria-labelledby="cs2-gov-title">
+              <div class="artefact-head">
+                <h3 class="artefact-title" id="cs2-gov-title">Confidentiality and scope boundaries</h3>
+                <span class="badge-illus">Governance rules</span>
+              </div>
+              <div class="artefact-body">
+                <dl class="gov-grid">
+                  <div class="gov-item">
+                    <dt>Employer permission</dt>
+                    <dd>Kainotomia Pte Ltd granted permission to describe my evaluation method and tracker structure, but not to show the platform.</dd>
+                  </div>
+                  <div class="gov-item">
+                    <dt>Platform and source anonymity</dt>
+                    <dd>Neither the OSINT platform nor the specific social or messaging platforms it collects from are named.</dd>
+                  </div>
+                  <div class="gov-item">
+                    <dt>No live records or identifiers</dt>
+                    <dd>No internal URLs, IP addresses, hostnames, real names, real profiles, channel names or dossier contents appear anywhere on this site.</dd>
+                  </div>
+                  <div class="gov-item">
+                    <dt>Fictional tracker entries</dt>
+                    <dd>The findings tracker table is shown only as an illustrative template with fictional entries.</dd>
+                  </div>
+                </dl>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="cs-section" aria-labelledby="outcome">
+          <div class="cs-rail">
+            <h2 id="outcome"><span class="rail-num">05</span><span class="rail-title">Outcome</span></h2>
+          </div>
+          <div class="cs-content">
+            <p class="outcome-lead">The findings tracker gave the engineer a structured log of AI-output failures to review and use when refining the RAG of the AI engine so that outputs would be accurate when customers used the system.</p>
+            <p>Alongside the AI audit, I tested and reported functional software bugs to the engineering team in a separate log and contributed recommendations on how to improve the platform’s functionality.</p>
+          </div>
+        </section>
+
+        <section class="cs-section" aria-labelledby="learned">
+          <div class="cs-rail">
+            <h2 id="learned"><span class="rail-num">06</span><span class="rail-title">What I learned</span></h2>
+          </div>
+          <div class="cs-content">
+            <p>I can identify where the model’s outputs fail. I cannot yet explain <em>why</em> the underlying statistical model produced them. Closing that gap is one reason I want formal training. <mark class="ph">[VERIFY]</mark></p>
+          </div>
+        </section>
+
+        <section class="cs-section" aria-labelledby="method">
+          <div class="cs-rail">
+            <h2 id="method"><span class="rail-num">07</span><span class="rail-title">Tools and method</span></h2>
+          </div>
+          <div class="cs-content">
+            <div class="method">
+              <p>Google Sheets and Gemini.</p>
+              <p>Findings tracker structure built on my own with Gemini; audit evaluations, failure classifications and evidence checks are my own. <mark class="ph">[VERIFY]</mark></p>
+            </div>
+          </div>
+        </section>
+
       </article>
     </main>
   </div>
+
+  <nav class="cs-nav" aria-label="Next case study">
+    <div class="wrap">
+      <p class="cs-nav-label">Next case study</p>
+      <p class="cs-nav-title"><a href="case-study-army-personnel-system.html">Personnel and equipment management system, Bangladesh Army →</a></p>
+    </div>
+  </nav>
 
   <footer class="site-footer">
     <div class="wrap">

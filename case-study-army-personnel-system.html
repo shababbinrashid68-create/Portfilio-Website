@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
-  <link rel="stylesheet" href="site.css?v=6">
+  <link rel="stylesheet" href="site.css?v=7">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -31,7 +31,7 @@
 
     <main id="main">
       <header class="cs-head">
-        <p class="crumb"><a href="case-studies.html">All case studies</a> <span>Case Study 3</span></p>
+        <p class="crumb"><span class="crumb-label">Case study 03 / 03</span> <a href="case-studies.html">← All case studies</a></p>
         <h1>Personnel and equipment management system, Bangladesh Army</h1>
         <p class="dek">Business analyst on a system now in use by an Army unit. I handled client communication, requirements and feedback, and worked with the UI designers and developers through to delivery.</p>
       </header>
@@ -45,286 +45,334 @@
 
       <article class="cs-body">
 
-        <h2 id="context">Context</h2>
-        <p>An Army unit needed a system to manage its personnel and equipment records, which had previously been kept on paper.</p>
-        <p>The unit’s staff (commanders, clerks and quartermaster staff) described their processes precisely, but in military administrative terms the developers could not build from directly. My job at Kainotomia Pte Ltd was to work between the unit and our development and design teams.</p>
-
-        <h2 id="role">My role</h2>
-        <p>I worked as the Business Analyst across the project, sitting between the Army unit and our internal delivery teams across five core responsibilities:</p>
-
-        <figure class="artefact full-bleed" aria-labelledby="cs3-rolemap-title">
-          <div class="artefact-head">
-            <h3 class="artefact-title" id="cs3-rolemap-title">Role map: sitting between the Army unit and the delivery teams</h3>
-            <span class="badge-illus">Simplified illustration</span>
+        <section class="cs-section" aria-labelledby="context">
+          <div class="cs-rail">
+            <h2 id="context"><span class="rail-num">01</span><span class="rail-title">Context</span></h2>
           </div>
-          <div class="artefact-body">
-            <div class="role-map">
-              <div class="role-endpoint">
-                <div>
-                  <span class="flow-stage">Client side</span>
-                  <h4>Bangladesh Army unit</h4>
-                  <p>Operational stakeholders defining unit workflows and reviewing rules.</p>
-                </div>
-                <div class="role-subbox">
-                  <strong>Unit users</strong>
-                  <p>Commanders, clerks and quartermaster staff</p>
-                </div>
-              </div>
-
-              <div class="role-bridge">
-                <div class="role-bridge-head">
-                  <span class="flow-stage">Bridge role</span>
-                  <h4>Business Analyst (my role)</h4>
-                  <p>What passed through me between the unit and the delivery teams:</p>
-                </div>
-                <div class="role-stream">
-                  <div class="role-stream-dir">
-                    <span>1. Requirements</span>
-                    <span class="role-stream-arrow">Unit → BA → Dev</span>
-                  </div>
-                  <p>Gathered across five meetings with the unit and translated into system rules.</p>
-                </div>
-                <div class="role-stream">
-                  <div class="role-stream-dir">
-                    <span>2. Feedback</span>
-                    <span class="role-stream-arrow">Unit ↔ BA → Dev</span>
-                  </div>
-                  <p>Documented unit review feedback in a numbered log and routed changes to build.</p>
-                </div>
-                <div class="role-stream">
-                  <div class="role-stream-dir">
-                    <span>3. Design input</span>
-                    <span class="role-stream-arrow">BA ↔ UI designers</span>
-                  </div>
-                  <p>Worked closely with UI designers on forms, dashboard charts and PDF layouts.</p>
-                </div>
-                <div class="role-stream">
-                  <div class="role-stream-dir">
-                    <span>4. Delivery checks</span>
-                    <span class="role-stream-arrow">Dev → BA → Unit</span>
-                  </div>
-                  <p>Checked delivered features against what the unit had agreed.</p>
-                </div>
-              </div>
-
-              <div class="role-endpoint">
-                <div>
-                  <span class="flow-stage">Delivery side</span>
-                  <h4>Kainotomia Pte Ltd teams</h4>
-                  <p>Internal engineering and interface teams building the system.</p>
-                </div>
-                <div class="role-subbox">
-                  <strong>Development team</strong>
-                  <p>Built the personnel and equipment modules from agreed system rules.</p>
-                </div>
-                <div class="role-subbox">
-                  <strong>UI designers</strong>
-                  <p>Designed the visual outlook and interface structure.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <figcaption class="artefact-foot">Simplified illustration of the Business Analyst role across client communication, requirements, feedback, UI collaboration and delivery checks.</figcaption>
-        </figure>
-
-        <ol class="role-resp-grid full-bleed" aria-label="Five Business Analyst responsibilities">
-          <li class="role-resp-card">
-            <h3><span class="step-num">1</span> Client communication</h3>
-            <p>I was responsible for communication with the unit throughout the project.</p>
-          </li>
-          <li class="role-resp-card">
-            <h3><span class="step-num">2</span> Requirements gathering</h3>
-            <p>Across five meetings with the unit, I gathered the requirements for both the personnel and equipment modules. <mark class="ph">[VERIFY: wrote each as an exact rule (trigger, frequency, approver)]</mark></p>
-          </li>
-          <li class="role-resp-card">
-            <h3><span class="step-num">3</span> Feedback gathering</h3>
-            <p>I gathered the unit’s feedback during review sessions and documented each change request in a numbered feedback log mapped to specific registration steps, modules and dashboard views, then assigned each item to the responsible developer or UI designer.</p>
-          </li>
-          <li class="role-resp-card">
-            <h3><span class="step-num">4</span> UI collaboration</h3>
-            <p>I worked closely with the UI designers on the visual outlook of the system, relaying the unit’s review feedback on form controls, dashboard visualizations, font readability, Army-specific terminology and downloadable PDF soldier biodata layouts.</p>
-          </li>
-          <li class="role-resp-card">
-            <h3><span class="step-num">5</span> Delivery assurance</h3>
-            <p>I made sure the development team built what the client asked for. <mark class="ph">[VERIFY: checked delivered features against what the unit had agreed]</mark></p>
-          </li>
-        </ol>
-
-        <h2 id="approach">Approach</h2>
-
-        <figure class="artefact full-bleed" aria-labelledby="cs3-lifecycle-title">
-          <div class="artefact-head">
-            <h3 class="artefact-title" id="cs3-lifecycle-title">Requirements lifecycle</h3>
-            <span class="badge-illus">Simplified illustration</span>
-          </div>
-          <div class="artefact-body">
-            <ol class="flow-list flow-7">
-              <li class="flow-node">
-                <span class="flow-stage">Stage 1</span>
-                <strong>Meetings</strong>
-                <p>Five requirement and review meetings held with the unit.</p>
-              </li>
-              <li class="flow-node">
-                <span class="flow-stage">Stage 2</span>
-                <strong>Requirements</strong>
-                <p>Personnel and equipment processes structured into system rules.</p>
-              </li>
-              <li class="flow-node">
-                <span class="flow-stage">Stage 3</span>
-                <strong>Unit review and feedback</strong>
-                <p>Unit reviewed draft requirements and raised change requests.</p>
-              </li>
-              <li class="flow-node">
-                <span class="flow-stage">Stage 4</span>
-                <strong>Confirmation</strong>
-                <p>Revised rules confirmed with users before going to build.</p>
-              </li>
-              <li class="flow-node">
-                <span class="flow-stage">Stage 5</span>
-                <strong>Design and build</strong>
-                <p>Worked with UI designers and developers as modules were built.</p>
-              </li>
-              <li class="flow-node">
-                <span class="flow-stage">Stage 6</span>
-                <strong>Check against agreed requirements</strong>
-                <p>Checked delivered features against what the unit had agreed.</p>
-              </li>
-              <li class="flow-node">
-                <span class="flow-stage">Stage 7</span>
-                <strong>Delivery</strong>
-                <p>System delivered and placed in use by the unit.</p>
-              </li>
-            </ol>
-          </div>
-          <figcaption class="artefact-foot">Simplified illustration of the seven stages from initial unit meetings through to delivery.</figcaption>
-        </figure>
-
-        <div class="step">
-          <h3><span class="step-num">Area 1</span> Personnel module</h3>
-          <p>I gathered the unit’s personnel management requirements and confirmed each revised rule with the users before it went to development. <mark class="ph">[VERIFY: personnel requirements included reminders before a mandatory training deadline lapses and before a temporary medical category falls due for review]</mark></p>
-        </div>
-        <aside class="note" aria-label="Decision note: feedback loop">
-          <span class="note-kind">Decision (feedback loop)</span>
-          <p>Confirming each revised rule with users before development meant changes were caught on paper, not after they were built. <mark class="ph">[VERIFY]</mark></p>
-        </aside>
-
-        <div class="step">
-          <h3><span class="step-num">Area 2</span> Equipment module</h3>
-          <p>I gathered the requirements for tracking equipment across the unit. <mark class="ph">[VERIFY: every item issued, handed over or written off leaves a record with supporting documents; a new quartermaster sees what the predecessor held]</mark></p>
-        </div>
-        <aside class="note" aria-label="Decision note: equipment records">
-          <span class="note-kind">Decision (equipment records)</span>
-          <p>A record for every movement means nothing disappears without explanation at handover. <mark class="ph">[VERIFY]</mark></p>
-        </aside>
-
-        <div class="step">
-          <h3><span class="step-num">Area 3</span> Nominated heir for the salary account (one example of questioning a requirement)</h3>
-          <p>In the nominated-heir field for the soldier’s salary account, the unit specified that a wife must always receive exactly 50%. I questioned this and raised it with the unit, which removed the fixed share immediately. The field was built open, so each soldier sets their own nominations. <mark class="ph">[VERIFY: reason — a fixed share does not fit every soldier, because family circumstances differ and inheritance shares under Bangladesh's personal laws vary with religion and family structure]</mark></p>
-        </div>
-        <aside class="note" aria-label="Decision note: heir field">
-          <span class="note-kind">Decision (heir field)</span>
-          <p>A fixed share would have recorded something false for soldiers whose family situation did not match it. <mark class="ph">[VERIFY]</mark></p>
-        </aside>
-
-        <figure class="artefact is-secondary" aria-labelledby="cs3-ba-title">
-          <div class="artefact-head">
-            <h3 class="artefact-title" id="cs3-ba-title">Nominated-heir field</h3>
-            <span class="badge-illus">Simplified illustration</span>
-          </div>
-          <div class="artefact-body before-after">
-            <div class="ba-col">
-              <span class="ba-label">Before</span>
-              <h4>Spouse share fixed at 50%</h4>
-              <p>Initial requirement fixed a 50% share for a wife on every salary-account nomination record.</p>
-            </div>
-            <div class="ba-col is-after">
-              <span class="ba-label">After</span>
-              <h4>Share left open; each soldier sets their own nominations</h4>
-              <p>Fixed share removed after review with the unit; the field was built open.</p>
-            </div>
-          </div>
-        </figure>
-
-        <div class="step">
-          <h3><span class="step-num">Area 4</span> Interface</h3>
-          <p>Working with the UI designers, I translated the unit’s review feedback into interface updates across the registration forms and main dashboard: modernizing the dashboard layout, increasing the overall font size for readability, adding dashboard charts for trade breakdown and personal training completion, formatting a downloadable PDF soldier biodata sheet, replacing fixed dropdowns with open input fields where entries varied, and updating field labels to match Army terminology.</p>
-        </div>
-        <aside class="note" aria-label="Decision note: interface and form controls">
-          <span class="note-kind">Decision (interface)</span>
-          <p>Replacing fixed dropdowns with open text inputs on fields such as institution name and exercise name meant clerks could record real entries without being blocked by a preset list. <mark class="ph">[VERIFY]</mark></p>
-        </aside>
-
-        <figure class="artefact full-bleed" aria-labelledby="cs3-login-title">
-          <div class="artefact-head">
-            <h3 class="artefact-title" id="cs3-login-title">System login portal (unit identifier and badge redacted)</h3>
-            <span class="badge-illus">Sanitized screenshot</span>
-          </div>
-          <div class="artefact-body">
-            <img class="dash-shot" src="army-system-login.jpg" alt="Sanitized login screen of the Bangladesh Army personnel and equipment management system in Bengali, with the unit badge and regiment identifier removed" width="1024" height="484" decoding="async">
-          </div>
-          <figcaption class="artefact-foot">Sanitized login screen of the delivered system. The unit badge and regiment identifier have been removed to keep the unit anonymous.</figcaption>
-        </figure>
-
-        <figure class="artefact full-bleed" aria-labelledby="cs3-dash-title">
-          <div class="artefact-head">
-            <h3 class="artefact-title" id="cs3-dash-title">Main dashboard view (unit identifier and badge redacted)</h3>
-            <span class="badge-illus">Sanitized screenshot</span>
-          </div>
-          <div class="artefact-body">
-            <img class="dash-shot" src="army-system-dashboard.png" alt="Sanitized main dashboard of the Bangladesh Army personnel and equipment management system in Bengali showing summary cards and rank, trade, weight and health charts, with the top-left unit badge and regiment name removed" width="1024" height="491" decoding="async">
-          </div>
-          <figcaption class="artefact-foot">Sanitized main dashboard view created with the UI designers, showing personnel summary cards and breakdown charts for rank and trade, weight report and health status. The top-left unit badge and regiment identifier have been removed; no individual soldier records are shown.</figcaption>
-        </figure>
-
-        <h2 id="governance">Constraints and confidentiality</h2>
-        <p>Because this system was built for a defence client, strict disclosure rules apply to this write-up:</p>
-
-        <section class="artefact" aria-labelledby="cs3-gov-title">
-          <div class="artefact-head">
-            <h3 class="artefact-title" id="cs3-gov-title">Confidentiality boundaries</h3>
-            <span class="badge-illus">Governance rules</span>
-          </div>
-          <div class="artefact-body">
-            <dl class="gov-grid">
-              <div class="gov-item">
-                <dt>Sanitized login and aggregate dashboard only</dt>
-                <dd>Only the login screen and aggregate dashboard view (both with the unit badge and unit identifier removed) are shown; no individual personnel records, salary-account forms or equipment logs are displayed.</dd>
-              </div>
-              <div class="gov-item">
-                <dt>No unit name, number or location</dt>
-                <dd>Bangladesh Army is named with approval, without identifying the specific unit or location.</dd>
-              </div>
-              <div class="gov-item">
-                <dt>No personnel data</dt>
-                <dd>No real soldier records, salary-account nominations or equipment logs appear anywhere on this site.</dd>
-              </div>
-              <div class="gov-item">
-                <dt>No security classification markings</dt>
-                <dd>No internal military abbreviations or classification markings are used.</dd>
-              </div>
-            </dl>
+          <div class="cs-content">
+            <p>An Army unit needed a system to manage its personnel and equipment records, which had previously been kept on paper.</p>
+            <p>The unit’s staff (commanders, clerks and quartermaster staff) described their processes precisely, but in military administrative terms the developers could not build from directly. My job at Kainotomia Pte Ltd was to work between the unit and our development and design teams.</p>
           </div>
         </section>
 
-        <h2 id="outcome">Outcome</h2>
-        <p>The system has been delivered and is in use by the unit.</p>
+        <section class="cs-section" aria-labelledby="role">
+          <div class="cs-rail">
+            <h2 id="role"><span class="rail-num">02</span><span class="rail-title">My role</span></h2>
+          </div>
+          <div class="cs-content">
+            <p>I worked as the Business Analyst across the project, sitting between the Army unit and our internal delivery teams across five core responsibilities:</p>
 
-        <h2 id="learned">What I learned</h2>
-        <p>Good requirements protect the people a system records, not only the people who manage it.</p>
-        <p><mark class="ph">[PLACEHOLDER: what I would do differently]</mark></p>
+            <figure class="artefact" aria-labelledby="cs3-rolemap-title">
+              <div class="artefact-head">
+                <h3 class="artefact-title" id="cs3-rolemap-title">Role map: sitting between the Army unit and the delivery teams</h3>
+                <span class="badge-illus">Simplified illustration</span>
+              </div>
+              <div class="artefact-body">
+                <div class="role-map">
+                  <div class="role-endpoint">
+                    <div>
+                      <span class="flow-stage">Client side</span>
+                      <h4>Bangladesh Army unit</h4>
+                      <p>Operational stakeholders defining unit workflows and reviewing rules.</p>
+                    </div>
+                    <div class="role-subbox">
+                      <strong>Unit users</strong>
+                      <p>Commanders, clerks and quartermaster staff</p>
+                    </div>
+                  </div>
 
-        <h2 id="method">Tools and method</h2>
-        <div class="method">
-          <p>Requirements meetings, the requirements outline, Software Requirements Specifications and a numbered unit feedback log.</p>
-        </div>
+                  <div class="role-bridge">
+                    <div class="role-bridge-head">
+                      <span class="flow-stage">Bridge role</span>
+                      <h4>Business Analyst (my role)</h4>
+                      <p>What passed through me between the unit and the delivery teams:</p>
+                    </div>
+                    <div class="role-stream">
+                      <div class="role-stream-dir">
+                        <span>1. Requirements</span>
+                        <span class="role-stream-arrow">Unit → BA → Dev</span>
+                      </div>
+                      <p>Gathered across five meetings with the unit and translated into system rules.</p>
+                    </div>
+                    <div class="role-stream">
+                      <div class="role-stream-dir">
+                        <span>2. Feedback</span>
+                        <span class="role-stream-arrow">Unit ↔ BA → Dev</span>
+                      </div>
+                      <p>Documented unit review feedback in a numbered log and routed changes to build.</p>
+                    </div>
+                    <div class="role-stream">
+                      <div class="role-stream-dir">
+                        <span>3. Design input</span>
+                        <span class="role-stream-arrow">BA ↔ UI designers</span>
+                      </div>
+                      <p>Worked closely with UI designers on forms, dashboard charts and PDF layouts.</p>
+                    </div>
+                    <div class="role-stream">
+                      <div class="role-stream-dir">
+                        <span>4. Delivery checks</span>
+                        <span class="role-stream-arrow">Dev → BA → Unit</span>
+                      </div>
+                      <p>Checked delivered features against what the unit had agreed.</p>
+                    </div>
+                  </div>
 
-        <nav class="cs-nav" aria-label="Case study navigation">
-          <a href="case-study-ai-output-audit.html">Previous: AI output audit for an OSINT platform</a>
-          <a href="case-studies.html">All case studies</a>
-        </nav>
+                  <div class="role-endpoint">
+                    <div>
+                      <span class="flow-stage">Delivery side</span>
+                      <h4>Kainotomia Pte Ltd teams</h4>
+                      <p>Internal engineering and interface teams building the system.</p>
+                    </div>
+                    <div class="role-subbox">
+                      <strong>Development team</strong>
+                      <p>Built the personnel and equipment modules from agreed system rules.</p>
+                    </div>
+                    <div class="role-subbox">
+                      <strong>UI designers</strong>
+                      <p>Designed the visual outlook and interface structure.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <figcaption class="artefact-foot">Simplified illustration of the Business Analyst role across client communication, requirements, feedback, UI collaboration and delivery checks.</figcaption>
+            </figure>
+
+            <ol class="role-resp-grid" aria-label="Five Business Analyst responsibilities">
+              <li class="role-resp-card">
+                <h3><span class="step-num">1</span> Client communication</h3>
+                <p>I was responsible for communication with the unit throughout the project.</p>
+              </li>
+              <li class="role-resp-card">
+                <h3><span class="step-num">2</span> Requirements gathering</h3>
+                <p>Across five meetings with the unit, I gathered the requirements for both the personnel and equipment modules. <mark class="ph">[VERIFY: wrote each as an exact rule (trigger, frequency, approver)]</mark></p>
+              </li>
+              <li class="role-resp-card">
+                <h3><span class="step-num">3</span> Feedback gathering</h3>
+                <p>I gathered the unit’s feedback during review sessions and documented each change request in a numbered feedback log mapped to specific registration steps, modules and dashboard views, then assigned each item to the responsible developer or UI designer.</p>
+              </li>
+              <li class="role-resp-card">
+                <h3><span class="step-num">4</span> UI collaboration</h3>
+                <p>I worked closely with the UI designers on the visual outlook of the system, relaying the unit’s review feedback on form controls, dashboard visualizations, font readability, Army-specific terminology and downloadable PDF soldier biodata layouts.</p>
+              </li>
+              <li class="role-resp-card">
+                <h3><span class="step-num">5</span> Delivery assurance</h3>
+                <p>I made sure the development team built what the client asked for. <mark class="ph">[VERIFY: checked delivered features against what the unit had agreed]</mark></p>
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="cs-section" aria-labelledby="approach">
+          <div class="cs-rail">
+            <h2 id="approach"><span class="rail-num">03</span><span class="rail-title">Approach</span></h2>
+          </div>
+          <div class="cs-content">
+            <figure class="artefact" aria-labelledby="cs3-lifecycle-title">
+              <div class="artefact-head">
+                <h3 class="artefact-title" id="cs3-lifecycle-title">Requirements lifecycle</h3>
+                <span class="badge-illus">Simplified illustration</span>
+              </div>
+              <div class="artefact-body">
+                <ol class="flow-list flow-7">
+                  <li class="flow-node">
+                    <span class="flow-stage">Stage 1</span>
+                    <strong>Meetings</strong>
+                    <p>Five requirement and review meetings held with the unit.</p>
+                  </li>
+                  <li class="flow-node">
+                    <span class="flow-stage">Stage 2</span>
+                    <strong>Requirements</strong>
+                    <p>Personnel and equipment processes structured into system rules.</p>
+                  </li>
+                  <li class="flow-node">
+                    <span class="flow-stage">Stage 3</span>
+                    <strong>Unit review and feedback</strong>
+                    <p>Unit reviewed draft requirements and raised change requests.</p>
+                  </li>
+                  <li class="flow-node">
+                    <span class="flow-stage">Stage 4</span>
+                    <strong>Confirmation</strong>
+                    <p>Revised rules confirmed with users before going to build.</p>
+                  </li>
+                  <li class="flow-node">
+                    <span class="flow-stage">Stage 5</span>
+                    <strong>Design and build</strong>
+                    <p>Worked with UI designers and developers as modules were built.</p>
+                  </li>
+                  <li class="flow-node">
+                    <span class="flow-stage">Stage 6</span>
+                    <strong>Check against agreed requirements</strong>
+                    <p>Checked delivered features against what the unit had agreed.</p>
+                  </li>
+                  <li class="flow-node">
+                    <span class="flow-stage">Stage 7</span>
+                    <strong>Delivery</strong>
+                    <p>System delivered and placed in use by the unit.</p>
+                  </li>
+                </ol>
+              </div>
+              <figcaption class="artefact-foot">Simplified illustration of the seven stages from initial unit meetings through to delivery.</figcaption>
+            </figure>
+
+            <div class="step">
+              <span class="step-num">Step 1</span>
+              <h3>Personnel module</h3>
+              <p>I gathered the unit’s personnel management requirements and confirmed each revised rule with the users before it went to development. <mark class="ph">[VERIFY: personnel requirements included reminders before a mandatory training deadline lapses and before a temporary medical category falls due for review]</mark></p>
+              <aside class="note" aria-label="Decision note: feedback loop">
+                <span class="note-kind">Decision (feedback loop)</span>
+                <p>Confirming each revised rule with users before development meant changes were caught on paper, not after they were built. <mark class="ph">[VERIFY]</mark></p>
+              </aside>
+            </div>
+
+            <div class="step">
+              <span class="step-num">Step 2</span>
+              <h3>Equipment module</h3>
+              <p>I gathered the requirements for tracking equipment across the unit. <mark class="ph">[VERIFY: every item issued, handed over or written off leaves a record with supporting documents; a new quartermaster sees what the predecessor held]</mark></p>
+              <aside class="note" aria-label="Decision note: equipment records">
+                <span class="note-kind">Decision (equipment records)</span>
+                <p>A record for every movement means nothing disappears without explanation at handover. <mark class="ph">[VERIFY]</mark></p>
+              </aside>
+            </div>
+
+            <div class="step">
+              <span class="step-num">Step 3</span>
+              <h3>Nominated heir for the salary account (one example of questioning a requirement)</h3>
+              <p>In the nominated-heir field for the soldier’s salary account, the unit specified that a wife must always receive exactly 50%. I questioned this and raised it with the unit, which removed the fixed share immediately. The field was built open, so each soldier sets their own nominations. <mark class="ph">[VERIFY: reason — a fixed share does not fit every soldier, because family circumstances differ and inheritance shares under Bangladesh's personal laws vary with religion and family structure]</mark></p>
+              <aside class="note" aria-label="Decision note: heir field">
+                <span class="note-kind">Decision (heir field)</span>
+                <p>A fixed share would have recorded something false for soldiers whose family situation did not match it. <mark class="ph">[VERIFY]</mark></p>
+              </aside>
+            </div>
+
+            <figure class="artefact is-secondary" aria-labelledby="cs3-ba-title">
+              <div class="artefact-head">
+                <h3 class="artefact-title" id="cs3-ba-title">Nominated-heir field</h3>
+                <span class="badge-illus">Simplified illustration</span>
+              </div>
+              <div class="artefact-body before-after">
+                <div class="ba-col">
+                  <span class="ba-label">Before</span>
+                  <h4>Spouse share fixed at 50%</h4>
+                  <p>Initial requirement fixed a 50% share for a wife on every salary-account nomination record.</p>
+                </div>
+                <div class="ba-col is-after">
+                  <span class="ba-label">After</span>
+                  <h4>Share left open; each soldier sets their own nominations</h4>
+                  <p>Fixed share removed after review with the unit; the field was built open.</p>
+                </div>
+              </div>
+            </figure>
+
+            <div class="step">
+              <span class="step-num">Step 4</span>
+              <h3>Interface</h3>
+              <p>Working with the UI designers, I translated the unit’s review feedback into interface updates across the registration forms and main dashboard: modernizing the dashboard layout, increasing the overall font size for readability, adding dashboard charts for trade breakdown and personal training completion, formatting a downloadable PDF soldier biodata sheet, replacing fixed dropdowns with open input fields where entries varied, and updating field labels to match Army terminology.</p>
+              <aside class="note" aria-label="Decision note: interface and form controls">
+                <span class="note-kind">Decision (interface)</span>
+                <p>Replacing fixed dropdowns with open text inputs on fields such as institution name and exercise name meant clerks could record real entries without being blocked by a preset list. <mark class="ph">[VERIFY]</mark></p>
+              </aside>
+            </div>
+
+            <figure class="artefact" aria-labelledby="cs3-login-title">
+              <div class="artefact-head">
+                <h3 class="artefact-title" id="cs3-login-title">System login portal (unit identifier and badge redacted)</h3>
+                <span class="badge-illus">Sanitized screenshot</span>
+              </div>
+              <div class="artefact-body">
+                <img class="dash-shot" src="army-system-login.jpg" alt="Sanitized login screen of the Bangladesh Army personnel and equipment management system in Bengali, with the unit badge and regiment identifier removed" width="1024" height="484" decoding="async">
+              </div>
+              <figcaption class="artefact-foot">Sanitized login screen of the delivered system. The unit badge and regiment identifier have been removed to keep the unit anonymous.</figcaption>
+            </figure>
+
+            <figure class="artefact" aria-labelledby="cs3-dash-title">
+              <div class="artefact-head">
+                <h3 class="artefact-title" id="cs3-dash-title">Main dashboard view (unit identifier and badge redacted)</h3>
+                <span class="badge-illus">Sanitized screenshot</span>
+              </div>
+              <div class="artefact-body">
+                <img class="dash-shot" src="army-system-dashboard.png" alt="Sanitized main dashboard of the Bangladesh Army personnel and equipment management system in Bengali showing summary cards and rank, trade, weight and health charts, with the top-left unit badge and regiment name removed" width="1024" height="491" decoding="async">
+              </div>
+              <figcaption class="artefact-foot">Sanitized main dashboard view created with the UI designers, showing personnel summary cards and breakdown charts for rank and trade, weight report and health status. The top-left unit badge and regiment identifier have been removed; no individual soldier records are shown.</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="cs-section" aria-labelledby="governance">
+          <div class="cs-rail">
+            <h2 id="governance"><span class="rail-num">04</span><span class="rail-title">Constraints and confidentiality</span></h2>
+          </div>
+          <div class="cs-content">
+            <p>Because this system was built for a defence client, strict disclosure rules apply to this write-up:</p>
+
+            <section class="artefact" aria-labelledby="cs3-gov-title">
+              <div class="artefact-head">
+                <h3 class="artefact-title" id="cs3-gov-title">Confidentiality boundaries</h3>
+                <span class="badge-illus">Governance rules</span>
+              </div>
+              <div class="artefact-body">
+                <dl class="gov-grid">
+                  <div class="gov-item">
+                    <dt>Sanitized login and aggregate dashboard only</dt>
+                    <dd>Only the login screen and aggregate dashboard view (both with the unit badge and unit identifier removed) are shown; no individual personnel records, salary-account forms or equipment logs are displayed.</dd>
+                  </div>
+                  <div class="gov-item">
+                    <dt>No unit name, number or location</dt>
+                    <dd>Bangladesh Army is named with approval, without identifying the specific unit or location.</dd>
+                  </div>
+                  <div class="gov-item">
+                    <dt>No personnel data</dt>
+                    <dd>No real soldier records, salary-account nominations or equipment logs appear anywhere on this site.</dd>
+                  </div>
+                  <div class="gov-item">
+                    <dt>No security classification markings</dt>
+                    <dd>No internal military abbreviations or classification markings are used.</dd>
+                  </div>
+                </dl>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="cs-section" aria-labelledby="outcome">
+          <div class="cs-rail">
+            <h2 id="outcome"><span class="rail-num">05</span><span class="rail-title">Outcome</span></h2>
+          </div>
+          <div class="cs-content">
+            <p class="outcome-lead">The system has been delivered and is in use by the unit.</p>
+          </div>
+        </section>
+
+        <section class="cs-section" aria-labelledby="learned">
+          <div class="cs-rail">
+            <h2 id="learned"><span class="rail-num">06</span><span class="rail-title">What I learned</span></h2>
+          </div>
+          <div class="cs-content">
+            <p>Good requirements protect the people a system records, not only the people who manage it.</p>
+            <p><mark class="ph">[PLACEHOLDER: what I would do differently]</mark></p>
+          </div>
+        </section>
+
+        <section class="cs-section" aria-labelledby="method">
+          <div class="cs-rail">
+            <h2 id="method"><span class="rail-num">07</span><span class="rail-title">Tools and method</span></h2>
+          </div>
+          <div class="cs-content">
+            <div class="method">
+              <p>Requirements meetings, the requirements outline, Software Requirements Specifications and a numbered unit feedback log.</p>
+            </div>
+          </div>
+        </section>
+
       </article>
     </main>
   </div>
+
+  <nav class="cs-nav" aria-label="Next case study">
+    <div class="wrap">
+      <p class="cs-nav-label">Next case study</p>
+      <p class="cs-nav-title"><a href="case-study-onboarding-monetization.html">User onboarding and monetization dashboard →</a></p>
+    </div>
+  </nav>
 
   <footer class="site-footer">
     <div class="wrap">
