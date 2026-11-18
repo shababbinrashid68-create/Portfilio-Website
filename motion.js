@@ -19,6 +19,103 @@ window.__motion = true;
     }
   }
 
+  var lenis = null;
+
+  function lockScroll() {
+    if (lenis) {
+      lenis.stop();
+    } else {
+      docEl.style.overflow = 'hidden';
+    }
+  }
+
+  function unlockScroll() {
+    if (lenis) {
+      lenis.start();
+    } else {
+      docEl.style.overflow = '';
+    }
+  }
+
+  function headerOffset() {
+    var header = document.querySelector('.site-header');
+    var h = header ? header.getBoundingClientRect().height : 0;
+    return -(h + 16);
+  }
+
+  function focusTarget(el) {
+    if (!el) return;
+    if (!el.matches('a[href], button, input, select, textarea, [tabindex]')) {
+      el.setAttribute('tabindex', '-1');
+    }
+    el.focus({ preventScroll: true });
+  }
+
+  function initLenis() {
+    if (!docEl.classList.contains('motion') || typeof window.Lenis !== 'function') return;
+
+    lenis = new Lenis({ lerp: 0.085 });
+    function raf(t) { lenis.raf(t); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+    window.__lenis = lenis;
+
+    // Nested horizontal scrollers keep native trackpad scrolling.
+    document.querySelectorAll('.mrr-table-wrap, .sql-block').forEach(function (el) {
+      el.setAttribute('data-lenis-prevent', '');
+    });
+    document.querySelectorAll('main *').forEach(function (el) {
+      var ox = getComputedStyle(el).overflowX;
+      if (ox === 'auto' || ox === 'scroll') {
+        el.setAttribute('data-lenis-prevent', '');
+      }
+    });
+
+    // Same-page anchor links, the skip link and "Back to top".
+    document.addEventListener('click', function (e) {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (!a) return;
+
+      var url;
+      try { url = new URL(a.getAttribute('href'), location.href); } catch (err) { return; }
+      if (url.origin !== location.origin || url.pathname !== location.pathname || !url.hash) return;
+
+      var skip = document.querySelector('.skip-link');
+
+      if (url.hash === '#top' || a.hasAttribute('data-back-to-top')) {
+        e.preventDefault();
+        lenis.scrollTo(0, {
+          duration: 1.6,
+          onComplete: function () { focusTarget(skip); }
+        });
+        history.pushState(null, '', url.hash);
+        return;
+      }
+
+      var target;
+      try { target = document.getElementById(decodeURIComponent(url.hash.slice(1))); } catch (err) { target = null; }
+      if (!target) return;
+
+      e.preventDefault();
+      lenis.scrollTo(target, {
+        offset: headerOffset(),
+        onComplete: function () { focusTarget(target); }
+      });
+      history.pushState(null, '', url.hash);
+    });
+
+    // Arriving from another page with a hash: land below the header.
+    if (location.hash && location.hash.length > 1) {
+      var initial = null;
+      try { initial = document.getElementById(decodeURIComponent(location.hash.slice(1))); } catch (err) {}
+      if (initial) {
+        requestAnimationFrame(function () {
+          lenis.scrollTo(initial, { offset: headerOffset(), immediate: true, force: true });
+        });
+      }
+    }
+  }
+
   function initIntro() {
     var isHome = !!document.querySelector('.hero');
     var seen = false;
@@ -56,7 +153,7 @@ window.__motion = true;
       '</div>';
 
     document.body.insertBefore(loader, document.body.firstChild);
-    docEl.style.overflow = 'hidden';
+    lockScroll();
 
     var counterEl = loader.querySelector('.intro-counter');
     var fillEl = loader.querySelector('.intro-fill');
@@ -93,7 +190,7 @@ window.__motion = true;
         sessionStorage.setItem('sbr-intro', '1');
       } catch (e) {}
 
-      docEl.style.overflow = '';
+      unlockScroll();
       loader.classList.add('is-exit');
       loader.classList.add('is-leaving');
       startHeroEntrance();
@@ -335,7 +432,7 @@ window.__motion = true;
     function openMenu() {
       btn.setAttribute('aria-expanded', 'true');
       menu.classList.add('is-open');
-      docEl.style.overflow = 'hidden';
+      lockScroll();
       setInert(true);
       if (menuLinks[0]) {
         menuLinks[0].focus();
@@ -346,7 +443,7 @@ window.__motion = true;
       if (btn.getAttribute('aria-expanded') !== 'true') return;
       btn.setAttribute('aria-expanded', 'false');
       menu.classList.remove('is-open');
-      docEl.style.overflow = '';
+      unlockScroll();
       setInert(false);
       if (returnFocus !== false) {
         btn.focus();
@@ -398,6 +495,7 @@ window.__motion = true;
   }
 
   function init() {
+    initLenis();
     initMobileMenu();
     if (!hasMotion) return;
     initLineReveals();
