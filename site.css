@@ -3238,3 +3238,164 @@ tbody th { font-weight: 650; color: var(--ink); }
     width: 180px;
   }
 }
+
+/* ---------- Editorial Motion & User-Action Micro-interactions ---------- */
+
+@keyframes editorialRise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes detailsReveal {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 1. Single deliberate page-load entrance on the hero / page header */
+.hero-name,
+.hero .display,
+.hero-sub,
+.hero-intro,
+.hero .link-row {
+  animation: editorialRise 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-name       { animation-delay: 0.02s; }
+.hero .display   { animation-delay: 0.09s; }
+.hero-sub        { animation-delay: 0.16s; }
+.hero-intro      { animation-delay: 0.23s; }
+.hero .link-row  { animation-delay: 0.30s; }
+
+.hero-portrait {
+  animation: editorialRise 0.78s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
+}
+
+.page-head,
+.cs-head {
+  animation: editorialRise 0.58s cubic-bezier(0.22, 1, 0.36, 1) 0.02s both;
+}
+
+.summary {
+  animation: editorialRise 0.62s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+}
+
+/* 2. User-action micro-interactions */
+.link-row li a {
+  transition:
+    transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.link-row li a:hover,
+.link-row li a:focus-visible {
+  transform: translateY(-2px);
+}
+
+.link-row li a:active {
+  transform: translateY(0);
+}
+
+.cs-row-media {
+  transition: border-color 0.25s ease;
+}
+
+.cs-row-media--img img,
+.cs-row-media--diagram .cs-mini-diagram {
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cs-row:hover .cs-row-media {
+  border-color: var(--rule-strong);
+}
+
+.cs-row:hover .cs-row-media--img img,
+.cs-row:hover .cs-row-media--diagram .cs-mini-diagram {
+  transform: scale(1.022);
+}
+
+.cs-row-cta a,
+.work-area-link a,
+.bg-more a,
+.tk-where a,
+.cs-nav-title a {
+  display: inline-block;
+  transition:
+    transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.15s ease;
+}
+
+.cs-row-cta a:hover,
+.work-area-link a:hover,
+.bg-more a:hover,
+.tk-where a:hover,
+.cs-nav-title a:hover {
+  transform: translateX(3px);
+}
+
+/* Smooth <details> accordion & SQL expansion */
+.faq-item summary {
+  transition: color 0.15s ease;
+}
+
+.faq-item summary:hover {
+  color: var(--accent);
+}
+
+.faq-item summary::after {
+  content: "+";
+  display: inline-block;
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), color 0.15s ease;
+}
+
+.faq-item[open] summary::after {
+  content: "+";
+  transform: rotate(45deg);
+}
+
+.faq-item[open] .faq-answer,
+.sql-details[open] pre {
+  animation: detailsReveal 0.24s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-name,
+  .hero .display,
+  .hero-sub,
+  .hero-intro,
+  .hero .link-row,
+  .hero-portrait,
+  .page-head,
+  .cs-head,
+  .summary,
+  .faq-item[open] .faq-answer,
+  .sql-details[open] pre {
+    animation: none !important;
+  }
+  .link-row li a:hover,
+  .link-row li a:focus-visible,
+  .cs-row:hover .cs-row-media--img img,
+  .cs-row:hover .cs-row-media--diagram .cs-mini-diagram,
+  .cs-row-cta a:hover,
+  .work-area-link a:hover,
+  .bg-more a:hover,
+  .tk-where a:hover,
+  .cs-nav-title a:hover,
+  .faq-item[open] summary::after {
+    transform: none !important;
+  }
+}
+
