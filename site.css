@@ -2923,94 +2923,64 @@ tbody th { font-weight: 650; color: var(--ink); }
 
 .cs-section {
   display: grid;
-  grid-template-columns: 3fr 9fr;
-  gap: 2rem 3rem;
-  padding: 2.5rem 0;
-  border-top: 1px solid var(--rule);
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.35rem;
+  padding: 2.25rem 0;
+  border-top: 0;
   align-items: start;
 }
 
 .cs-section:first-child {
-  border-top: 0;
   padding-top: 0.5rem;
 }
 
 .cs-rail {
-  position: sticky;
-  top: 1.5rem;
+  position: static;
 }
 
 .cs-rail h2 {
-  font-family: var(--sans);
-  font-size: 0.9375rem;
-  font-weight: 500;
-  color: var(--muted);
-  letter-spacing: 0;
-  line-height: 1.35;
+  font-family: var(--display);
+  font-size: clamp(1.75rem, 3vw, 2.375rem);
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  line-height: 1.15;
   margin: 0;
-  padding: 0;
+  padding: 0 0 0.6rem;
   border: 0;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
 }
 
 .rail-num {
-  display: block;
+  display: inline-block;
   font-family: var(--sans);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   font-weight: 500;
-  color: var(--muted);
-  margin-bottom: 0.2rem;
+  color: var(--accent);
+  margin: 0;
 }
 
 .rail-title {
-  display: block;
-  font-family: var(--sans);
-  font-size: 0.9375rem;
-  font-weight: 500;
-  color: var(--muted);
+  display: inline;
+  font-family: var(--display);
+  font-size: inherit;
+  font-weight: 400;
+  color: var(--ink);
 }
 
 .cs-content > p,
 .cs-content > ul,
 .cs-content > ol:not(.role-resp-grid) {
-  max-width: var(--measure);
+  max-width: 72ch;
 }
 
-@media (max-width: 61.99rem) {
-  .cs-section {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1.15rem;
-    padding: 2rem 0;
-  }
-  .cs-rail {
-    position: static;
-  }
-  .cs-rail h2 {
-    font-family: var(--display);
-    font-size: clamp(1.75rem, 3vw, 2.375rem);
-    font-weight: 400;
-    color: var(--ink);
-    letter-spacing: -0.01em;
-    padding-bottom: 0.55rem;
-    border-bottom: 1px solid var(--rule);
-  }
-  .rail-num {
-    display: inline;
-    font-size: 0.875rem;
-    margin-right: 0.65rem;
-  }
-  .rail-title {
-    display: inline;
-    font-family: var(--display);
-    font-size: inherit;
-    font-weight: 400;
-    color: var(--ink);
-  }
-}
-
-/* Steps and notes beneath */
+/* Steps with side-by-side Decision / Trade-off margin notes on desktop */
 .step {
   margin: 0 0 2.25rem;
-  padding: 0.15rem 0 0.15rem 1.35rem;
+  padding: 0.2rem 0 0.2rem 1.35rem;
   background: transparent;
   border-top: 0;
   border-right: 0;
@@ -3042,24 +3012,25 @@ tbody th { font-weight: 650; color: var(--ink); }
 }
 
 .step > p {
-  max-width: var(--measure);
+  max-width: 70ch;
   margin: 0 0 1rem;
+}
+
+.step > p:last-of-type {
+  margin-bottom: 0;
 }
 
 .note {
   margin: 1rem 0 0;
-  padding: 0.85rem 0 0;
-  background: transparent;
-  border: 0;
-  border-top: 1px solid var(--rule);
+  padding: 0.95rem 1.15rem;
+  background: var(--surface-tint);
+  border: 1px solid var(--rule);
   border-radius: 0;
-  display: grid;
-  grid-template-columns: 9.5rem minmax(0, 1fr);
-  gap: 0.5rem 1.25rem;
-  align-items: baseline;
+  display: block;
 }
 
 .note-kind {
+  display: block;
   font-family: var(--sans);
   font-size: 0.8125rem;
   font-weight: 500;
@@ -3067,23 +3038,33 @@ tbody th { font-weight: 650; color: var(--ink); }
   background: transparent;
   border: 0;
   padding: 0;
-  margin: 0;
+  margin: 0 0 0.3rem;
 }
 
 .note p {
   font-family: var(--serif);
   font-style: italic;
-  font-size: 1.0625rem;
-  line-height: 1.6;
+  font-size: 1.02rem;
+  line-height: 1.58;
   color: var(--ink);
   margin: 0;
-  max-width: var(--measure);
+  max-width: none;
 }
 
-@media (max-width: 41.99rem) {
-  .note {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0.25rem;
+@media (min-width: 56rem) {
+  .step {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    column-gap: 2.75rem;
+    align-items: start;
+  }
+  .step > :not(.note) {
+    grid-column: 1;
+  }
+  .step > .note {
+    grid-column: 2;
+    grid-row: 1 / span 6;
+    margin-top: 0.15rem;
   }
 }
 
