@@ -56,7 +56,7 @@
               <li><strong>Who is driving potential revenue?</strong> Breakdown of monthly recurring revenue <span class="sim">Simulated</span> <span class="scaled">Scaled</span> by age band and relationship status, showing that individuals aged 50–64 generate 45% of simulated MRR.</li>
               <li><strong>Where is onboarding most successful?</strong> Top 10 US states by profile completion rate, showing that users in states such as Georgia, Washington and Oregon complete their profiles at rates exceeding 94%.</li>
               <li><strong>Which sign-up methods yield the highest completion?</strong> Comparison of onboarding completion by authentication method, showing that Google sign-ups reach the highest profile completion (60.3%), while Apple ID trails at 49.68%.</li>
-              <li><strong>What is the overall health of the onboarding funnel?</strong> Headline view of total sign-ups (32,078 <span class="scaled">Scaled</span>) versus fully onboarded users (18,138 <span class="scaled">Scaled</span>), resulting in a 56.5% overall profile completion rate.</li>
+              <li><strong>What is the overall health of the onboarding funnel?</strong> Headline view of total sign-ups (32,078) versus fully onboarded users (18,138), resulting in a 56.5% overall profile completion rate.</li>
             </ul>
           </div>
         </section>
@@ -92,7 +92,7 @@
                   <li class="flow-node">
                     <span class="flow-stage">Stage 3</span>
                     <strong>Google BigQuery (SQL)</strong>
-                    <p>CTEs, CASE logic, date functions, and GROUP BY / HAVING aggregations with scaled user counts <span class="scaled">Scaled</span>.</p>
+                    <p>CTEs, CASE logic, date functions, and GROUP BY / HAVING aggregations with scaled user counts.</p>
                   </li>
                   <li class="flow-node">
                     <span class="flow-stage">Stage 4</span>
@@ -133,8 +133,8 @@
 
             <div class="step">
               <span class="step-num">Step 3</span>
-              <h3>Modelling revenue as scenarios <span class="sim">Simulated</span></h3>
-              <p>I had no permission to use monetization data, so the revenue component is a deterministic expected-value simulation <span class="sim">Simulated</span> (with no <code>RAND()</code>). In a <code>params</code> CTE, I set a hypothetical $9.99/month premium tier and assigned conversion propensity from profile completion (<code>0.35</code> at 100% completion, <code>0.15</code> at 70–99%, and <code>0.00</code> below 70%), then computed conservative (<code>0.5×</code>), base (<code>1.0×</code>) and optimistic (<code>1.5×</code>) MRR columns controlled by a Looker Studio parameter (<code>MRR Scenario</code>).</p>
+              <h3>Modelling revenue as scenarios</h3>
+              <p>I had no permission to use monetization data, so the revenue component is a deterministic expected-value simulation (with no <code>RAND()</code>). In a <code>params</code> CTE, I set a hypothetical $9.99/month premium tier and assigned conversion propensity from profile completion (<code>0.35</code> at 100% completion, <code>0.15</code> at 70–99%, and <code>0.00</code> below 70%), then computed conservative (<code>0.5×</code>), base (<code>1.0×</code>) and optimistic (<code>1.5×</code>) MRR columns controlled by a Looker Studio parameter (<code>MRR Scenario</code>).</p>
               <aside class="note" aria-label="Decision note: revenue scenarios">
                 <span class="note-kind">Decision</span>
                 <p>Keeping all assumptions in a <code>params</code> CTE and exposing three labelled scenarios makes the simulation transparent rather than presenting a single number as a forecast. <mark class="ph">[VERIFY]</mark></p>
@@ -144,7 +144,7 @@
             <div class="step">
               <span class="step-num">Step 4</span>
               <h3>Comparing profile completion by sign-up method and state</h3>
-              <p>Across 32,078 sign-ups <span class="scaled">Scaled</span>, 18,138 users <span class="scaled">Scaled</span> completed onboarding, an overall profile completion rate of 56.5%. By sign-up method (with Email &amp; Password excluded for n &lt; 50), Google led at 60.3% and Phone OTP reached 56.38%, while Apple ID trailed Google by 10.6 percentage points at 49.68%. Across US states with more than 50 users, Georgia led at 99.32% and all top-10 states exceeded 94%—a skew I noted on the dashboard because state is captured during profile setup rather than at initial sign-up, so the state ranking should be read as relative rather than absolute.</p>
+              <p>Across 32,078 sign-ups <span class="scaled">Scaled</span>, 18,138 users completed onboarding, an overall profile completion rate of 56.5%. By sign-up method (with Email &amp; Password excluded for n &lt; 50), Google led at 60.3% and Phone OTP reached 56.38%, while Apple ID trailed Google by 10.6 percentage points at 49.68%. Across US states with more than 50 users, Georgia led at 99.32% and all top-10 states exceeded 94%—a skew I noted on the dashboard because state is captured during profile setup rather than at initial sign-up, so the state ranking should be read as relative rather than absolute.</p>
               <aside class="note" aria-label="Decision note: state capture bias">
                 <span class="note-kind">Decision</span>
                 <p>Because state is captured during profile setup, state-level completion is biased upward; noting this on the dashboard ensures the state ranking is read as relative, not absolute.</p>
@@ -162,12 +162,12 @@
               <div class="artefact-body scenario-panel">
                 <div class="kpi-grid" aria-label="Headline dashboard metrics">
                   <div class="kpi-card">
-                    <div class="kpi-label"><span>Total Sign-ups</span> <span class="scaled">Scaled</span></div>
+                    <div class="kpi-label"><span>Total Sign-ups</span></div>
                     <span class="kpi-val">32,078</span>
                     <span class="kpi-sub">Scaled user volume</span>
                   </div>
                   <div class="kpi-card">
-                    <div class="kpi-label"><span>Fully Onboarded</span> <span class="scaled">Scaled</span></div>
+                    <div class="kpi-label"><span>Fully Onboarded</span></div>
                     <span class="kpi-val">18,138</span>
                     <span class="kpi-sub">Completed profile setup</span>
                   </div>
@@ -177,15 +177,15 @@
                     <span class="kpi-sub">Actual rate (unscaled)</span>
                   </div>
                   <div class="kpi-card">
-                    <div class="kpi-label"><span>Simulated MRR / month</span> <span class="sim">Simulated</span></div>
+                    <div class="kpi-label"><span>Simulated MRR / month</span></div>
                     <span class="kpi-val">$57,719</span>
-                    <span class="kpi-sub">Base scenario (<span class="scaled">Scaled</span>, $9.99/mo tier)</span>
+                    <span class="kpi-sub">Base scenario ($9.99/mo tier)</span>
                   </div>
                 </div>
 
                 <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem;">
                   <div>
-                    <h4 style="margin: 0 0 0.2rem;">Individuals aged 50–64 generate 45% of simulated MRR <span class="sim">Simulated</span> <span class="scaled">Scaled</span></h4>
+                    <h4 style="margin: 0 0 0.2rem;">Individuals aged 50–64 generate 45% of simulated MRR</h4>
                     <p style="margin: 0; font-size: var(--step--2); color: var(--muted);">Simulated monthly recurring revenue (USD, scaled) by relationship status and age band under the Base scenario.</p>
                   </div>
                   <div class="scenario-bar" role="group" aria-label="Looker Studio MRR Scenario parameter">
@@ -195,7 +195,7 @@
                   </div>
                 </div>
 
-                <p class="mrr-table-caption">Simulated monthly recurring revenue (<span class="sim">Simulated</span>, <span class="scaled">Scaled</span>) assuming a hypothetical $9.99/month premium tier with subscriber propensity modelled from profile completion.</p>
+                <p class="mrr-table-caption">Simulated monthly recurring revenue assuming a hypothetical $9.99/month premium tier with subscriber propensity modelled from profile completion.</p>
                 <div class="mrr-scroll-outer">
                   <div class="mrr-table-wrap">
                     <table class="mrr-table">
@@ -212,18 +212,18 @@
                       <tbody>
                         <tr>
                           <th scope="row">Individual</th>
-                          <td>$3,815 <span class="sim">Simulated</span></td>
-                          <td>$12,306 <span class="sim">Simulated</span></td>
-                          <td class="is-peak">$26,186 <span class="sim">Simulated</span></td>
-                          <td>$10,050 <span class="sim">Simulated</span></td>
-                          <td>$2,019 <span class="sim">Simulated</span></td>
+                          <td>$3,815</td>
+                          <td>$12,306</td>
+                          <td class="is-peak">$26,186</td>
+                          <td>$10,050</td>
+                          <td>$2,019</td>
                         </tr>
                         <tr>
                           <th scope="row">Couple</th>
                           <td>—</td>
-                          <td>$892 <span class="sim">Simulated</span></td>
-                          <td>$1,913 <span class="sim">Simulated</span></td>
-                          <td>$538 <span class="sim">Simulated</span></td>
+                          <td>$892</td>
+                          <td>$1,913</td>
+                          <td>$538</td>
                           <td>—</td>
                         </tr>
                       </tbody>
@@ -287,7 +287,7 @@
                   <img class="dash-shot" src="dashboard-onboarding-monetization.png" width="686" height="602" alt="Sanitized Looker Studio dashboard showing 32,078 scaled sign-ups, 18,138 scaled fully onboarded users, 56.5% profile completion rate, $57,719 simulated monthly recurring revenue under the Base scenario, age and relationship breakdown, top-10 US states, and completion rate by sign-up method.">
                 </div>
               </div>
-              <figcaption class="artefact-foot">Sanitized Looker Studio dashboard export. All user volumes and dollar amounts are scaled (<span class="scaled">Scaled</span>), all MRR figures are simulated (<span class="sim">Simulated</span>, assuming a hypothetical $9.99/mo tier), and completion percentages are actual unscaled rates.</figcaption>
+              <figcaption class="artefact-foot">Sanitized Looker Studio dashboard export. All user volumes and dollar amounts are scaled, all MRR figures are simulated (assuming a hypothetical $9.99/mo tier), and completion percentages are actual unscaled rates.</figcaption>
             </figure>
 
             <figure class="artefact" aria-labelledby="cs1-sql-title">
@@ -414,7 +414,7 @@ ORDER BY projected_mrr_usd DESC;</code></pre>
                   </div>
                   <div class="gov-item">
                     <dt>Revenue component <span class="sim">Simulated</span></dt>
-                    <dd>I had no permission to use monetization data, so all revenue estimates (such as the $57,719/month Base MRR) are simulated (<span class="sim">Simulated</span>) across conservative, base and optimistic scenarios using a hypothetical $9.99/month tier.</dd>
+                    <dd>I had no permission to use monetization data, so all revenue estimates (such as the $57,719/month Base MRR) are simulated across conservative, base and optimistic scenarios using a hypothetical $9.99/month tier.</dd>
                   </div>
                   <div class="gov-item">
                     <dt>Live dashboard access <span>Not linked</span></dt>
@@ -431,7 +431,7 @@ ORDER BY projected_mrr_usd DESC;</code></pre>
             <h2 id="outcome"><span class="rail-num">05</span><span class="rail-title">Outcome</span></h2>
           </div>
           <div class="cs-content">
-            <p class="outcome-lead">The dashboard showed an overall profile completion rate of 56.5% (18,138 fully onboarded users out of 32,078 sign-ups <span class="scaled">Scaled</span>), surfaced a 10.6 percentage-point completion gap between Apple ID (49.68%) and Google sign-in (60.3%), and concentrated 45% of simulated Base MRR ($26,186 of $57,719/month <span class="sim">Simulated</span> <span class="scaled">Scaled</span>) among individual users aged 50–64.</p>
+            <p class="outcome-lead">The dashboard showed an overall profile completion rate of 56.5% (18,138 fully onboarded users out of 32,078 sign-ups <span class="scaled">Scaled</span>), surfaced a 10.6 percentage-point completion gap between Apple ID (49.68%) and Google sign-in (60.3%), and concentrated 45% of simulated Base MRR ($26,186 of $57,719/month <span class="sim">Simulated</span>) among individual users aged 50–64.</p>
             <p>Overall, the analysis answered part of the business question on onboarding behaviour, while its monetization findings remained illustrative because real monetization data was not available.</p>
           </div>
         </section>

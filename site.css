@@ -1468,7 +1468,12 @@ mark.ph {
 /* Scenario-switch illustration (CS1) */
 .scenario-panel {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 1rem;
+}
+
+.scenario-panel > * {
+  min-width: 0;
 }
 
 .scenario-bar {
