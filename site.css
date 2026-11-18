@@ -517,6 +517,22 @@ mark.ph {
   background: var(--accent-mid);
   color: #FFFFFF;
 }
+.link-row li a.btn-contact {
+  background: var(--accent-soft);
+  border: 1.5px solid var(--accent);
+  color: var(--accent);
+  font-weight: 700;
+}
+.link-row li a.btn-contact:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #FFFFFF;
+}
+@media (prefers-color-scheme: dark) {
+  .link-row li a.btn-contact:hover {
+    color: #0F151A;
+  }
+}
 
 .section { padding-block: 2.75rem 1rem; }
 .section > h2:first-child {
