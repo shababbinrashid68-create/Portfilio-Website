@@ -3689,52 +3689,6 @@ html.lenis, html.lenis body { height: auto; }
 /* Native smooth scroll only applies when Lenis is absent. */
 html.lenis { scroll-behavior: auto; }
 
-/* Scroll 2: Pinned case-study titles (home, >= 62rem only) */
-@media (min-width: 62rem) {
-  main:has(> .hero) .cs-row {
-    --panel: var(--ink-deep);
-    display: grid;
-    grid-template-columns: 7fr 5fr;
-    align-items: start;
-    gap: 0;
-    padding: 0;
-    border-top: 1px solid var(--rule);
-  }
-  /* Source design per-row panel colours (alternative, not enabled):
-  main:has(> .hero) .cs-row:nth-child(1) { --panel: #8D1A12; }
-  main:has(> .hero) .cs-row:nth-child(2) { --panel: #A8761A; }
-  main:has(> .hero) .cs-row:nth-child(3) { --panel: #4A0F1E; }
-  */
-  main:has(> .hero) .cs-row-media {
-    min-height: 84vh;
-    display: grid;
-    place-items: center;
-    aspect-ratio: auto;
-    padding: 0;
-    border: 0;
-    overflow: hidden;
-    background: var(--panel);
-  }
-  main:has(> .hero) .cs-row-media--img img {
-    width: 66%;
-    height: auto;
-    aspect-ratio: 16 / 10;
-    object-fit: cover;
-    box-shadow: 0 30px 60px rgba(0, 0, 0, .35);
-  }
-  main:has(> .hero) .cs-row-media--diagram .mini-diagram {
-    width: 66%;
-    padding: 1.5rem;
-    background: var(--surface);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, .35);
-  }
-  main:has(> .hero) .cs-row-body {
-    position: sticky;
-    top: calc(var(--header-h, 72px) + 24px);
-    align-self: start;
-    padding: 3.5rem 2rem 2rem;
-  }
-}
 
 /* Scroll 3: Sticky header (>= 42rem) — solid background so scrolled text never bleeds behind nav links */
 @media (min-width: 42rem) {
@@ -3811,11 +3765,6 @@ html.motion [data-reveal="media"] .mini-diagram { transform: scale(1.06);
 html.motion [data-reveal="media"].is-in img,
 html.motion [data-reveal="media"].is-in .mini-diagram { transform: none; }
 
-@media (min-width: 62rem) {
-  html.motion main:has(> .hero) .cs-row-body[data-reveal] {
-    transform: none;
-  }
-}
 
 [data-reveal="media"] {
   overflow: hidden;
