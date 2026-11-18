@@ -2431,6 +2431,10 @@ tbody th { font-weight: 650; color: var(--ink); }
   display: block;
 }
 
+.cs-row-media--img img[src="army-system-login.jpg"] {
+  object-position: 82% center;
+}
+
 .cs-row-media--diagram {
   display: flex;
   align-items: center;
