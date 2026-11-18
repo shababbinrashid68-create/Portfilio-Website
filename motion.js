@@ -70,6 +70,10 @@ window.__motion = true;
       }
     });
 
+    function normPath(p) {
+      return (p || '').replace(/\/index\.html$/i, '/');
+    }
+
     // Same-page anchor links, the skip link and "Back to top".
     document.addEventListener('click', function (e) {
       if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
@@ -78,7 +82,7 @@ window.__motion = true;
 
       var url;
       try { url = new URL(a.getAttribute('href'), location.href); } catch (err) { return; }
-      if (url.origin !== location.origin || url.pathname !== location.pathname || !url.hash) return;
+      if (url.origin !== location.origin || normPath(url.pathname) !== normPath(location.pathname) || !url.hash) return;
 
       var skip = document.querySelector('.skip-link');
 
@@ -105,20 +109,26 @@ window.__motion = true;
       history.pushState(null, '', url.hash);
     });
 
-    // Arriving from another page with a hash: land below the header.
+    // Arriving from another page with a hash (e.g. index.html#contact): land below the header.
     if (location.hash && location.hash.length > 1) {
       var initial = null;
       try { initial = document.getElementById(decodeURIComponent(location.hash.slice(1))); } catch (err) {}
       if (initial) {
-        requestAnimationFrame(function () {
-          lenis.scrollTo(initial, { offset: headerOffset(), immediate: true, force: true });
-        });
+        var scrollToInitial = function () {
+          lenis.resize();
+          var targetY = Math.max(0, Math.round(initial.getBoundingClientRect().top + window.scrollY + headerOffset()));
+          lenis.scrollTo(targetY, { immediate: true, force: true });
+          window.dispatchEvent(new Event('scroll'));
+        };
+        requestAnimationFrame(scrollToInitial);
+        window.addEventListener('load', scrollToInitial, { once: true });
       }
     }
   }
 
   function initIntro() {
     var isHome = !!document.querySelector('.hero');
+    var hasHash = !!(location.hash && location.hash.length > 1);
     var seen = false;
     try {
       seen = sessionStorage.getItem('sbr-intro') !== null;
@@ -126,7 +136,7 @@ window.__motion = true;
       seen = false;
     }
 
-    if (!INTRO || !isHome || seen || !docEl.classList.contains('motion')) {
+    if (!INTRO || !isHome || seen || hasHash || !docEl.classList.contains('motion')) {
       startHeroEntrance();
       return;
     }
