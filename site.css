@@ -3736,46 +3736,17 @@ html.lenis { scroll-behavior: auto; }
   }
 }
 
-/* Scroll 3: Sticky inverting header (>= 42rem) */
+/* Scroll 3: Sticky header (>= 42rem) — solid background so scrolled text never bleeds behind nav links */
 @media (min-width: 42rem) {
   .site-header {
     position: sticky;
     top: 0;
     z-index: 70;
-    background: transparent;
-    mix-blend-mode: difference;
-    box-shadow: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    color: #FFFFFF;
-    border-bottom-color: rgba(255, 255, 255, .2);
-  }
-  .site-header .site-title,
-  .site-header .site-title:hover,
-  .site-header .site-nav a,
-  .site-header .site-nav a:hover,
-  .site-header .site-nav a[aria-current="page"] {
-    color: #FFFFFF;
-  }
-  .site-header .site-title::before {
-    background: #FFFFFF;
-  }
-  .site-header .site-nav a[aria-current="page"] {
-    border-bottom-color: #FFFFFF;
-  }
-  .site-header .site-title:hover,
-  .site-header .site-nav a:hover {
-    text-decoration: underline;
-    text-underline-offset: .2em;
-  }
-  .site-header a:focus-visible {
-    outline: 2px solid #FFFFFF;
-    outline-offset: 3px;
+    background: var(--paper);
+    mix-blend-mode: normal;
+    border-bottom: 1px solid var(--rule);
   }
 }
-  .hero {
-    isolation: isolate;
-  }
 
 /* Scroll 4: Scroll-triggered reveals, rail h2 reveal support, and no-JS fallback keyframes */
 @keyframes editorialRise {
