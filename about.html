@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
-  <link rel="stylesheet" href="site.css?v=6">
+  <link rel="stylesheet" href="site.css?v=7">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -30,9 +30,14 @@
     </header>
 
     <main id="main">
-      <div class="page-head">
-        <h1>About</h1>
-        <p>Business Analyst at Kainotomia Pte Ltd, moving from software services into data-driven product work.</p>
+      <div class="page-head page-head--about">
+        <div class="page-head-copy">
+          <h1>About</h1>
+          <p>Business Analyst at Kainotomia Pte Ltd, moving from software services into data-driven product work.</p>
+        </div>
+        <figure class="about-portrait">
+          <img src="shabab-bin-rashid.jpg" alt="Portrait of Shabab Bin Rashid wearing glasses, a grey blazer and a patterned tie" width="240" height="240" decoding="async">
+        </figure>
       </div>
 
       <section class="about-grid" aria-labelledby="background">
@@ -40,6 +45,7 @@
           <h2 id="background">Background</h2>
           <p>I am a Business Analyst at Kainotomia Pte Ltd, a software services company that builds commercial software and public-sector systems in Bangladesh. My work puts me between non-technical stakeholders (army units, elected representatives, project managers) and the development teams that build for them. I question requirements rather than transcribe them.</p>
           <p>I also prepare business proposals—covering technical and financial proposals—and respond to Requests for Proposals (RFPs) and Expressions of Interest (EOIs) for Bangladesh government ICT tenders, including donor-financed projects.</p>
+          <p>Outside work, I spend time travelling, playing football, jogging and playing video games.</p>
         </div>
 
         <div class="prose">
@@ -51,47 +57,59 @@
 
       <section aria-labelledby="skills">
         <h2 id="skills">Skills</h2>
-        <div class="table-wrap">
-          <table>
+        <div class="toolkit-col">
+          <table class="toolkit-table">
             <caption>Proficiency is stated as it stands today.</caption>
             <thead>
-              <tr><th scope="col">Area</th><th scope="col">Level</th><th scope="col">Where it shows</th></tr>
+              <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Skill</th>
+                <th scope="col">Level</th>
+                <th scope="col">Where it shows</th>
+              </tr>
             </thead>
             <tbody>
               <tr>
-                <th scope="row">SQL (Google BigQuery)</th>
-                <td>Intermediate: aggregation with GROUP BY / HAVING, CASE logic, CTEs, date functions</td>
-                <td><a href="case-study-onboarding-monetization.html">Onboarding and monetization dashboard</a></td>
+                <td class="tk-num">01</td>
+                <th scope="row" class="tk-skill">SQL (Google BigQuery)</th>
+                <td class="tk-level">Intermediate: aggregation with GROUP BY / HAVING, CASE logic, CTEs, date functions</td>
+                <td class="tk-where"><a href="case-study-onboarding-monetization.html">Onboarding dashboard →</a></td>
               </tr>
               <tr>
-                <th scope="row">Looker Studio</th>
-                <td>Working proficiency: parameters, scenario switching</td>
-                <td><a href="case-study-onboarding-monetization.html">Onboarding and monetization dashboard</a></td>
+                <td class="tk-num">02</td>
+                <th scope="row" class="tk-skill">Looker Studio</th>
+                <td class="tk-level">Working proficiency: parameters, scenario switching</td>
+                <td class="tk-where"><a href="case-study-onboarding-monetization.html">Onboarding dashboard →</a></td>
               </tr>
               <tr>
-                <th scope="row">Excel / Google Sheets</th>
-                <td>Working proficiency</td>
-                <td><a href="#education">Academic work</a>; <a href="case-study-ai-output-audit.html">AI output audit</a></td>
+                <td class="tk-num">03</td>
+                <th scope="row" class="tk-skill">Excel / Google Sheets</th>
+                <td class="tk-level">Working proficiency: academic work and structured audit trackers</td>
+                <td class="tk-where"><a href="case-study-ai-output-audit.html">AI output audit →</a></td>
               </tr>
               <tr>
-                <th scope="row">Business proposals, RFPs and EOIs</th>
-                <td>Working proficiency: technical and financial proposals, RFP and EOI responses for government ICT tenders, including donor-financed projects</td>
-                <td><a href="#background">Background above</a></td>
+                <td class="tk-num">04</td>
+                <th scope="row" class="tk-skill">Requirements &amp; proposals</th>
+                <td class="tk-level">User stories, acceptance criteria, stakeholder meetings; technical and financial proposals, RFPs and EOIs for government ICT tenders, including donor-financed projects</td>
+                <td class="tk-where"><a href="case-study-army-personnel-system.html">Bangladesh Army system →</a></td>
               </tr>
               <tr>
-                <th scope="row">Requirements engineering</th>
-                <td>User stories, acceptance criteria, stakeholder meetings</td>
-                <td><a href="case-study-army-personnel-system.html">Bangladesh Army system</a> (requirements, feedback, UI collaboration)</td>
+                <td class="tk-num">05</td>
+                <th scope="row" class="tk-skill">AI output evaluation</th>
+                <td class="tk-level">Structured audit of AI-generated scores, flags and summaries</td>
+                <td class="tk-where"><a href="case-study-ai-output-audit.html">AI output audit →</a></td>
               </tr>
               <tr>
-                <th scope="row">AI output evaluation</th>
-                <td>Structured audit of AI-generated scores, flags and summaries</td>
-                <td><a href="case-study-ai-output-audit.html">AI output audit</a></td>
+                <td class="tk-num">06</td>
+                <th scope="row" class="tk-skill">Statistics</th>
+                <td class="tk-level">Regression, correlation, survey analysis at academic level, originally in SPSS</td>
+                <td class="tk-where"><a href="about.html#education">Education →</a></td>
               </tr>
               <tr>
-                <th scope="row">Statistics</th>
-                <td>Regression, correlation, survey analysis at academic level, originally in SPSS</td>
-                <td><a href="#education">Education below</a></td>
+                <td class="tk-num">07</td>
+                <th scope="row" class="tk-skill">Python (stated gap)</th>
+                <td class="tk-level">Beginner: current gap I want formal graduate training to close</td>
+                <td class="tk-where"><a href="about.html#why">Graduate goal →</a></td>
               </tr>
             </tbody>
           </table>
