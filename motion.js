@@ -494,7 +494,19 @@ window.__motion = true;
     }
   }
 
+  function initHeaderHeight() {
+    var header = document.querySelector('.site-header');
+    if (!header) return;
+    function measure() {
+      docEl.style.setProperty('--header-h', Math.round(header.getBoundingClientRect().height) + 'px');
+    }
+    measure();
+    window.addEventListener('resize', measure);
+    window.addEventListener('load', measure);
+  }
+
   function init() {
+    initHeaderHeight();
     initLenis();
     initMobileMenu();
     if (!hasMotion) return;
