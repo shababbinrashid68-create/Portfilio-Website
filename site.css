@@ -3445,6 +3445,77 @@ html.motion .hero.is-in .link-row {
   }
 }
 
+/* Step 6: Hover and focus transitions */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+.cs-row-body h3 a,
+.cs-row-cta a {
+  text-decoration: underline 1px;
+  text-underline-offset: .12em;
+  text-decoration-color: transparent;
+  transition: color .3s ease, text-decoration-color .3s ease;
+}
+.cs-row-body h3 a:hover,
+.cs-row-body h3 a:focus-visible,
+.cs-row-cta a:hover,
+.cs-row-cta a:focus-visible {
+  text-decoration: underline 1px;
+  text-underline-offset: .12em;
+  text-decoration-color: currentColor;
+}
+
+.toolkit-table tbody tr {
+  transition: background-color .3s ease, color .3s ease;
+}
+.toolkit-table tbody th,
+.toolkit-table tbody td,
+.toolkit-table tbody a {
+  transition: background-color .3s ease, color .3s ease;
+}
+.toolkit-table tbody tr:hover,
+.toolkit-table tbody tr:focus-within {
+  background: var(--ink);
+  color: var(--paper);
+}
+.toolkit-table tbody tr:hover th,
+.toolkit-table tbody tr:hover td,
+.toolkit-table tbody tr:hover a,
+.toolkit-table tbody tr:focus-within th,
+.toolkit-table tbody tr:focus-within td,
+.toolkit-table tbody tr:focus-within a {
+  color: var(--paper);
+}
+
+.link-row li a {
+  transition:
+    background-color .3s ease,
+    color .3s ease,
+    border-color .3s ease;
+}
+
+.cs-nav-arrow {
+  display: inline-block;
+  transition: transform .3s var(--ease-out);
+}
+.cs-nav-title a:hover .cs-nav-arrow,
+.cs-nav-title a:focus-visible .cs-nav-arrow {
+  transform: translateX(6px);
+}
+
+.faq-item summary::after {
+  content: "+";
+  display: inline-block;
+  transition: transform .3s var(--ease-out);
+}
+.faq-item[open] summary::after {
+  content: "+";
+  transform: rotate(45deg);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto !important;
