@@ -5,7 +5,7 @@ window.__motion = true;
   const INTRO = true;
 
   var docEl = document.documentElement;
-  if (!docEl.classList.contains('motion')) return;
+  var hasMotion = docEl.classList.contains('motion');
 
   var heroStarted = false;
   function startHeroEntrance() {
@@ -150,8 +150,6 @@ window.__motion = true;
   function initHeroCrosshair() {
     var hero = document.querySelector('.hero');
     if (!hero) return;
-    if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-    if (!matchMedia('(min-width: 54rem)').matches) return;
 
     var ch = document.createElement('div');
     ch.className = 'hero-crosshair';
@@ -257,7 +255,120 @@ window.__motion = true;
     });
   }
 
+  function initMobileMenu() {
+    var header = document.querySelector('.site-header');
+    var nav = document.querySelector('.site-nav');
+    if (!header || !nav) return;
+
+    docEl.classList.add('menu-js');
+
+    var btn = document.createElement('button');
+    btn.className = 'menu-btn';
+    btn.type = 'button';
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-controls', 'site-menu');
+    btn.innerHTML =
+      '<span class="sr-only">Menu</span>' +
+      '<span class="menu-bar" aria-hidden="true"></span>' +
+      '<span class="menu-bar" aria-hidden="true"></span>';
+
+    header.appendChild(btn);
+
+    var menu = document.createElement('nav');
+    menu.id = 'site-menu';
+    menu.setAttribute('aria-label', 'Mobile');
+    var ulClone = nav.querySelector('ul').cloneNode(true);
+    menu.appendChild(ulClone);
+    document.body.appendChild(menu);
+
+    var mainEl = document.querySelector('main');
+    var footerEl = document.querySelector('.site-footer');
+    var csNavEl = document.querySelector('.cs-nav');
+    var skipEl = document.querySelector('.skip-link');
+    var siteTitleEl = header.querySelector('.site-title');
+    var menuLinks = Array.prototype.slice.call(menu.querySelectorAll('a'));
+
+    function setInert(state) {
+      [mainEl, footerEl, csNavEl, skipEl, siteTitleEl].forEach(function (el) {
+        if (!el) return;
+        if (state) {
+          el.setAttribute('inert', '');
+          el.inert = true;
+        } else {
+          el.removeAttribute('inert');
+          el.inert = false;
+        }
+      });
+    }
+
+    function openMenu() {
+      btn.setAttribute('aria-expanded', 'true');
+      menu.classList.add('is-open');
+      docEl.style.overflow = 'hidden';
+      setInert(true);
+      if (menuLinks[0]) {
+        menuLinks[0].focus();
+      }
+    }
+
+    function closeMenu(returnFocus) {
+      if (btn.getAttribute('aria-expanded') !== 'true') return;
+      btn.setAttribute('aria-expanded', 'false');
+      menu.classList.remove('is-open');
+      docEl.style.overflow = '';
+      setInert(false);
+      if (returnFocus !== false) {
+        btn.focus();
+      }
+    }
+
+    btn.addEventListener('click', function () {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      if (expanded) {
+        closeMenu(true);
+      } else {
+        openMenu();
+      }
+    });
+
+    menuLinks.forEach(function (link) {
+      link.addEventListener('click', function () {
+        closeMenu(false);
+      });
+    });
+
+    window.addEventListener('keydown', function (e) {
+      if (btn.getAttribute('aria-expanded') !== 'true') return;
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeMenu(true);
+        return;
+      }
+      if (e.key === 'Tab') {
+        var focusables = [btn].concat(menuLinks);
+        var first = focusables[0];
+        var last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    });
+
+    var mqDesktop = matchMedia('(min-width: 42rem)');
+    if (mqDesktop.addEventListener) {
+      mqDesktop.addEventListener('change', function (e) {
+        if (e.matches) closeMenu(false);
+      });
+    }
+  }
+
   function init() {
+    initMobileMenu();
+    if (!hasMotion) return;
     initLineReveals();
     initHeroCrosshair();
     initIntro();
