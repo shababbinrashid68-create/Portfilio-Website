@@ -3230,6 +3230,21 @@ tbody th { font-weight: 650; color: var(--ink); }
 
 /* Motion */
 
+.reveal-line { display: block; overflow: hidden; padding-top: .06em; }
+.reveal-line > span { display: block; }
+html.motion .reveal-line > span {
+  transform: translateY(105%);
+  transition: transform 1.2s var(--ease-inout);
+  transition-delay: calc(var(--i, 0) * var(--stagger));
+}
+html.motion h2 .reveal-line > span {
+  transition-duration: .9s;
+}
+html.motion .is-in .reveal-line > span,
+html.motion .is-in > .reveal-line > span {
+  transform: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto !important;
