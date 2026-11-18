@@ -97,6 +97,7 @@ window.__motion = true;
       if (!target) return;
 
       e.preventDefault();
+      focusTarget(target);
       lenis.scrollTo(target, {
         offset: headerOffset(),
         onComplete: function () { focusTarget(target); }
@@ -173,7 +174,6 @@ window.__motion = true;
     function cleanupSkipListeners() {
       window.removeEventListener('click', skipIntro);
       window.removeEventListener('keydown', skipIntro);
-      window.removeEventListener('wheel', skipIntro);
     }
 
     function triggerLeave() {
@@ -211,7 +211,6 @@ window.__motion = true;
 
     window.addEventListener('click', skipIntro, { passive: true });
     window.addEventListener('keydown', skipIntro);
-    window.addEventListener('wheel', skipIntro, { passive: true });
 
     var startTime = performance.now();
 
@@ -364,23 +363,124 @@ window.__motion = true;
         }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' })
       : null;
 
+    var vh = window.innerHeight || docEl.clientHeight;
     h2s.forEach(function (h2) {
-      if (h2.children.length > 0) return;
-      var text = h2.textContent;
-      h2.textContent = '';
+      if (h2.querySelector('mark.ph') || h2.querySelector('.reveal-line')) return;
       var outer = document.createElement('span');
       outer.className = 'reveal-line';
       var inner = document.createElement('span');
-      inner.textContent = text;
+      while (h2.firstChild) {
+        inner.appendChild(h2.firstChild);
+      }
       outer.appendChild(inner);
       h2.appendChild(outer);
 
-      if (io) {
+      var r = h2.getBoundingClientRect();
+      if (r.top < vh * 0.92 && r.bottom > 0) {
+        h2.classList.add('is-in');
+      } else if (io) {
         io.observe(h2);
       } else {
         h2.classList.add('is-in');
       }
     });
+  }
+
+  function initScrollReveals() {
+    var targets = [];
+
+    function addGroup(nodeList, type, staggered) {
+      var list = Array.prototype.slice.call(nodeList || []);
+      list.forEach(function (el, idx) {
+        if (!el || el.hasAttribute('data-reveal')) return;
+        el.setAttribute('data-reveal', type);
+        if (staggered) {
+          el.style.setProperty('--i', String(Math.min(idx, 5)));
+        }
+        targets.push(el);
+      });
+    }
+
+    // Home & case-studies.html rows
+    addGroup(document.querySelectorAll('.cs-row-media'), 'media', false);
+    addGroup(document.querySelectorAll('.cs-row-body'), 'up', false);
+
+    // Home sections
+    addGroup(document.querySelectorAll('.work-areas > li'), 'up', true);
+    document.querySelectorAll('.toolkit-table tbody').forEach(function (tb) {
+      addGroup(tb.querySelectorAll('tr'), 'up', true);
+    });
+    addGroup(document.querySelectorAll('.faq-list > details'), 'up', true);
+    addGroup(document.querySelectorAll('.contact-band > *'), 'up', true);
+
+    // Case study pages
+    addGroup(document.querySelectorAll('.summary'), 'up', false);
+    addGroup(document.querySelectorAll('.step'), 'up', false);
+    addGroup(document.querySelectorAll('.step .note'), 'up', false);
+    addGroup(document.querySelectorAll('.artefact'), 'up', false);
+    addGroup(document.querySelectorAll('.sql-block'), 'up', false);
+    addGroup(document.querySelectorAll('.outcome-lead'), 'up', false);
+
+    // Case study media (.artefact images, .dash-shot)
+    document.querySelectorAll('.artefact img, .dash-shot').forEach(function (img) {
+      var container = img.closest('.dash-shot-wrap') || img.parentElement;
+      if (container && !container.hasAttribute('data-reveal')) {
+        container.setAttribute('data-reveal', 'media');
+        targets.push(container);
+      }
+    });
+
+    // About page portrait
+    addGroup(document.querySelectorAll('.about-portrait'), 'media', false);
+
+    if (!targets.length) return;
+
+    var io = 'IntersectionObserver' in window
+      ? new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-in');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' })
+      : null;
+
+    var vh = window.innerHeight || docEl.clientHeight;
+    targets.forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      if (r.top < vh * 0.92 && r.bottom > 0) {
+        el.classList.add('is-in');
+      } else if (io) {
+        io.observe(el);
+      } else {
+        el.classList.add('is-in');
+      }
+    });
+
+    // Fast scroll or End-key jump fallback: reveal anything that has already passed or entered the viewport.
+    function checkPassed() {
+      var h = window.innerHeight || docEl.clientHeight;
+      for (var i = 0; i < targets.length; i++) {
+        var el = targets[i];
+        if (el.classList.contains('is-in')) continue;
+        var rect = el.getBoundingClientRect();
+        if (rect.top < h * 0.95) {
+          el.classList.add('is-in');
+          if (io) io.unobserve(el);
+        }
+      }
+      var allH2 = document.querySelectorAll('main h2');
+      for (var j = 0; j < allH2.length; j++) {
+        var h2 = allH2[j];
+        if (h2.classList.contains('is-in')) continue;
+        var hr = h2.getBoundingClientRect();
+        if (hr.top < h * 0.95) {
+          h2.classList.add('is-in');
+        }
+      }
+    }
+    window.addEventListener('scroll', checkPassed, { passive: true });
   }
 
   function initMobileMenu() {
@@ -511,6 +611,7 @@ window.__motion = true;
     initMobileMenu();
     if (!hasMotion) return;
     initLineReveals();
+    initScrollReveals();
     initHeroCrosshair();
     initIntro();
   }

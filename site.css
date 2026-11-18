@@ -3776,3 +3776,86 @@ html.lenis { scroll-behavior: auto; }
   .hero {
     isolation: isolate;
   }
+
+/* Scroll 4: Scroll-triggered reveals, rail h2 reveal support, and no-JS fallback keyframes */
+@keyframes editorialRise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-name,
+.hero .display,
+.hero-sub,
+.hero-intro,
+.hero .link-row {
+  animation: editorialRise 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.hero-name       { animation-delay: 0.02s; }
+.hero .display   { animation-delay: 0.09s; }
+.hero-sub        { animation-delay: 0.16s; }
+.hero-intro      { animation-delay: 0.23s; }
+.hero .link-row  { animation-delay: 0.30s; }
+.hero-portrait {
+  animation: editorialRise 0.78s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
+}
+.page-head,
+.cs-head {
+  animation: editorialRise 0.58s cubic-bezier(0.22, 1, 0.36, 1) 0.02s both;
+}
+.summary {
+  animation: editorialRise 0.62s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+}
+
+html.motion .hero-name,
+html.motion .hero .display,
+html.motion .hero-sub,
+html.motion .hero-intro,
+html.motion .hero .link-row,
+html.motion .hero-portrait,
+html.motion .page-head,
+html.motion .cs-head,
+html.motion .summary {
+  animation: none;
+}
+
+.cs-rail h2 .reveal-line > span {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+html.motion [data-reveal] { opacity: 0; transform: translateY(24px);
+  transition: opacity .9s var(--ease-out), transform .9s var(--ease-out);
+  transition-delay: calc(var(--i, 0) * var(--stagger)); }
+html.motion [data-reveal].is-in { opacity: 1; transform: none; }
+html.motion [data-reveal="media"] img,
+html.motion [data-reveal="media"] .mini-diagram { transform: scale(1.06);
+  transition: transform 1.8s var(--ease-out); }
+html.motion [data-reveal="media"].is-in img,
+html.motion [data-reveal="media"].is-in .mini-diagram { transform: none; }
+
+@media (min-width: 62rem) {
+  html.motion main:has(> .hero) .cs-row-body[data-reveal] {
+    transform: none;
+  }
+}
+
+[data-reveal="media"] {
+  overflow: hidden;
+}
+
+@media print {
+  html.motion [data-reveal],
+  html.motion [data-reveal="media"] img,
+  html.motion [data-reveal="media"] .mini-diagram {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
