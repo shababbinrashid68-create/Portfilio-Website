@@ -3275,6 +3275,95 @@ html.motion .hero.is-in .link-row {
   opacity: 1;
 }
 
+/* Step 4: Intro loader */
+.intro-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--ink-deep);
+  color: #EDEDED;
+  padding: 20px 22px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: var(--sans);
+  transform: translateY(0);
+  transition: transform .9s var(--ease-inout);
+  user-select: none;
+}
+.intro-loader.is-leaving {
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+.intro-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+.intro-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: 20vw;
+  line-height: .8;
+  letter-spacing: -.04em;
+}
+.intro-char-mask {
+  display: inline-block;
+  overflow: hidden;
+  padding: 0.08em 0.01em;
+}
+.intro-char {
+  display: inline-block;
+  transform: translateY(110%);
+  transition: transform 1s var(--ease-inout);
+  transition-delay: calc(var(--i, 0) * .06s);
+}
+.intro-loader.is-enter .intro-char {
+  transform: translateY(0);
+}
+.intro-loader.is-exit .intro-char {
+  transform: translateY(-110%);
+}
+.intro-bottom-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+.intro-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.intro-loading-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+.intro-counter {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(40px, 5.4vw, 110px);
+  line-height: 0.9;
+  font-variant-numeric: tabular-nums;
+}
+.intro-track {
+  width: 100%;
+  height: 1px;
+  background: #2A2A30;
+  overflow: hidden;
+}
+.intro-fill {
+  width: 100%;
+  height: 100%;
+  background: #EDEDED;
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto !important;
