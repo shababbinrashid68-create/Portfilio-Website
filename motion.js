@@ -147,6 +147,77 @@ window.__motion = true;
     }, 1600);
   }
 
+  function initHeroCrosshair() {
+    var hero = document.querySelector('.hero');
+    if (!hero) return;
+    if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    if (!matchMedia('(min-width: 54rem)').matches) return;
+
+    var ch = document.createElement('div');
+    ch.className = 'hero-crosshair';
+    ch.setAttribute('aria-hidden', 'true');
+    ch.innerHTML =
+      '<div class="hero-ch-v"></div>' +
+      '<div class="hero-ch-h"><span class="hero-ch-label">Business Analyst</span></div>' +
+      '<div class="hero-ch-follower">' +
+        '<img src="shabab-bin-rashid.jpg" alt="" decoding="async">' +
+        '<span class="hero-ch-caption">Data-driven</span>' +
+      '</div>';
+
+    hero.appendChild(ch);
+
+    var vLine = ch.querySelector('.hero-ch-v');
+    var hLine = ch.querySelector('.hero-ch-h');
+    var follower = ch.querySelector('.hero-ch-follower');
+    var pendingRaf = null;
+    var lastX = 0;
+    var lastY = 0;
+    var overInteractive = false;
+
+    function updatePositions() {
+      pendingRaf = null;
+      vLine.style.transform = 'translateX(' + lastX + 'px)';
+      hLine.style.transform = 'translateY(' + lastY + 'px)';
+      follower.style.transform = 'translate(' + lastX + 'px, ' + lastY + 'px) translate(-50%, -62%)';
+      follower.classList.toggle('is-hidden', overInteractive);
+    }
+
+    hero.addEventListener('pointerenter', function (e) {
+      if (!heroStarted) return;
+      if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+      if (!matchMedia('(min-width: 54rem)').matches) return;
+      var rect = hero.getBoundingClientRect();
+      lastX = e.clientX - rect.left;
+      lastY = e.clientY - rect.top;
+      overInteractive = !!(e.target && e.target.closest && e.target.closest('a, button'));
+      updatePositions();
+      ch.classList.add('is-visible');
+    });
+
+    hero.addEventListener('pointermove', function (e) {
+      if (!heroStarted) return;
+      if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+      if (!matchMedia('(min-width: 54rem)').matches) {
+        ch.classList.remove('is-visible');
+        return;
+      }
+      var rect = hero.getBoundingClientRect();
+      lastX = e.clientX - rect.left;
+      lastY = e.clientY - rect.top;
+      overInteractive = !!(e.target && e.target.closest && e.target.closest('a, button'));
+      if (!ch.classList.contains('is-visible')) {
+        ch.classList.add('is-visible');
+      }
+      if (!pendingRaf) {
+        pendingRaf = requestAnimationFrame(updatePositions);
+      }
+    });
+
+    hero.addEventListener('pointerleave', function () {
+      ch.classList.remove('is-visible');
+    });
+  }
+
   function initLineReveals() {
     var csHead = document.querySelector('.cs-head');
     if (csHead) {
@@ -188,6 +259,7 @@ window.__motion = true;
 
   function init() {
     initLineReveals();
+    initHeroCrosshair();
     initIntro();
   }
 
