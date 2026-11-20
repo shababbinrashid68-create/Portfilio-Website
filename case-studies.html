@@ -16,7 +16,7 @@
   d.documentElement.classList.add('motion');
   setTimeout(function(){if(!window.__motion)d.documentElement.classList.remove('motion')},3000);})(document);
   </script>
-  <link rel="stylesheet" href="site.css?v=9">
+  <link rel="stylesheet" href="site.css?v=11">
   <script src="vendor/lenis-1.1.13.min.js?v=9" defer></script>
   <script src="motion.js?v=10" defer></script>
 </head>
@@ -44,7 +44,13 @@
       <div class="cs-rows">
         <article class="cs-row">
           <a class="cs-row-media cs-row-media--img" href="case-study-onboarding-monetization.html" tabindex="-1" aria-hidden="true">
-            <img src="dashboard-onboarding-monetization.png" alt="Sanitized Looker Studio dashboard showing scaled onboarding funnel KPIs, simulated MRR by relationship status and age band, completion by sign-up method and top US states" width="686" height="602" decoding="async">
+            <span class="cs-media-frame cs-media-frame--shot">
+              <img src="dashboard-onboarding-monetization.png" alt="Sanitized Looker Studio dashboard showing scaled onboarding funnel KPIs, simulated MRR by relationship status and age band, completion by sign-up method and top US states" width="686" height="602" decoding="async">
+            </span>
+            <span class="cs-media-cap">
+              <strong>Sanitized dashboard</strong>
+              <span>Scaled and simulated</span>
+            </span>
           </a>
           <div class="cs-row-body">
             <p class="cs-row-num">Case study 01</p>
@@ -62,14 +68,39 @@
 
         <article class="cs-row">
           <a class="cs-row-media cs-row-media--diagram" href="case-study-ai-output-audit.html" tabindex="-1" aria-hidden="true">
-            <div class="mini-diagram">
-              <span class="badge-illus">Illustrative diagram</span>
-              <ol class="mini-flow">
-                <li><strong>1. Audit AI output</strong><span>Scores, red flags &amp; citations vs raw posts</span></li>
-                <li><strong>2. Classify failure</strong><span>RAG/model gap separated from UI or pipeline bugs</span></li>
-                <li><strong>3. Route to log</strong><span>Sheets tracker for RAG refinement; bugs logged separately</span></li>
-              </ol>
-            </div>
+            <span class="cs-media-frame cs-media-frame--diagram">
+              <svg class="mini-diagram" viewBox="0 0 360 220" role="img" aria-label="Illustrative AI output audit flow from AI outputs through structured checks to a RAG findings tracker and separate bug log">
+                <rect x="20" y="12" width="320" height="46" rx="4" fill="var(--surface-tint)" stroke="var(--rule)" stroke-width="1.2"/>
+                <text x="180" y="31" text-anchor="middle" font-family="var(--sans)" font-size="12.5" font-weight="600" fill="var(--ink)">AI module output</text>
+                <text x="180" y="48" text-anchor="middle" font-family="var(--sans)" font-size="10.5" fill="var(--muted)">Threat scores (0–100), red flags and summaries</text>
+
+                <line x1="180" y1="58" x2="180" y2="75" stroke="var(--accent)" stroke-width="1.4"/>
+                <polygon points="175,72 185,72 180,79" fill="var(--accent)"/>
+
+                <rect x="20" y="80" width="320" height="48" rx="4" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.4"/>
+                <text x="180" y="99" text-anchor="middle" font-family="var(--sans)" font-size="12.5" font-weight="600" fill="var(--accent)">Structured audit checks</text>
+                <text x="180" y="117" text-anchor="middle" font-family="var(--sans)" font-size="10.5" fill="var(--ink)">Quote intent, evidence vs flags, geo source, links</text>
+
+                <line x1="180" y1="128" x2="180" y2="140" stroke="var(--rule-strong)" stroke-width="1.3"/>
+                <line x1="96" y1="140" x2="264" y2="140" stroke="var(--rule-strong)" stroke-width="1.3"/>
+                <line x1="96" y1="140" x2="96" y2="152" stroke="var(--accent)" stroke-width="1.4"/>
+                <polygon points="91,149 101,149 96,156" fill="var(--accent)"/>
+                <line x1="264" y1="140" x2="264" y2="152" stroke="var(--rule-strong)" stroke-width="1.4"/>
+                <polygon points="259,149 269,149 264,156" fill="var(--rule-strong)"/>
+
+                <rect x="20" y="157" width="152" height="51" rx="4" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2"/>
+                <text x="96" y="178" text-anchor="middle" font-family="var(--sans)" font-size="12" font-weight="600" fill="var(--ink)">Findings tracker</text>
+                <text x="96" y="195" text-anchor="middle" font-family="var(--sans)" font-size="10.5" fill="var(--muted)">For RAG refinement</text>
+
+                <rect x="188" y="157" width="152" height="51" rx="4" fill="var(--surface-tint)" stroke="var(--rule)" stroke-width="1.2"/>
+                <text x="264" y="178" text-anchor="middle" font-family="var(--sans)" font-size="12" font-weight="600" fill="var(--ink)">Separate bug log</text>
+                <text x="264" y="195" text-anchor="middle" font-family="var(--sans)" font-size="10.5" fill="var(--muted)">For engineering fixes</text>
+              </svg>
+            </span>
+            <span class="cs-media-cap">
+              <strong>Audit triage flow</strong>
+              <span>Illustrative diagram</span>
+            </span>
           </a>
           <div class="cs-row-body">
             <p class="cs-row-num">Case study 02</p>
@@ -87,7 +118,13 @@
 
         <article class="cs-row">
           <a class="cs-row-media cs-row-media--img" href="case-study-army-personnel-system.html" tabindex="-1" aria-hidden="true">
-            <img src="army-system-login.jpg" alt="Sanitized login screen of the Bangladesh Army personnel and equipment management system in Bengali, with the unit badge and regiment identifier removed" width="1024" height="484" decoding="async">
+            <span class="cs-media-frame cs-media-frame--shot">
+              <img src="army-system-login.jpg" alt="Sanitized login screen of the Bangladesh Army personnel and equipment management system in Bengali, with the unit badge and regiment identifier removed" width="1024" height="484" decoding="async">
+            </span>
+            <span class="cs-media-cap">
+              <strong>Sanitized login screen</strong>
+              <span>Identifiers removed</span>
+            </span>
           </a>
           <div class="cs-row-body">
             <p class="cs-row-num">Case study 03</p>
