@@ -954,6 +954,10 @@ mark.ph {
   gap: 1.5rem 2rem;
 }
 
+.footer-grid--3 {
+  grid-template-columns: minmax(0, 1.6fr) repeat(2, minmax(0, 1fr));
+}
+
 .footer-brand {
   font-weight: 700;
   color: var(--ink);
@@ -2771,12 +2775,15 @@ tbody th { font-weight: 650; color: var(--ink); }
 }
 
 /* Contact band (editorial) */
+.section:has(.faq-list) {
+  padding-bottom: 0;
+}
+
 .contact-band {
-  margin-top: 2.75rem;
+  margin-top: 0;
   padding: 2.25rem 0 0.5rem;
   background: transparent;
   border: 0;
-  border-top: 1px solid var(--rule);
   border-radius: 0;
 }
 
