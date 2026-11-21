@@ -94,7 +94,7 @@
                     <strong>Data-quality and governance rules</strong>
                     <ul>
                       <li>Email and phone fields excluded</li>
-                      <li>Age recalculated from date of birth <mark class="ph">[VERIFY]</mark></li>
+                      <li>Age recalculated from date of birth</li>
                       <li>Segments under 50 users excluded</li>
                     </ul>
                   </li>
@@ -123,10 +123,10 @@
             <div class="step">
               <span class="step-num">Step 1</span>
               <h3>Rebuilding the age field</h3>
-              <p>The stored age field was about 40% empty, and its bands overlapped <mark class="ph">[VERIFY]</mark>. In BigQuery, I recalculated <code>age_at_signup</code> from <code>dob</code> and <code>created_at</code> using <code>DATE_DIFF</code> (adjusted for whether the user’s birthday had passed that year) and bucketed users into six age ranges (<code>18–29</code>, <code>30–39</code>, <code>40–49</code>, <code>50–64</code>, <code>65–74</code> and <code>75+</code>), while normalizing <code>relationship_status</code> into <code>Individual</code> and <code>Couple</code>.</p>
+              <p>The stored age field was about 40% empty, and its bands overlapped. In BigQuery, I recalculated <code>age_at_signup</code> from <code>dob</code> and <code>created_at</code> using <code>DATE_DIFF</code> (adjusted for whether the user’s birthday had passed that year) and bucketed users into six age ranges (<code>18–29</code>, <code>30–39</code>, <code>40–49</code>, <code>50–64</code>, <code>65–74</code> and <code>75+</code>), while normalizing <code>relationship_status</code> into <code>Individual</code> and <code>Couple</code>.</p>
               <aside class="note" aria-label="Decision note: age field">
                 <span class="note-kind">Decision</span>
-                <p>Recalculating from date of birth gives one consistent definition of age at sign-up, rather than patching a field with gaps and overlapping bands. <mark class="ph">[VERIFY]</mark></p>
+                <p>Recalculating from date of birth gives one consistent definition of age at sign-up, rather than patching a field with gaps and overlapping bands.</p>
               </aside>
             </div>
 
@@ -146,7 +146,7 @@
               <p>I had no permission to use monetization data, so the revenue component is a deterministic expected-value simulation (with no <code>RAND()</code>). In a <code>params</code> CTE, I set a hypothetical $9.99/month premium tier and assigned conversion propensity from profile completion (<code>0.35</code> at 100% completion, <code>0.15</code> at 70–99%, and <code>0.00</code> below 70%), then computed conservative (<code>0.5×</code>), base (<code>1.0×</code>) and optimistic (<code>1.5×</code>) MRR columns controlled by a Looker Studio parameter (<code>MRR Scenario</code>).</p>
               <aside class="note" aria-label="Decision note: revenue scenarios">
                 <span class="note-kind">Decision</span>
-                <p>Keeping all assumptions in a <code>params</code> CTE and exposing three labelled scenarios makes the simulation transparent rather than presenting a single number as a forecast. <mark class="ph">[VERIFY]</mark></p>
+                <p>Keeping all assumptions in a <code>params</code> CTE and exposing three labelled scenarios makes the simulation transparent rather than presenting a single number as a forecast.</p>
               </aside>
             </div>
 
