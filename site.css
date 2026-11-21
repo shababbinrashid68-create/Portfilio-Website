@@ -1417,13 +1417,13 @@ mark.ph {
 
 .audit-top-row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.8fr) minmax(0, 1fr);
-  gap: 1rem;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.9rem;
   align-items: stretch;
 }
 
 .audit-box {
-  padding: 1rem 1.1rem;
+  padding: 1rem 1.2rem;
   background: var(--paper);
   border: 1px solid var(--rule);
   border-radius: 5px;
@@ -1437,21 +1437,36 @@ mark.ph {
 
 .audit-box h4 {
   font-size: var(--step--1);
-  margin: 0.2rem 0 0.4rem;
+  margin: 0.2rem 0 0.45rem;
 }
 
 .audit-box p {
   font-size: var(--step--2);
   color: var(--muted);
   margin: 0;
-  line-height: 1.48;
+  line-height: 1.55;
+  max-width: none;
+}
+
+.audit-box ul {
+  margin: 0.45rem 0 0;
+  padding-left: 1.15rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.75rem;
+}
+
+.audit-box li {
+  margin-bottom: 0;
+  font-size: var(--step--2);
+  color: var(--ink);
 }
 
 .audit-checks-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.65rem;
-  margin-top: 0.65rem;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
 }
 
 .audit-check-item {
@@ -1761,6 +1776,7 @@ mark.ph {
   font-size: var(--step--2);
   padding: 0.65rem 0.85rem;
   border: 1px solid var(--rule);
+  text-align: left;
 }
 
 .sheet-col-letter {
@@ -1777,6 +1793,12 @@ mark.ph {
   padding: 0.75rem 0.85rem;
   border: 1px solid var(--rule);
   vertical-align: top;
+  text-align: left;
+}
+
+.sheet-table td code,
+.sheet-table .verdict-pill {
+  white-space: nowrap;
 }
 
 .sheet-table tbody tr:nth-child(even) {
@@ -2053,6 +2075,7 @@ mark.ph {
   font-family: var(--sans);
   font-size: var(--step--1);
 }
+.method p { max-width: none; }
 .method p:last-child { margin-bottom: 0; }
 
 .cs-nav {
@@ -2936,7 +2959,7 @@ tbody th { font-weight: 650; color: var(--ink); }
   font-family: var(--serif);
   font-size: 1.25rem;
   color: var(--muted);
-  max-width: var(--measure);
+  max-width: none;
   line-height: 1.55;
   margin: 0;
 }
@@ -3055,7 +3078,7 @@ tbody th { font-weight: 650; color: var(--ink); }
 .cs-content > p,
 .cs-content > ul,
 .cs-content > ol:not(.role-resp-grid) {
-  max-width: 72ch;
+  max-width: none;
 }
 
 /* Steps with side-by-side Decision / Trade-off margin notes on desktop */
@@ -3093,7 +3116,7 @@ tbody th { font-weight: 650; color: var(--ink); }
 }
 
 .step > p {
-  max-width: 70ch;
+  max-width: none;
   margin: 0 0 1rem;
 }
 
@@ -3176,7 +3199,7 @@ tbody th { font-weight: 650; color: var(--ink); }
   line-height: 1.25;
   letter-spacing: -0.015em;
   color: var(--ink);
-  max-width: 46ch !important;
+  max-width: none !important;
   margin: 0 0 1.25rem;
 }
 
