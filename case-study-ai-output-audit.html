@@ -142,7 +142,7 @@
               <p>I review the generated threat scores (0–100), red flags and narrative summaries against the raw public posts they cite. I check for hallucinations, logic failures, and deterministic extraction or NLP errors. In particular, I verify whether a cited quote reflects personal intent or is actually third-party news, sarcasm or gaming talk, and whether the evidence contradicts flags the system marked as positive.</p>
               <aside class="note" aria-label="Decision note: quote context">
                 <span class="note-kind">Decision</span>
-                <p>Checking each cited quote in its full thread catches false positives where the model treated news reposts, sarcasm or gaming slang as literal personal intent. <mark class="ph">[VERIFY]</mark></p>
+                <p>Checking each cited quote in its full thread catches false positives where the model treated news reposts, sarcasm or gaming slang as literal personal intent.</p>
               </aside>
             </div>
 
@@ -152,7 +152,7 @@
               <p>I verify whether demographic attributions (language, timezone and location) come from the raw content itself or from gazetteer heuristics. I also inspect cross-case links to confirm whether two profiles have a genuine connection, or were linked only because of shared public channels, moderation bots or self-matching.</p>
               <aside class="note" aria-label="Decision note: source verification">
                 <span class="note-kind">Decision</span>
-                <p>Separating raw-content evidence from heuristic defaults prevents gazetteer guesses and shared-channel bots from looking like verified intelligence links. <mark class="ph">[VERIFY]</mark></p>
+                <p>I checked every location against the posts themselves, and every link between profiles against actual interaction between them. This stopped two false results from being reported as fact: a location guessed from a place-name lookup, and two unrelated profiles linked only because both used the same channel bot.</p>
               </aside>
             </div>
 
@@ -162,7 +162,7 @@
               <p>I built an AI-inconsistency findings tracker in Google Sheets on my own, with Gemini, so the engineer could review specific failure cases and refine the RAG of the AI engine for customer use. Its columns capture the finding title, assessment, verdict, profile reference and evidence. I also tested the platform for functional software bugs, reported them separately to the engineering team, and contributed input on how to improve system functionality.</p>
               <aside class="note" aria-label="Trade-off note: separate trackers">
                 <span class="note-kind">Trade-off</span>
-                <p>Maintaining two logs requires classifying every defect before logging it, but it keeps RAG and training-data feedback clean of routine software bugs. <mark class="ph">[VERIFY]</mark></p>
+                <p>Maintaining two logs requires classifying every defect before logging it, but it keeps RAG and training-data feedback clean of routine software bugs.</p>
               </aside>
             </div>
 
@@ -271,7 +271,7 @@
             <h2 id="learned"><span class="rail-num">06</span><span class="rail-title">What I learned</span></h2>
           </div>
           <div class="cs-content">
-            <p>I can identify where the model’s outputs fail. I cannot yet explain <em>why</em> the underlying statistical model produced them. Closing that gap is one reason I want formal training. <mark class="ph">[VERIFY]</mark></p>
+            <p>I can identify where the model’s outputs fail. I cannot yet explain <em>why</em> the underlying statistical model produced them. Closing that gap is one reason I want formal training.</p>
           </div>
         </section>
 
@@ -282,7 +282,7 @@
           <div class="cs-content">
             <div class="method">
               <p>Google Sheets and Gemini.</p>
-              <p>Findings tracker structure built on my own with Gemini; audit evaluations, failure classifications and evidence checks are my own. <mark class="ph">[VERIFY]</mark></p>
+              <p>Findings tracker structure built on my own with Gemini; audit evaluations, failure classifications and evidence checks are my own.</p>
             </div>
           </div>
         </section>
