@@ -49,7 +49,7 @@
         <div><dt>Role</dt><dd>Analysis, SQL and dashboard build</dd></div>
         <div><dt>Client type</dt><dd>Internal product team</dd></div>
         <div><dt>Tools</dt><dd>Google BigQuery (SQL), Looker Studio</dd></div>
-        <div><dt>Outcome</dt><dd>Answered part of the business question; limited by the absence of real monetization data</dd></div>
+        <div><dt>Outcome</dt><dd>Answered the onboarding questions; monetization stayed simulated without live revenue data</dd></div>
       </dl>
 
       <article class="cs-body">
@@ -59,13 +59,13 @@
             <h2 id="context"><span class="rail-num">01</span><span class="rail-title">Context</span></h2>
           </div>
           <div class="cs-content">
-            <p>The project manager of WYZR Friends asked for an analysis of user onboarding and monetization. WYZR Friends is a live product built by my company, Parallaxlogic Infotech, so the work used real user data, with the team’s permission.</p>
-            <p>The dashboard was built to answer four primary business questions:</p>
+            <p>The project manager of WYZR Friends asked for an analysis of user onboarding and monetization. Parallaxlogic Infotech builds and runs WYZR Friends, so I worked on real user tables with the team's permission.</p>
+            <p>The dashboard answered four questions for the team:</p>
             <ul>
-              <li><strong>Who is driving potential revenue?</strong> Breakdown of monthly recurring revenue <span class="sim">Simulated</span> <span class="scaled">Scaled</span> by age band and relationship status, showing that individuals aged 50–64 generate 45% of simulated MRR.</li>
-              <li><strong>Where is onboarding most successful?</strong> Top 10 US states by profile completion rate, showing that users in states such as Georgia, Washington and Oregon complete their profiles at rates exceeding 94%.</li>
-              <li><strong>Which sign-up methods yield the highest completion?</strong> Comparison of onboarding completion by authentication method, showing that Google sign-ups reach the highest profile completion (60.3%), while Apple ID trails at 49.68%.</li>
-              <li><strong>What is the overall health of the onboarding funnel?</strong> Headline view of total sign-ups (32,078) versus fully onboarded users (18,138), resulting in a 56.5% overall profile completion rate.</li>
+              <li>Which user segments drive potential revenue: a breakdown of monthly recurring revenue <span class="sim">Simulated</span> <span class="scaled">Scaled</span> by age band and relationship status, where individuals aged 50-64 account for 45% of simulated MRR.</li>
+              <li>Where onboarding performs best: the top 10 US states by profile completion rate, where states including Georgia, Washington, and Oregon all sit above 94%.</li>
+              <li>Which sign-up method converts best: profile completion by login method, with Google highest at 60.3% and Apple ID lowest at 49.68%.</li>
+              <li>How healthy the funnel is in aggregate: 18,138 fully onboarded users out of 32,078 sign-ups, a 56.5% profile completion rate.</li>
             </ul>
           </div>
         </section>
@@ -75,7 +75,7 @@
             <h2 id="role"><span class="rail-num">02</span><span class="rail-title">My role</span></h2>
           </div>
           <div class="cs-content">
-            <p>I wrote the SQL queries behind the onboarding and monetization dashboard in Google BigQuery and built the dashboard in Looker Studio. I framed the business questions, defined the metrics, made the data-governance decisions described below, and validated the outputs.</p>
+            <p>I wrote the Google BigQuery SQL behind the analysis and built the Looker Studio dashboard. I also framed the business questions, defined the metrics, set the data-handling rules, and checked the numbers against the source tables.</p>
 
             <figure class="artefact" aria-labelledby="cs1-flow-title">
               <div class="artefact-head">
@@ -110,7 +110,7 @@
                   </li>
                 </ol>
               </div>
-              <figcaption class="artefact-foot">Illustrative process diagram showing how raw user tables moved through governance and quality rules into Looker Studio.</figcaption>
+              <figcaption class="artefact-foot">How raw user tables moved through data-cleaning and governance rules into Looker Studio.</figcaption>
             </figure>
           </div>
         </section>
@@ -123,40 +123,40 @@
             <div class="step">
               <span class="step-num">Step 1</span>
               <h3>Rebuilding the age field</h3>
-              <p>The stored age field was about 40% empty, and its bands overlapped. In BigQuery, I recalculated <code>age_at_signup</code> from <code>dob</code> and <code>created_at</code> using <code>DATE_DIFF</code> (adjusted for whether the user’s birthday had passed that year) and bucketed users into six age ranges (<code>18–29</code>, <code>30–39</code>, <code>40–49</code>, <code>50–64</code>, <code>65–74</code> and <code>75+</code>), while normalizing <code>relationship_status</code> into <code>Individual</code> and <code>Couple</code>.</p>
+              <p>About 40% of the stored age field was blank, and its age bands overlapped. In BigQuery, I recalculated <code>age_at_signup</code> from <code>dob</code> and <code>created_at</code> using <code>DATE_DIFF</code> (adjusting for whether the user's birthday had passed that year) and grouped users into six ranges (<code>18-29</code>, <code>30-39</code>, <code>40-49</code>, <code>50-64</code>, <code>65-74</code>, and <code>75+</code>). I also normalized <code>relationship_status</code> into <code>Individual</code> and <code>Couple</code>.</p>
               <aside class="note" aria-label="Decision note: age field">
                 <span class="note-kind">Decision</span>
-                <p>Recalculating from date of birth gives one consistent definition of age at sign-up, rather than patching a field with gaps and overlapping bands.</p>
+                <p>Using date of birth gave every row the same definition of age at sign-up and avoided carrying over the old overlapping ranges.</p>
               </aside>
             </div>
 
             <div class="step">
               <span class="step-num">Step 2</span>
               <h3>Setting a minimum segment size</h3>
-              <p>Segments with fewer than 50 users (<code>HAVING COUNT(id) &gt;= 50</code> and <code>WHERE s.n_users &gt;= p.min_segment_n</code>) were excluded as statistically unreliable. On the dashboard, this rule excluded states with 50 or fewer users, the Email &amp; Password sign-up method (n &lt; 50), the <code>18–29</code> age band, and the <code>30–39</code> and <code>75+</code> Couple cohorts.</p>
+              <p>I dropped segments with fewer than 50 users (<code>HAVING COUNT(id) &gt;= 50</code> and <code>WHERE s.n_users &gt;= p.min_segment_n</code>) because small samples produce noisy rates. That removed states with fewer than 50 users, the Email &amp; Password sign-up method (n &lt; 50), the <code>18-29</code> age band, and the <code>30-39</code> and <code>75+</code> Couple cohorts.</p>
               <aside class="note" aria-label="Trade-off note: segment threshold">
                 <span class="note-kind">Trade-off</span>
-                <p>Small cohorts drop out of the view, keeping unstable rates from small sample sizes out of the comparison.</p>
+                <p>Dropping small cohorts hides early or niche segments, so the dashboard trades full coverage for steadier comparison rates.</p>
               </aside>
             </div>
 
             <div class="step">
               <span class="step-num">Step 3</span>
               <h3>Modelling revenue as scenarios</h3>
-              <p>I had no permission to use monetization data, so the revenue component is a deterministic expected-value simulation (with no <code>RAND()</code>). In a <code>params</code> CTE, I set a hypothetical $9.99/month premium tier and assigned conversion propensity from profile completion (<code>0.35</code> at 100% completion, <code>0.15</code> at 70–99%, and <code>0.00</code> below 70%), then computed conservative (<code>0.5×</code>), base (<code>1.0×</code>) and optimistic (<code>1.5×</code>) MRR columns controlled by a Looker Studio parameter (<code>MRR Scenario</code>).</p>
+              <p>Because I did not have permission to use monetization data, I modelled revenue as a deterministic expected-value simulation (no <code>RAND()</code>). In a <code>params</code> CTE, I set a hypothetical $9.99/month tier and set conversion propensity from profile completion (<code>0.35</code> at 100%, <code>0.15</code> at 70-99%, and <code>0.00</code> below 70%). From there I calculated conservative (<code>0.5×</code>), base (<code>1.0×</code>), and optimistic (<code>1.5×</code>) MRR columns wired to a Looker Studio <code>MRR Scenario</code> parameter.</p>
               <aside class="note" aria-label="Decision note: revenue scenarios">
                 <span class="note-kind">Decision</span>
-                <p>Keeping all assumptions in a <code>params</code> CTE and exposing three labelled scenarios makes the simulation transparent rather than presenting a single number as a forecast.</p>
+                <p>Putting every assumption in a <code>params</code> CTE and showing three labelled scenarios makes the revenue numbers easy to inspect and adjust, so nobody mistakes a single figure for a forecast.</p>
               </aside>
             </div>
 
             <div class="step">
               <span class="step-num">Step 4</span>
               <h3>Comparing profile completion by sign-up method and state</h3>
-              <p>Across 32,078 sign-ups <span class="scaled">Scaled</span>, 18,138 users completed onboarding, an overall profile completion rate of 56.5%. By sign-up method (with Email &amp; Password excluded for n &lt; 50), Google led at 60.3% and Phone OTP reached 56.38%, while Apple ID trailed Google by 10.6 percentage points at 49.68%. Across US states with more than 50 users, Georgia led at 99.32% and all top-10 states exceeded 94%—a skew I noted on the dashboard because state is captured during profile setup rather than at initial sign-up, so the state ranking should be read as relative rather than absolute.</p>
+              <p>Out of 32,078 sign-ups <span class="scaled">Scaled</span>, 18,138 users finished onboarding, a 56.5% profile completion rate. Among login methods with at least 50 users (excluding Email &amp; Password), Google came first at 60.3%, Phone OTP reached 56.38%, and Apple ID sat 10.6 percentage points behind Google at 49.68%. Across US states with at least 50 users, Georgia led at 99.32% and every top-10 state was above 94%. Those state numbers skew high because the app only asks for a user's state during profile setup, after initial sign-up.</p>
               <aside class="note" aria-label="Decision note: state capture bias">
                 <span class="note-kind">Decision</span>
-                <p>Because state is captured during profile setup, state-level completion is biased upward; noting this on the dashboard ensures the state ranking is read as relative, not absolute.</p>
+                <p>I added a note directly on the dashboard explaining when state is collected, so readers compare states against one another instead of reading 94%+ as true funnel completion.</p>
               </aside>
             </div>
 
@@ -171,17 +171,17 @@
               <div class="artefact-body scenario-panel">
                 <div class="kpi-grid" aria-label="Headline dashboard metrics">
                   <div class="kpi-card">
-                    <div class="kpi-label"><span>Total Sign-ups</span></div>
+                    <div class="kpi-label"><span>Total sign-ups</span></div>
                     <span class="kpi-val">32,078</span>
                     <span class="kpi-sub">Scaled user volume</span>
                   </div>
                   <div class="kpi-card">
-                    <div class="kpi-label"><span>Fully Onboarded</span></div>
+                    <div class="kpi-label"><span>Fully onboarded</span></div>
                     <span class="kpi-val">18,138</span>
                     <span class="kpi-sub">Completed profile setup</span>
                   </div>
                   <div class="kpi-card">
-                    <div class="kpi-label"><span>Profile Completion Rate</span></div>
+                    <div class="kpi-label"><span>Profile completion rate</span></div>
                     <span class="kpi-val">56.5%</span>
                     <span class="kpi-sub">Actual rate (unscaled)</span>
                   </div>
@@ -194,8 +194,8 @@
 
                 <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem;">
                   <div>
-                    <h4 style="margin: 0 0 0.2rem;">Individuals aged 50–64 generate 45% of simulated MRR</h4>
-                    <p style="margin: 0; font-size: var(--step--2); color: var(--muted);">Simulated monthly recurring revenue (USD, scaled) by relationship status and age band under the Base scenario.</p>
+                    <h4 style="margin: 0 0 0.2rem;">Individuals aged 50-64 generate 45% of simulated MRR</h4>
+                    <p style="margin: 0; font-size: var(--step--2); color: var(--muted);">Scaled USD by relationship status and age band under the Base scenario.</p>
                   </div>
                   <div class="scenario-bar" role="group" aria-label="Looker Studio MRR Scenario parameter">
                     <div class="scenario-option">Conservative</div>
@@ -204,17 +204,17 @@
                   </div>
                 </div>
 
-                <p class="mrr-table-caption">Simulated monthly recurring revenue assuming a hypothetical $9.99/month premium tier with subscriber propensity modelled from profile completion.</p>
+                <p class="mrr-table-caption">Assumes a hypothetical $9.99/month tier with conversion propensity based on profile completion.</p>
                 <div class="mrr-scroll-outer">
                   <div class="mrr-table-wrap">
                     <table class="mrr-table">
                       <thead>
                         <tr>
                           <th scope="col">Relationship status</th>
-                          <th scope="col">30–39</th>
-                          <th scope="col">40–49</th>
-                          <th scope="col">50–64</th>
-                          <th scope="col">65–74</th>
+                          <th scope="col">30-39</th>
+                          <th scope="col">40-49</th>
+                          <th scope="col">50-64</th>
+                          <th scope="col">65-74</th>
                           <th scope="col">75+</th>
                         </tr>
                       </thead>
@@ -229,11 +229,11 @@
                         </tr>
                         <tr>
                           <th scope="row">Couple</th>
-                          <td>—</td>
+                          <td>-</td>
                           <td>$892</td>
                           <td>$1,913</td>
                           <td>$538</td>
-                          <td>—</td>
+                          <td>-</td>
                         </tr>
                       </tbody>
                     </table>
@@ -285,7 +285,7 @@
                         <div class="bar-track"><div class="bar-fill" style="width: 97.53%;"></div></div>
                       </li>
                       <li class="bar-item">
-                        <div class="bar-meta"><span>Ohio · Virginia · Arizona · Pennsylvania · New York</span><span>97.01% – 94.87%</span></div>
+                        <div class="bar-meta"><span>Ohio · Virginia · Arizona · Pennsylvania · New York</span><span>97.01% to 94.87%</span></div>
                         <div class="bar-track"><div class="bar-fill" style="width: 96%;"></div></div>
                       </li>
                     </ul>
@@ -400,7 +400,7 @@ ORDER BY projected_mrr_usd DESC;</code></pre>
             <h2 id="governance"><span class="rail-num">04</span><span class="rail-title">Data governance and constraints</span></h2>
           </div>
           <div class="cs-content">
-            <p>Working with real product records required setting boundaries on what entered the queries and what could be shown outside the team.</p>
+            <p>Because this work used real product records, I set clear rules on what entered the queries and what could be shown outside the team.</p>
 
             <section class="artefact" aria-labelledby="cs1-gov-title">
               <div class="artefact-head">
@@ -411,11 +411,11 @@ ORDER BY projected_mrr_usd DESC;</code></pre>
                 <dl class="gov-grid">
                   <div class="gov-item">
                     <dt>Permissions</dt>
-                    <dd>All permissions were obtained from the WYZR Friends team before the data was used.</dd>
+                    <dd>The WYZR Friends team approved access before I queried any tables.</dd>
                   </div>
                   <div class="gov-item">
                     <dt>Personal data <span>Excluded</span></dt>
-                    <dd>Email and phone-number fields were deliberately excluded so personal identifiers never entered the reporting layer.</dd>
+                    <dd>I excluded email and phone-number fields so personal identifiers never entered the reporting layer.</dd>
                   </div>
                   <div class="gov-item">
                     <dt>User volumes <span class="scaled">Scaled</span></dt>
@@ -423,11 +423,11 @@ ORDER BY projected_mrr_usd DESC;</code></pre>
                   </div>
                   <div class="gov-item">
                     <dt>Revenue component <span class="sim">Simulated</span></dt>
-                    <dd>I had no permission to use monetization data, so all revenue estimates (such as the $57,719/month Base MRR) are simulated across conservative, base and optimistic scenarios using a hypothetical $9.99/month tier.</dd>
+                    <dd>I had no permission to use monetization data, so all revenue estimates (such as the $57,719/month Base MRR) are simulated across conservative, base, and optimistic scenarios using a hypothetical $9.99/month tier.</dd>
                   </div>
                   <div class="gov-item">
                     <dt>Live dashboard access <span>Not linked</span></dt>
-                    <dd>The live Looker Studio dashboard is never linked or embedded. It contains production queries and carries risk to the client.</dd>
+                    <dd>The live Looker Studio dashboard is never linked or embedded. It contains production queries, and exposing it would put client data at risk.</dd>
                   </div>
                 </dl>
               </div>
@@ -440,8 +440,8 @@ ORDER BY projected_mrr_usd DESC;</code></pre>
             <h2 id="outcome"><span class="rail-num">05</span><span class="rail-title">Outcome</span></h2>
           </div>
           <div class="cs-content">
-            <p class="outcome-lead">The dashboard showed an overall profile completion rate of 56.5% (18,138 fully onboarded users out of 32,078 sign-ups <span class="scaled">Scaled</span>), surfaced a 10.6 percentage-point completion gap between Apple ID (49.68%) and Google sign-in (60.3%), and concentrated 45% of simulated Base MRR ($26,186 of $57,719/month <span class="sim">Simulated</span>) among individual users aged 50–64.</p>
-            <p>Overall, the analysis answered part of the business question on onboarding behaviour, while its monetization findings remained illustrative because real monetization data was not available.</p>
+            <p class="outcome-lead">The dashboard put profile completion at 56.5% (18,138 fully onboarded users out of 32,078 sign-ups <span class="scaled">Scaled</span>) and pinpointed a 10.6 percentage-point gap between Apple ID (49.68%) and Google sign-in (60.3%). Under the simulated Base scenario, individual users aged 50-64 accounted for 45% of MRR ($26,186 of $57,719/month <span class="sim">Simulated</span>).</p>
+            <p>That gave the team concrete answers on onboarding behaviour, while the monetization numbers stayed illustrative without live revenue data.</p>
           </div>
         </section>
 
@@ -450,8 +450,8 @@ ORDER BY projected_mrr_usd DESC;</code></pre>
             <h2 id="learned"><span class="rail-num">06</span><span class="rail-title">What I learned</span></h2>
           </div>
           <div class="cs-content">
-            <p>Most of the work happens before the query is written, and an analysis is only as strong as the data it is allowed to see.</p>
-            <p>What I would do differently: agree data access, including monetization data, with the project team before fixing the scope of the questions.</p>
+            <p>Cleaning the age field, setting segment thresholds, and sorting out data access took more effort than writing the queries themselves.</p>
+            <p>Next time, I would confirm what data I can access, including monetization tables, before locking in the questions the dashboard is supposed to answer.</p>
           </div>
         </section>
 
@@ -462,7 +462,7 @@ ORDER BY projected_mrr_usd DESC;</code></pre>
           <div class="cs-content">
             <div class="method">
               <p>Google BigQuery (SQL) and Looker Studio.</p>
-              <p>SQL drafted and debugged with AI assistance; business questions, metric definitions, data-governance decisions and output validation are my own.</p>
+              <p>I used AI assistance to draft and debug SQL. The business questions, metric definitions, data-governance choices, and output checks were my own.</p>
             </div>
           </div>
         </section>

@@ -39,14 +39,14 @@
       <header class="cs-head">
         <p class="crumb"><span class="crumb-label">Case study 02 / 03</span> <a href="case-studies.html">← All case studies</a></p>
         <h1><span class="reveal-line" style="--i:0"><span>AI output audit for an OSINT threat-intelligence platform</span></span></h1>
-        <p class="dek">Evaluating an in-house AI module’s threat scores, red flags and narrative summaries, and separating model-output failures from functional software bugs.</p>
+        <p class="dek">Evaluating an in-house AI module's threat scores, red flags, and narrative summaries, and separating model-output failures from functional software bugs.</p>
       </header>
 
       <dl class="summary" aria-label="Summary">
         <div><dt>Role</dt><dd>AI model evaluation, functional bug testing and product improvement input</dd></div>
         <div><dt>Client type</dt><dd>In-house product (Parallaxlogic Infotech)</dd></div>
         <div><dt>Tools</dt><dd>Google Sheets, Gemini</dd></div>
-        <div><dt>Outcome</dt><dd>Findings tracker used by the engineer to refine the AI engine’s RAG pipeline for customer readiness, alongside separate functional bug reporting and feature input</dd></div>
+        <div><dt>Outcome</dt><dd>The engineer used the findings tracker to refine the AI engine's RAG pipeline before customer release, separate from functional bug reports and feature input</dd></div>
       </dl>
 
       <article class="cs-body">
@@ -56,8 +56,8 @@
             <h2 id="context"><span class="rail-num">01</span><span class="rail-title">Context</span></h2>
           </div>
           <div class="cs-content">
-            <p>My company, Parallaxlogic Infotech, develops an OSINT (open-source intelligence) threat-intelligence platform. The platform collects from publicly accessible sources: public channels, public groups and public stories. It includes a new, in-house-trained AI module that produces threat scores (0–100), red flags and narrative summaries.</p>
-            <p>My employer gave permission to describe this evaluation work, but not to show the platform or any real records.</p>
+            <p>Parallaxlogic Infotech builds an OSINT (open-source intelligence) threat-intelligence platform that pulls from public channels, groups, and stories. It includes a new in-house AI module that generates 0-100 threat scores, red flags, and narrative summaries.</p>
+            <p>My employer allowed me to describe how I audited those outputs, without showing the platform or any real records.</p>
           </div>
         </section>
 
@@ -66,7 +66,7 @@
             <h2 id="role"><span class="rail-num">02</span><span class="rail-title">My role</span></h2>
           </div>
           <div class="cs-content">
-            <p>My role covered three areas across the platform: evaluating the AI module’s outputs and logging failures so the engineer could refine the AI engine’s RAG (retrieval-augmented generation) pipeline; testing the platform for functional software bugs and reporting them to the engineering team; and contributing my own input on how to improve the system’s functionality. I built the AI-inconsistency findings tracker described below on my own with Gemini. I did not design, train or build the underlying AI model itself.</p>
+            <p>I audited the AI module's outputs and logged failures so the engineer could refine the RAG (retrieval-augmented generation) pipeline. Separately, I tested the platform for functional software bugs, reported them to engineering, and suggested product improvements. I built the AI-inconsistency findings tracker myself using Gemini. I did not design, train, or build the model.</p>
 
             <figure class="artefact" aria-labelledby="cs2-flow-title">
               <div class="artefact-head">
@@ -78,9 +78,9 @@
                   <div class="audit-box">
                     <span class="flow-stage">Stage 1: Input</span>
                     <h4>In-house AI module output</h4>
-                    <p>Generated from publicly accessible channels, groups and stories:</p>
+                    <p>Generated from public channels, groups, and stories:</p>
                     <ul>
-                      <li>Threat score (0–100)</li>
+                      <li>Threat score (0-100)</li>
                       <li>Red flags</li>
                       <li>Narrative summary and cross-case links</li>
                     </ul>
@@ -120,13 +120,13 @@
                   <div class="audit-box">
                     <span class="flow-stage">Stage 3: Triage &amp; routing</span>
                     <h4>Separated tracking logs</h4>
-                    <p><strong>Route A (AI-output failure):</strong> logged in the Google Sheets findings tracker so the engineer could review cases and refine the AI engine’s RAG pipeline.</p>
+                    <p>AI-output failures went into the Google Sheets findings tracker so the engineer could review cases and refine the RAG pipeline.</p>
                     <hr style="border: 0; border-top: 1px solid var(--rule); margin: 0.65rem 0;">
-                    <p><strong>Route B (Functional bugs &amp; product input):</strong> functional bugs tested and reported separately to the engineering team, alongside input on system functionality improvements.</p>
+                    <p>Functional software bugs went to a separate engineering bug log, alongside suggestions for product improvements.</p>
                   </div>
                 </div>
               </div>
-              <figcaption class="artefact-foot">Illustrative process diagram showing how AI module outputs are audited across six failure categories and kept separate from functional software bugs.</figcaption>
+              <figcaption class="artefact-foot">How AI module outputs were checked across six failure categories and kept separate from functional software bugs.</figcaption>
             </figure>
           </div>
         </section>
@@ -139,17 +139,17 @@
             <div class="step">
               <span class="step-num">Step 1</span>
               <h3>Auditing scores, flags and quote context</h3>
-              <p>I review the generated threat scores (0–100), red flags and narrative summaries against the raw public posts they cite. I check for hallucinations, logic failures, and deterministic extraction or NLP errors. In particular, I verify whether a cited quote reflects personal intent or is actually third-party news, sarcasm or gaming talk, and whether the evidence contradicts flags the system marked as positive.</p>
+              <p>I checked each 0-100 threat score, red flag, and summary against the raw public posts it cited, looking for hallucinations, broken logic, and deterministic extraction or NLP errors. A big part of this was reading cited quotes in context to see whether they expressed real personal intent or were reposted news, sarcasm, or gaming talk, and checking if the source evidence contradicted flags the system marked as positive.</p>
               <aside class="note" aria-label="Decision note: quote context">
                 <span class="note-kind">Decision</span>
-                <p>Checking each cited quote in its full thread catches false positives where the model treated news reposts, sarcasm or gaming slang as literal personal intent.</p>
+                <p>Reading the full thread around a quote caught false positives that looked alarming in isolation.</p>
               </aside>
             </div>
 
             <div class="step">
               <span class="step-num">Step 2</span>
               <h3>Checking demographic sources and cross-case links</h3>
-              <p>I verify whether demographic attributions (language, timezone and location) come from the raw content itself or from gazetteer heuristics. I also inspect cross-case links to confirm whether two profiles have a genuine connection, or were linked only because of shared public channels, moderation bots or self-matching.</p>
+              <p>For demographic fields (language, timezone, and location), I checked whether the attribution came from the posts themselves or from gazetteer heuristics. On cross-case links, I checked whether two profiles had interacted directly or only appeared together through a shared public channel, a moderation bot, or a self-match.</p>
               <aside class="note" aria-label="Decision note: source verification">
                 <span class="note-kind">Decision</span>
                 <p>I checked every location against the posts themselves, and every link between profiles against actual interaction between them. This stopped two false results from being reported as fact: a location guessed from a place-name lookup, and two unrelated profiles linked only because both used the same channel bot.</p>
@@ -159,10 +159,10 @@
             <div class="step">
               <span class="step-num">Step 3</span>
               <h3>Tracking AI inconsistencies separately from functional bugs</h3>
-              <p>I built an AI-inconsistency findings tracker in Google Sheets on my own, with Gemini, so the engineer could review specific failure cases and refine the RAG of the AI engine for customer use. Its columns capture the finding title, assessment, verdict, profile reference and evidence. I also tested the platform for functional software bugs, reported them separately to the engineering team, and contributed input on how to improve system functionality.</p>
+              <p>Using Gemini, I put together a Google Sheets tracker for AI inconsistencies so the engineer could review individual failures and refine the RAG pipeline before customer release. Each row logged the finding title, assessment, verdict, profile reference, and evidence. Functional software bugs went into a separate engineering report, along with my suggestions for improving the platform.</p>
               <aside class="note" aria-label="Trade-off note: separate trackers">
                 <span class="note-kind">Trade-off</span>
-                <p>Maintaining two logs requires classifying every defect before logging it, but it keeps RAG and training-data feedback clean of routine software bugs.</p>
+                <p>Keeping two logs meant classifying every issue up front, so RAG and training-data feedback did not get mixed up with routine software bugs.</p>
               </aside>
             </div>
 
@@ -189,7 +189,7 @@
                       <td>Summary treats multiplayer game match commentary as a real-world statement of intent and raises the threat score.</td>
                       <td><span class="verdict-pill">Context misread</span></td>
                       <td><code>[Fictional-Ref-A]</code></td>
-                      <td>Quoted line in the public group thread refers to an in-game map objective, not a real location.</td>
+                      <td>Quoted line in the public group thread is about an in-game map objective, not a real location.</td>
                     </tr>
                     <tr>
                       <th scope="row">Positive flag contradicted by cited quote</th>
@@ -203,14 +203,14 @@
                       <td>Narrative summary states location as a confirmed fact, but raw public stories contain no geographic markers.</td>
                       <td><span class="verdict-pill">Heuristic artifact</span></td>
                       <td><code>[Fictional-Ref-C]</code></td>
-                      <td>Location string matches a default gazetteer lookup on a common surname rather than raw post text.</td>
+                      <td>Location string comes from a default gazetteer match on a common surname; the raw posts mention no place.</td>
                     </tr>
                     <tr>
                       <th scope="row">Cross-case link caused by shared moderation bot</th>
                       <td>Two unrelated profiles are linked as associates because both interacted with the same automated welcome bot in a public channel.</td>
                       <td><span class="verdict-pill">Bot / channel artifact</span></td>
                       <td><code>[Fictional-Ref-D]</code></td>
-                      <td>Link graph edge points through an automated channel bot account rather than direct interaction.</td>
+                      <td>Link graph connects the two accounts through an automated channel bot; they never interacted directly.</td>
                     </tr>
                   </tbody>
                 </table>
@@ -225,7 +225,7 @@
             <h2 id="governance"><span class="rail-num">04</span><span class="rail-title">Data governance and constraints</span></h2>
           </div>
           <div class="cs-content">
-            <p>Because the platform handles threat-intelligence assessments, strict confidentiality boundaries apply to what can be described on this page.</p>
+            <p>Because the platform handles threat-intelligence assessments, I left several details out of this write-up.</p>
 
             <section class="artefact" aria-labelledby="cs2-gov-title">
               <div class="artefact-head">
@@ -236,7 +236,7 @@
                 <dl class="gov-grid">
                   <div class="gov-item">
                     <dt>Employer permission</dt>
-                    <dd>Parallaxlogic Infotech granted permission to describe my evaluation method and tracker structure, but not to show the platform.</dd>
+                    <dd>Parallaxlogic Infotech allowed me to describe my evaluation method and tracker structure, without showing the platform.</dd>
                   </div>
                   <div class="gov-item">
                     <dt>Platform and source anonymity</dt>
@@ -244,7 +244,7 @@
                   </div>
                   <div class="gov-item">
                     <dt>No live records or identifiers</dt>
-                    <dd>No internal URLs, IP addresses, hostnames, real names, real profiles, channel names or dossier contents appear anywhere on this site.</dd>
+                    <dd>No internal URLs, IP addresses, hostnames, real names, real profiles, channel names, or dossier contents appear anywhere on this site.</dd>
                   </div>
                   <div class="gov-item">
                     <dt>Fictional tracker entries</dt>
@@ -261,8 +261,8 @@
             <h2 id="outcome"><span class="rail-num">05</span><span class="rail-title">Outcome</span></h2>
           </div>
           <div class="cs-content">
-            <p class="outcome-lead">The findings tracker gave the engineer a structured log of AI-output failures to review and use when refining the RAG of the AI engine so that outputs would be accurate when customers used the system.</p>
-            <p>Alongside the AI audit, I tested and reported functional software bugs to the engineering team in a separate log and contributed recommendations on how to improve the platform’s functionality.</p>
+            <p class="outcome-lead">The engineer used the findings tracker to review failure cases and tighten the RAG pipeline before customer release.</p>
+            <p>In parallel, engineering received a separate bug log for functional defects alongside my suggestions for product improvements.</p>
           </div>
         </section>
 
@@ -271,7 +271,7 @@
             <h2 id="learned"><span class="rail-num">06</span><span class="rail-title">What I learned</span></h2>
           </div>
           <div class="cs-content">
-            <p>I can identify where the model’s outputs fail. I cannot yet explain <em>why</em> the underlying statistical model produced them. Closing that gap is one reason I want formal training.</p>
+            <p>I can spot where the model gets an output wrong, even if I cannot yet explain the statistical reason it produced that error. Closing that gap is one reason I want formal graduate training.</p>
           </div>
         </section>
 
@@ -282,7 +282,7 @@
           <div class="cs-content">
             <div class="method">
               <p>Google Sheets and Gemini.</p>
-              <p>Findings tracker structure built on my own with Gemini; audit evaluations, failure classifications and evidence checks are my own.</p>
+              <p>I built the findings tracker template with Gemini. All audit reviews, failure classifications, and evidence checks were my own.</p>
             </div>
           </div>
         </section>
