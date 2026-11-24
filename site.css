@@ -3170,6 +3170,46 @@ tbody th { font-weight: 650; color: var(--ink); }
     grid-row: 1 / span 6;
     margin-top: 0.15rem;
   }
+  .step.step--full {
+    display: block;
+  }
+}
+
+.case-feature__rows {
+  margin: 1rem 0 0;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.case-feature__row {
+  display: grid;
+  grid-template-columns: minmax(11rem, 13.5rem) minmax(0, 1fr);
+  gap: 0.35rem 1.75rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+}
+
+.case-feature__row dt {
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.case-feature__row dd {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  line-height: 1.62;
+  color: var(--ink);
+}
+
+@media (max-width: 42rem) {
+  .case-feature__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.25rem;
+  }
 }
 
 /* Figures (.artefact) */

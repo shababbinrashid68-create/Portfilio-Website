@@ -16,7 +16,7 @@
   d.documentElement.classList.add('motion');
   setTimeout(function(){if(!window.__motion)d.documentElement.classList.remove('motion')},3000);})(document);
   </script>
-  <link rel="stylesheet" href="site.css?v=12">
+  <link rel="stylesheet" href="site.css?v=13">
   <script src="vendor/lenis-1.1.13.min.js?v=9" defer></script>
   <script src="motion.js?v=10" defer></script>
 </head>
@@ -57,7 +57,7 @@
           </div>
           <div class="cs-content">
             <p>An Army unit needed a system to manage its personnel and equipment records, which had previously been kept on paper.</p>
-            <p>The unit’s staff (commanders, clerks and quartermaster staff) described their processes precisely, but in military administrative terms the developers could not build from directly. My job at Kainotomia Pte Ltd was to work between the unit and our development and design teams.</p>
+            <p>The unit’s staff (commanders, clerks and quartermaster staff) described their processes precisely, but in military administrative terms the developers could not build from directly. My job at Parallaxlogic Infotech was to work between the unit and our development and design teams.</p>
           </div>
         </section>
 
@@ -126,7 +126,7 @@
                   <div class="role-endpoint">
                     <div>
                       <span class="flow-stage">Delivery side</span>
-                      <h4>Kainotomia Pte Ltd teams</h4>
+                      <h4>Parallaxlogic Infotech teams</h4>
                       <p>Internal engineering and interface teams building the system.</p>
                     </div>
                     <div class="role-subbox">
@@ -220,42 +220,43 @@
               <figcaption class="artefact-foot">Simplified illustration of the seven stages from initial unit meetings through to delivery.</figcaption>
             </figure>
 
+            <p>Revised rules were confirmed with users before going to build, so changes were caught on paper rather than after they were built. <mark class="ph">[VERIFY]</mark></p>
+          </div>
+        </section>
+
+        <section class="cs-section" aria-labelledby="scope">
+          <div class="cs-rail">
+            <h2 id="scope"><span class="rail-num">04</span><span class="rail-title">Scope of work</span></h2>
+          </div>
+          <div class="cs-content">
+            <p>My work covered three areas of the system. They ran in parallel through the lifecycle above, not one after another.</p>
+
             <div class="step">
-              <span class="step-num">Step 1</span>
+              <span class="step-num">Area · Personnel module</span>
               <h3>Personnel module</h3>
-              <p>I gathered the unit’s personnel management requirements and confirmed each revised rule with the users before it went to development. <mark class="ph">[VERIFY: personnel requirements included reminders before a mandatory training deadline lapses and before a temporary medical category falls due for review]</mark></p>
-              <aside class="note" aria-label="Decision note: feedback loop">
-                <span class="note-kind">Decision (feedback loop)</span>
-                <p>Confirming each revised rule with users before development meant changes were caught on paper, not after they were built. <mark class="ph">[VERIFY]</mark></p>
+              <p>I gathered the unit’s personnel management requirements and confirmed each revised rule with the users before it went to development. Personnel requirements included reminders before a mandatory training deadline lapses and before a temporary medical category falls due for review.</p>
+              <aside class="note" aria-label="Why it mattered: personnel module">
+                <span class="note-kind">Why it mattered</span>
+                <p><mark class="ph">[PLACEHOLDER: why the personnel requirements mattered to the unit]</mark></p>
               </aside>
             </div>
 
             <div class="step">
-              <span class="step-num">Step 2</span>
+              <span class="step-num">Area · Equipment module</span>
               <h3>Equipment module</h3>
-              <p>I gathered the requirements for tracking equipment across the unit. <mark class="ph">[VERIFY: every item issued, handed over or written off leaves a record with supporting documents; a new quartermaster sees what the predecessor held]</mark></p>
-              <aside class="note" aria-label="Decision note: equipment records">
-                <span class="note-kind">Decision (equipment records)</span>
-                <p>A record for every movement means nothing disappears without explanation at handover. <mark class="ph">[VERIFY]</mark></p>
+              <p>I gathered the requirements for tracking equipment across the unit. Every item issued, handed over or written off leaves a record with supporting documents; a new quartermaster sees what the predecessor held.</p>
+              <aside class="note" aria-label="Why it mattered: equipment module">
+                <span class="note-kind">Why it mattered</span>
+                <p>A record for every movement means nothing disappears without explanation at handover.</p>
               </aside>
             </div>
 
             <div class="step">
-              <span class="step-num">Step 3</span>
-              <h3>Nominated heir for the salary account (one example of questioning a requirement)</h3>
-              <p>In the nominated-heir field for the soldier’s salary account, the unit specified that a wife must always receive exactly 50%. I questioned this and raised it with the unit, which removed the fixed share immediately. The field was built open, so each soldier sets their own nominations. <mark class="ph">[VERIFY: reason — a fixed share does not fit every soldier, because family circumstances differ and inheritance shares under Bangladesh's personal laws vary with religion and family structure]</mark></p>
-              <aside class="note" aria-label="Decision note: heir field">
-                <span class="note-kind">Decision (heir field)</span>
-                <p>A fixed share would have recorded something false for soldiers whose family situation did not match it. <mark class="ph">[VERIFY]</mark></p>
-              </aside>
-            </div>
-
-            <div class="step">
-              <span class="step-num">Step 4</span>
+              <span class="step-num">Area · Interface</span>
               <h3>Interface</h3>
               <p>Working with the UI designers, I translated the unit’s review feedback into interface updates across the registration forms and main dashboard: modernizing the dashboard layout, increasing the overall font size for readability, adding dashboard charts for trade breakdown and personal training completion, formatting a downloadable PDF soldier biodata sheet, replacing fixed dropdowns with open input fields where entries varied, and updating field labels to match Army terminology.</p>
-              <aside class="note" aria-label="Decision note: interface and form controls">
-                <span class="note-kind">Decision (interface)</span>
+              <aside class="note" aria-label="Why it mattered: interface">
+                <span class="note-kind">Why it mattered</span>
                 <p>Replacing fixed dropdowns with open text inputs on fields such as institution name and exercise name meant clerks could record real entries without being blocked by a preset list. <mark class="ph">[VERIFY]</mark></p>
               </aside>
             </div>
@@ -284,9 +285,39 @@
           </div>
         </section>
 
+        <section class="cs-section" aria-labelledby="questioned-requirement">
+          <div class="cs-rail">
+            <h2 id="questioned-requirement"><span class="rail-num">05</span><span class="rail-title">A requirement I questioned</span></h2>
+          </div>
+          <div class="cs-content">
+            <div class="step step--full">
+              <span class="step-num">Personnel module · Nominated heir for the salary account</span>
+              <h3>Removing a fixed 50% share from the nominated-heir field</h3>
+              <dl class="case-feature__rows">
+                <div class="case-feature__row">
+                  <dt>Requirement as given</dt>
+                  <dd>The unit specified that a soldier’s wife must always receive exactly 50% in the nominated-heir field for the salary account.</dd>
+                </div>
+                <div class="case-feature__row">
+                  <dt>What I did</dt>
+                  <dd>I questioned the rule and raised it with the unit.</dd>
+                </div>
+                <div class="case-feature__row">
+                  <dt>Outcome</dt>
+                  <dd>The unit removed the fixed share immediately. The field was built open, so each soldier sets their own nominations.</dd>
+                </div>
+                <div class="case-feature__row">
+                  <dt>Why it mattered</dt>
+                  <dd><mark class="ph">[VERIFY: a fixed share does not fit every soldier, because family circumstances differ and inheritance shares under Bangladesh's personal laws vary with religion and family structure]</mark>. A fixed share would have recorded something false for those soldiers.</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </section>
+
         <section class="cs-section" aria-labelledby="governance">
           <div class="cs-rail">
-            <h2 id="governance"><span class="rail-num">04</span><span class="rail-title">Constraints and confidentiality</span></h2>
+            <h2 id="governance"><span class="rail-num">06</span><span class="rail-title">Constraints and confidentiality</span></h2>
           </div>
           <div class="cs-content">
             <p>Because this system was built for a defence client, strict disclosure rules apply to this write-up:</p>
@@ -322,7 +353,7 @@
 
         <section class="cs-section" aria-labelledby="outcome">
           <div class="cs-rail">
-            <h2 id="outcome"><span class="rail-num">05</span><span class="rail-title">Outcome</span></h2>
+            <h2 id="outcome"><span class="rail-num">07</span><span class="rail-title">Outcome</span></h2>
           </div>
           <div class="cs-content">
             <p class="outcome-lead">The system has been delivered and is in use by the unit.</p>
@@ -331,7 +362,7 @@
 
         <section class="cs-section" aria-labelledby="learned">
           <div class="cs-rail">
-            <h2 id="learned"><span class="rail-num">06</span><span class="rail-title">What I learned</span></h2>
+            <h2 id="learned"><span class="rail-num">08</span><span class="rail-title">What I learned</span></h2>
           </div>
           <div class="cs-content">
             <p>Good requirements protect the people a system records, not only the people who manage it.</p>
@@ -341,7 +372,7 @@
 
         <section class="cs-section" aria-labelledby="method">
           <div class="cs-rail">
-            <h2 id="method"><span class="rail-num">07</span><span class="rail-title">Tools and method</span></h2>
+            <h2 id="method"><span class="rail-num">09</span><span class="rail-title">Tools and method</span></h2>
           </div>
           <div class="cs-content">
             <div class="method">
