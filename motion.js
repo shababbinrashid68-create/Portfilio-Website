@@ -13,10 +13,14 @@ window.__motion = true;
     heroStarted = true;
     var hero = document.querySelector('.hero');
     if (hero) {
+      void docEl.offsetHeight;
       requestAnimationFrame(function () {
-        hero.classList.add('is-in');
+        requestAnimationFrame(function () {
+          hero.classList.add('is-in');
+        });
       });
     }
+    flushInitialReveals();
   }
 
   var lenis = null;
@@ -353,12 +357,47 @@ window.__motion = true;
     });
   }
 
-  function initLineReveals() {
-    var csHead = document.querySelector('.cs-head');
-    if (csHead) {
+  var initialRevealQueue = [];
+  var initialRevealFlushed = false;
+
+  function queueInitialReveal(el, staggerIdx) {
+    if (!el) return;
+    if (typeof staggerIdx === 'number' && !el.style.getPropertyValue('--i')) {
+      el.style.setProperty('--i', String(Math.min(staggerIdx, 6)));
+    }
+    initialRevealQueue.push(el);
+  }
+
+  function flushInitialReveals() {
+    if (initialRevealFlushed) return;
+    initialRevealFlushed = true;
+    // Commit hidden initial state before toggling .is-in so transitions play on load/reload.
+    void docEl.offsetHeight;
+    requestAnimationFrame(function () {
       requestAnimationFrame(function () {
-        csHead.classList.add('is-in');
+        var csHead = document.querySelector('.cs-head');
+        if (csHead) csHead.classList.add('is-in');
+        var pageHead = document.querySelector('.page-head');
+        if (pageHead) pageHead.classList.add('is-in');
+        for (var i = 0; i < initialRevealQueue.length; i++) {
+          initialRevealQueue[i].classList.add('is-in');
+        }
+        initialRevealQueue = [];
       });
+    });
+  }
+
+  function initLineReveals() {
+    var pageH1 = document.querySelector('.page-head h1');
+    if (pageH1 && !pageH1.querySelector('mark.ph') && !pageH1.querySelector('.reveal-line')) {
+      var h1Outer = document.createElement('span');
+      h1Outer.className = 'reveal-line';
+      var h1Inner = document.createElement('span');
+      while (pageH1.firstChild) {
+        h1Inner.appendChild(pageH1.firstChild);
+      }
+      h1Outer.appendChild(h1Inner);
+      pageH1.appendChild(h1Outer);
     }
 
     var h2s = document.querySelectorAll('main h2');
@@ -370,10 +409,11 @@ window.__motion = true;
               io.unobserve(entry.target);
             }
           });
-        }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' })
+        }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' })
       : null;
 
     var vh = window.innerHeight || docEl.clientHeight;
+    var visibleCount = 0;
     h2s.forEach(function (h2) {
       if (h2.querySelector('mark.ph') || h2.querySelector('.reveal-line')) return;
       var outer = document.createElement('span');
@@ -386,8 +426,11 @@ window.__motion = true;
       h2.appendChild(outer);
 
       var r = h2.getBoundingClientRect();
-      if (r.top < vh * 0.92 && r.bottom > 0) {
+      if (r.bottom <= 0) {
+        // Already scrolled past (e.g. reload mid-page): show without waiting.
         h2.classList.add('is-in');
+      } else if (r.top < vh * 0.96 && r.bottom > 0) {
+        queueInitialReveal(h2, visibleCount++);
       } else if (io) {
         io.observe(h2);
       } else {
@@ -411,25 +454,39 @@ window.__motion = true;
       });
     }
 
+    // Page headers (case studies, about, index leads)
+    addGroup(document.querySelectorAll('.cs-head .crumb, .cs-head .dek'), 'up', true);
+    addGroup(document.querySelectorAll('.page-head p'), 'up', false);
+    addGroup(document.querySelectorAll('.section-lead'), 'up', false);
+
     // Home & case-studies.html rows
     addGroup(document.querySelectorAll('.cs-row-media'), 'media', false);
     addGroup(document.querySelectorAll('.cs-row-body'), 'up', false);
 
-    // Home sections
+    // Home & About sections
     addGroup(document.querySelectorAll('.work-areas > li'), 'up', true);
+    document.querySelectorAll('.about-grid .prose').forEach(function (prose) {
+      addGroup(prose.querySelectorAll(':scope > p'), 'up', true);
+    });
     document.querySelectorAll('.toolkit-table tbody').forEach(function (tb) {
       addGroup(tb.querySelectorAll('tr'), 'up', true);
     });
+    addGroup(document.querySelectorAll('.record'), 'up', false);
+    addGroup(document.querySelectorAll('main > section:not(.hero) > .link-row'), 'up', false);
     addGroup(document.querySelectorAll('.faq-list > details'), 'up', true);
     addGroup(document.querySelectorAll('.contact-band > *'), 'up', true);
 
-    // Case study pages
+    // Case study pages (cover all content blocks, not just steps/artefacts)
     addGroup(document.querySelectorAll('.summary'), 'up', false);
+    document.querySelectorAll('.cs-content').forEach(function (content) {
+      addGroup(content.querySelectorAll(':scope > p, :scope > ul, :scope > ol, :scope > .method'), 'up', true);
+    });
     addGroup(document.querySelectorAll('.step'), 'up', false);
     addGroup(document.querySelectorAll('.step .note'), 'up', false);
     addGroup(document.querySelectorAll('.artefact'), 'up', false);
     addGroup(document.querySelectorAll('.sql-block'), 'up', false);
     addGroup(document.querySelectorAll('.outcome-lead'), 'up', false);
+    addGroup(document.querySelectorAll('.cs-nav'), 'up', false);
 
     // Case study media (.artefact images, .dash-shot)
     document.querySelectorAll('.artefact img, .dash-shot').forEach(function (img) {
@@ -453,14 +510,18 @@ window.__motion = true;
               io.unobserve(entry.target);
             }
           });
-        }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' })
+        }, { threshold: 0.05, rootMargin: '0px 0px -4% 0px' })
       : null;
 
     var vh = window.innerHeight || docEl.clientHeight;
+    var visibleIdx = 0;
     targets.forEach(function (el) {
       var r = el.getBoundingClientRect();
-      if (r.top < vh * 0.92 && r.bottom > 0) {
+      if (r.bottom <= 0) {
+        // Already scrolled past (e.g. reload mid-page): show immediately.
         el.classList.add('is-in');
+      } else if (r.top < vh * 0.96 && r.bottom > 0) {
+        queueInitialReveal(el, visibleIdx++);
       } else if (io) {
         io.observe(el);
       } else {
@@ -475,7 +536,7 @@ window.__motion = true;
         var el = targets[i];
         if (el.classList.contains('is-in')) continue;
         var rect = el.getBoundingClientRect();
-        if (rect.top < h * 0.95) {
+        if (rect.top < h * 0.96) {
           el.classList.add('is-in');
           if (io) io.unobserve(el);
         }
@@ -485,12 +546,13 @@ window.__motion = true;
         var h2 = allH2[j];
         if (h2.classList.contains('is-in')) continue;
         var hr = h2.getBoundingClientRect();
-        if (hr.top < h * 0.95) {
+        if (hr.top < h * 0.96) {
           h2.classList.add('is-in');
         }
       }
     }
     window.addEventListener('scroll', checkPassed, { passive: true });
+    window.addEventListener('resize', checkPassed, { passive: true });
   }
 
   function initMobileMenu() {
