@@ -2919,7 +2919,7 @@ tbody th { font-weight: 650; color: var(--ink); }
 /* ---------- Phase 3 Editorial Case-Study Template ---------- */
 
 .cs-head {
-  padding-block: 2.5rem 1.75rem;
+  padding-block: 2rem 1.25rem;
   max-width: none;
 }
 
@@ -2968,8 +2968,8 @@ tbody th { font-weight: 650; color: var(--ink); }
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1.25rem 2rem;
-  margin: 0.5rem 0 2.5rem;
-  padding: 1.35rem 0;
+  margin: 0.5rem 0 1.5rem;
+  padding: 1.15rem 0;
   background: transparent;
   border: 0;
   border-top: 1px solid var(--rule);
@@ -3028,14 +3028,18 @@ tbody th { font-weight: 650; color: var(--ink); }
 .cs-section {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 1.35rem;
-  padding: 2.25rem 0;
+  gap: 1rem;
+  padding: 1.35rem 0;
   border-top: 0;
   align-items: start;
 }
 
 .cs-section:first-child {
-  padding-top: 0.5rem;
+  padding-top: 0;
+}
+
+.cs-section:last-child {
+  padding-bottom: 0.5rem;
 }
 
 .cs-rail {
@@ -3081,9 +3085,13 @@ tbody th { font-weight: 650; color: var(--ink); }
   max-width: none;
 }
 
+.cs-content > :last-child {
+  margin-bottom: 0;
+}
+
 /* Steps with side-by-side Decision / Trade-off margin notes on desktop */
 .step {
-  margin: 0 0 2.25rem;
+  margin: 0 0 1.6rem;
   padding: 0.2rem 0 0.2rem 1.35rem;
   background: transparent;
   border-top: 0;
@@ -3214,7 +3222,7 @@ tbody th { font-weight: 650; color: var(--ink); }
 
 /* Figures (.artefact) */
 .artefact {
-  margin: 1.5rem 0 2rem;
+  margin: 1.25rem 0 1.5rem;
   background: var(--surface);
   border: 1px solid var(--rule);
   border-radius: 0;
@@ -3289,8 +3297,8 @@ tbody th { font-weight: 650; color: var(--ink); }
 
 /* Next case study full-width --ink-deep band */
 .cs-nav {
-  margin-top: 4.5rem;
-  padding-block: 3rem 3.25rem;
+  margin-top: 2.75rem;
+  padding-block: 2.5rem 2.75rem;
   background: var(--ink-deep);
   border-top: 1px solid var(--rule);
   display: block;
