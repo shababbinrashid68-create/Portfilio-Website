@@ -471,7 +471,7 @@ window.__motion = true;
     document.querySelectorAll('.toolkit-table tbody').forEach(function (tb) {
       addGroup(tb.querySelectorAll('tr'), 'up', true);
     });
-    addGroup(document.querySelectorAll('.record'), 'up', false);
+    addGroup(document.querySelectorAll('.record, .cv-entry'), 'up', false);
     addGroup(document.querySelectorAll('main > section:not(.hero) > .link-row'), 'up', false);
     addGroup(document.querySelectorAll('.faq-list > details'), 'up', true);
     addGroup(document.querySelectorAll('.contact-band > *'), 'up', true);
