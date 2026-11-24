@@ -1,7 +1,7 @@
 /* ==========================================================
    Portfolio site stylesheet
-   One accent colour (petrol teal), two typefaces:
-   Jost for structure and display, Source Serif 4 for reading text.
+   One accent colour (petrol teal), one typeface (Jost) across
+   headings and body text, with monospace for code.
    Dark mode follows prefers-color-scheme.
    ========================================================== */
 
@@ -28,7 +28,7 @@
 
   --sans: "Jost", "Segoe UI", system-ui, sans-serif;
   --display: "Jost", "Segoe UI", system-ui, sans-serif;
-  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --serif: var(--sans);
   --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 
   --step--2: 0.8125rem;
@@ -90,7 +90,7 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: var(--step-0);
   line-height: 1.65;
   text-rendering: optimizeLegibility;
@@ -2353,7 +2353,7 @@ tbody th { font-weight: 650; color: var(--ink); }
 }
 
 .hero-sub {
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: 1.25rem;
   line-height: 1.5;
   color: var(--ink);
@@ -2362,7 +2362,7 @@ tbody th { font-weight: 650; color: var(--ink); }
 }
 
 .hero-intro {
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: 1.0625rem;
   line-height: 1.65;
   color: var(--muted);
@@ -2564,7 +2564,7 @@ tbody th { font-weight: 650; color: var(--ink); }
 }
 
 .cs-row-summary {
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: 1.0625rem;
   line-height: 1.65;
   color: var(--ink);
@@ -2656,7 +2656,7 @@ tbody th { font-weight: 650; color: var(--ink); }
 }
 
 .work-area-item p {
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: 1rem;
   line-height: 1.65;
   color: var(--muted);
@@ -2699,7 +2699,7 @@ tbody th { font-weight: 650; color: var(--ink); }
 }
 
 .bg-plain p {
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: 1.0625rem;
   line-height: 1.65;
   margin: 0 0 1rem;
@@ -2778,7 +2778,7 @@ tbody th { font-weight: 650; color: var(--ink); }
 }
 
 .tk-level {
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: 0.9375rem;
   line-height: 1.55;
   color: var(--ink);
@@ -2860,7 +2860,7 @@ tbody th { font-weight: 650; color: var(--ink); }
 
 .faq-answer p {
   margin: 0;
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: 1.0625rem;
   line-height: 1.65;
   color: var(--muted);
@@ -2956,7 +2956,7 @@ tbody th { font-weight: 650; color: var(--ink); }
 }
 
 .dek {
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: 1.25rem;
   color: var(--muted);
   max-width: none;
@@ -3154,7 +3154,7 @@ tbody th { font-weight: 650; color: var(--ink); }
 }
 
 .note p {
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-style: italic;
   font-size: 1.02rem;
   line-height: 1.58;
@@ -3207,7 +3207,7 @@ tbody th { font-weight: 650; color: var(--ink); }
 
 .case-feature__row dd {
   margin: 0;
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: 1.0625rem;
   line-height: 1.62;
   color: var(--ink);
