@@ -7,6 +7,6 @@ All files sit at the top level so they can be uploaded to GitHub with the normal
 - case-study-onboarding-monetization.html: Case Study 1
 - about.html: background, skills, education, contact
 - site.css: all styling
-- resume.pdf: add your résumé with exactly this name (not included)
+- Shabab_Bin_Rashid_CV.pdf: downloadable CV
 
 Every yellow highlight is a placeholder. Replace all of them before sharing the link.
